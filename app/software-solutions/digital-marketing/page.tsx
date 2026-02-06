@@ -80,7 +80,7 @@ export default function DigitalMarketingSolutions() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('/background/marketing-bg.jpg')",
+              backgroundImage: "url('/background/marketing-bg.webp')",
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-indigo-900/80 via-indigo-800/60 to-indigo-900/40"></div>

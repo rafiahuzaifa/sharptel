@@ -300,16 +300,16 @@ export default function WirelessServices() {
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link
-                  href="/contact"
+                  href="/Contact-us"
                   className="px-12 py-5 bg-gradient-to-r from-purple-600 to-purple-500 text-white font-bold rounded-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg"
                 >
                   Request Site Survey
                 </Link>
                 <Link
-                  href="tel:+922134567890"
+                  href="tel:+92-311-128-4373"
                   className="px-12 py-5 border-2 border-purple-600 text-purple-600 font-bold rounded-xl hover:bg-purple-50 transition-all duration-300 text-lg"
                 >
-                  Call: +92 21 3456 7890
+                  Call: +92-311-128-4373
                 </Link>
               </div>
             </div>

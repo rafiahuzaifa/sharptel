@@ -326,7 +326,7 @@ export default function SoftwareSolutions() {
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link 
-                  href="/contact" 
+                  href="/Contact-us" 
                   className="px-12 py-5 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold rounded-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg"
                 >
                   Start Project Discussion

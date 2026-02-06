@@ -42,14 +42,14 @@ export default function ClientAboutPage() {
   ]
 
   const partners = [
-    { name: "Cisco", logo: "/images/partners/cisco.png", category: "Networking" },
-    { name: "Microsoft", logo: "/images/partners/microsoft.png", category: "Software" },
-    { name: "Fortinet", logo: "/images/partners/fortinet.png", category: "Security" },
-    { name: "VMware", logo: "/images/partners/vmware.png", category: "Virtualization" },
-    { name: "HPE", logo: "/images/partners/hpe.png", category: "Hardware" },
-    { name: "Juniper", logo: "/images/partners/juniper.png", category: "Networking" },
-    { name: "Dell", logo: "/images/partners/dell.png", category: "Hardware" },
-    { name: "Oracle", logo: "/images/partners/oracle.png", category: "Database" },
+    { name: "Cisco", logo: "/background/cisco.webp", category: "Networking" },
+    { name: "Microsoft", logo: "/background/microsoft.webp", category: "Software" },
+    { name: "Fortinet", logo: "/background/fortinet.webp", category: "Security" },
+    { name: "VMware", logo: "/background/vmware.webp", category: "Virtualization" },
+    { name: "HPE", logo: "/background/hpe.webp", category: "Hardware" },
+    { name: "Juniper", logo: "/background/juniper.webp", category: "Networking" },
+    { name: "Dell", logo: "/background/dell.webp", category: "Hardware" },
+    { name: "Oracle", logo: "/background/oracle.webp", category: "Database" },
   ]
 
   const values = [
@@ -272,7 +272,7 @@ export default function ClientAboutPage() {
             >
               <div className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/about-us/our-story.jpg"
+                  src="/background/about.webp"
                   alt="Sharptel Headquarters"
                   fill
                   className="object-cover"

@@ -24,7 +24,7 @@ const solutions = [
   { 
     name: "Cyber Security", 
     slug: "cyber-security", 
-    image: "/images/solutions/cyber-security.jpg",
+    image: "/background/cyber-security.webp",
     icon: Shield,
     description: "Comprehensive protection against cyber threats with advanced firewall and threat detection systems.",
     features: ["Advanced Firewall", "Threat Intelligence", "24/7 Monitoring"],
@@ -33,7 +33,7 @@ const solutions = [
   { 
     name: "Data Center & Colocation", 
     slug: "data-center", 
-    image: "/images/solutions/data-center.jpg",
+    image: "/background/data-center.webp",
     icon: Server,
     description: "Secure and reliable data center services with maximum uptime and professional support.",
     features: ["Tier III Design", "Redundant Power", "Carrier Neutral"],
@@ -42,7 +42,7 @@ const solutions = [
   { 
     name: "Wi-Fi & Hotspot", 
     slug: "wi-fi-hotspot", 
-    image: "/images/solutions/wi-fi-hotspot.jpg",
+    image: "/background/wi-fi-hotspot.webp",
     icon: Wifi,
     description: "High-performance wireless networks with secure access and centralized management.",
     features: ["Enterprise Wi-Fi", "Guest Management", "Mesh Networking"],
@@ -51,7 +51,7 @@ const solutions = [
   { 
     name: "IoT & Automation", 
     slug: "iot-automation", 
-    image: "/images/solutions/iot-automation.jpg",
+    image: "/background/iot-automation.webp",
     icon: Cpu,
     description: "Intelligent automation solutions for smart buildings and industrial applications.",
     features: ["Smart Sensors", "Energy Management", "Remote Monitoring"],
@@ -60,7 +60,7 @@ const solutions = [
   { 
     name: "Voice Over IP (VoIP)", 
     slug: "voip-solutions", 
-    image: "/images/solutions/voip-solutions.jpg",
+    image: "/background/voip.webp",
     icon: Phone,
     description: "Reliable voice communication systems with advanced features for modern businesses.",
     features: ["HD Voice Quality", "Call Center Features", "Unified Comms"],

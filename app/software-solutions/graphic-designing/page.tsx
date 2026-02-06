@@ -77,7 +77,7 @@ export default function GraphicDesignServices() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('/background/design-bg.jpg')",
+              backgroundImage: "url('/background/design-bg.webp')",
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-teal-900/80 via-teal-800/60 to-teal-900/40"></div>

@@ -160,7 +160,7 @@ export default function Hero() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6"
           >
             <Link
-              href="/solutions"
+              href="/connectivity-solutions"
               className="group relative px-8 md:px-10 py-4 md:py-5 rounded-xl overflow-hidden min-w-[200px] md:min-w-[240px] text-center"
             >
               <motion.div
@@ -176,7 +176,7 @@ export default function Hero() {
             </Link>
 
             <Link
-              href="/contact"
+              href="/Contact-us"
               className="group relative px-8 md:px-10 py-4 md:py-5 rounded-xl overflow-hidden min-w-[200px] md:min-w-[240px] text-center glass-card hover:shadow-primary/30"
             >
               <span className="relative text-white text-base md:text-lg font-semibold tracking-wide">

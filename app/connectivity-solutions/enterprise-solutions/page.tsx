@@ -90,7 +90,7 @@ export default function EnterpriseInternetServices() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('/background/enterprise-internet-bg.jpg')",
+              backgroundImage: "url('/background/enterprise-internet-bg.webp')",
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
@@ -423,16 +423,16 @@ export default function EnterpriseInternetServices() {
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link
-                  href="/contact"
+                  href="/Contact-us"
                   className="px-12 py-5 bg-gradient-to-r from-red-600 to-red-500 text-white font-bold rounded-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg"
                 >
                   Request Free Assessment
                 </Link>
                 <Link
-                  href="tel:+922134567890"
+                  href="tel:+92-311-128-4373"
                   className="px-12 py-5 border-2 border-red-600 text-red-600 font-bold rounded-xl hover:bg-red-50 transition-all duration-300 text-lg"
                 >
-                  Call: +92 21 3456 7890
+                  Call: +92-311-128-4373
                 </Link>
               </div>
               

@@ -72,7 +72,7 @@ export default function CustomWebDevelopment() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('/background/web-bg.jpg')",
+              backgroundImage: "url('/background/web-bg.webp')",
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/80 via-emerald-800/60 to-emerald-900/40"></div>

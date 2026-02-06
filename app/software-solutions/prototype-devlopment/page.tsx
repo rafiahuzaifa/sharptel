@@ -90,7 +90,7 @@ export default function PrototypeDevelopment() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('/background/prototype-bg.jpg')",
+              backgroundImage: "url('/background/prototype-bg.webp')",
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-pink-900/80 via-pink-800/60 to-pink-900/40"></div>

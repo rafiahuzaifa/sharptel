@@ -75,7 +75,7 @@ export default function MobileAppsDevelopment() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('/background/mobile-bg.jpg')",
+              backgroundImage: "url('/background/mobile-bg.webp')",
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-800/60 to-blue-900/40"></div>
@@ -296,7 +296,7 @@ export default function MobileAppsDevelopment() {
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
-                href="/contact"
+                href="/Contact-us"
                 className="px-12 py-5 bg-white text-blue-700 font-bold rounded-xl hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg text-lg"
               >
                 Start Your Project

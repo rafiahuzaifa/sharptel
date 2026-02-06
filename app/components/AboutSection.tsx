@@ -47,7 +47,7 @@ export default function AboutSection() {
             className="rounded-3xl overflow-hidden shadow-2xl"
           >
             <Image
-              src="/images/team.jpg" // Place your team/group photo here
+              src="/background/team.webp" // Place your team/group photo here
               alt="SharpTel Team"
               width={600}
               height={500}

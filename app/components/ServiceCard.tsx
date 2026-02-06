@@ -15,25 +15,25 @@ const services = [
   {
     title: "Data Solutions",
     desc: "MPLS, Layer-2 transport, dark fiber, and advanced data connectivity tailored to your bandwidth needs.",
-    image: "/images/data-solutions.jpg",
+    image: "/background/data-solutions.webp",
     alt: "Data solutions MPLS network illustration",
   },
   {
     title: "Wireless Services",
     desc: "Robust LTE/4G/5G private networks, wireless broadband, and hotspot solutions for mobility.",
-    image: "/images/wireless-services.jpg",
+    image: "/background/wireless-services.jpg",
     alt: "Wireless LTE network and devices",
   },
   {
     title: "Banking Enterprise",
     desc: "Secure, compliant connectivity designed specifically for financial institutions and banking operations.",
-    image: "/images/banking-enterprise.jpg",
+    image: "/background/banking-enterprise.jpeg",
     alt: "Secure banking network infrastructure",
   },
   {
     title: "Call Center Services",
     desc: "Scalable VoIP-based call center infrastructure with high uptime and quality voice solutions.",
-    image: "/images/call-center.jpg",
+    image: "/background/call-center.webp",
     alt: "Modern call center VoIP setup",
   },
 
@@ -41,31 +41,31 @@ const services = [
   {
     title: "Cyber Security",
     desc: "Advanced threat protection, firewalls, endpoint security, and proactive cyber defense for enterprises.",
-    image: "/images/cyber-security.jpg",
+    image: "/background/cyber-security.webp",
     alt: "Cyber security shield and digital protection",
   },
   {
     title: "Data Center & Colocation",
     desc: "Tier-3 certified data centers with colocation, power redundancy, and 24/7 monitoring.",
-    image: "/images/data-center.jpg",
+    image: "/background/data-center.webp",
     alt: "Modern data center racks and cooling",
   },
   {
     title: "Wi-Fi & Hotspot",
     desc: "Enterprise-grade managed Wi-Fi, event hotspots, offloading, and cloud-controlled access points.",
-    image: "/images/wifi-hotspot.jpg",
+    image: "/background/wifi-hotspot.webp",
     alt: "Enterprise Wi-Fi access points deployment",
   },
   {
     title: "IoT & Automation",
     desc: "IoT connectivity, smart automation, sensors, and integration for industrial & smart city applications.",
-    image: "/images/iot-automation.jpg",
+    image: "/background/iot-automation.webp",
     alt: "IoT devices and automation network",
   },
   {
     title: "Voice Over IP (VoIP)",
     desc: "Hosted PBX, unified communications, scalable VoIP solutions to reduce costs and improve collaboration.",
-    image: "/images/voip.jpg",
+    image: "/background/voip.webp",
     alt: "VoIP phone system and unified communications",
   },
 
@@ -73,13 +73,13 @@ const services = [
   {
     title: "Managed Services",
     desc: "End-to-end IT/network/security management, NOC, backup, and disaster recovery for peace of mind.",
-    image: "/images/managed-services.jpg",
+    image: "/background/managed-services.webp",
     alt: "Managed IT services NOC monitoring",
   },
   {
     title: "Satellite Service",
     desc: "High-speed satellite internet for remote/rural areas with low latency and reliable coverage.",
-    image: "/images/satellite-service.jpg",
+    image: "/background/satellite-service.webp",
     alt: "Satellite internet dish in remote area",
   },
 ];

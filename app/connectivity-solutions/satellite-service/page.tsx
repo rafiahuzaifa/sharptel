@@ -63,7 +63,7 @@ export default function SatelliteService() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('/background/satellite-bg.jpg')",
+              backgroundImage: "url('/background/satellite-bg.webp')",
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
@@ -348,13 +348,13 @@ export default function SatelliteService() {
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
-                href="/contact"
+                href="/Contact-us"
                 className="px-12 py-5 bg-white text-violet-700 font-bold rounded-xl hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg text-lg"
               >
                 Get Satellite Quote
               </Link>
               <Link
-                href="tel:+922134567890"
+                href="tel:+92-311-128-4373"
                 className="px-12 py-5 border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300 text-lg"
               >
                 Call Satellite Expert

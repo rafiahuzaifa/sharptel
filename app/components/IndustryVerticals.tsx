@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const verticals = [
-  { title: "Government Sector", image: "/images/verticals/government.jpg" },
-  { title: "Enterprise Sector", image: "/images/verticals/enterprise.jpg" },
-  { title: "Financial Sector", image: "/images/verticals/financial.jpg" },
-  { title: "Small & Medium Enterprise Sector", image: "/images/verticals/sme.jpg" },
-  { title: "Defense Sector", image: "/images/verticals/defense.jpg" },
+  { title: "Government Sector", image: "/background/gov.webp" },
+  { title: "Enterprise Sector", image: "/background/enterprise.webp" },
+  { title: "Financial Sector", image: "/background/financial.webp" },
+  { title: "Small & Medium Enterprise Sector", image: "/background/sme.webp" },
+  { title: "Defense Sector", image: "/background/defence.webp" },
 ];
 
 export default function IndustryVerticals() {

@@ -393,13 +393,13 @@ export default function CoverageAreasCities() {
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link
-                  href="/contact"
+                  href="/Contact-us"
                   className="px-12 py-5 bg-gradient-to-r from-red-600 to-red-500 text-white font-bold rounded-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg"
                 >
                   Check Availability
                 </Link>
                 <Link
-                  href="tel:+922134567890"
+                  href="tel:+92-311-128-4373"
                   className="px-12 py-5 border-2 border-red-600 text-red-600 font-bold rounded-xl hover:bg-red-50 transition-all duration-300 text-lg"
                 >
                   Call for Coverage Info
