@@ -90,7 +90,7 @@ export default function ProductsPage() {
     <div className="min-h-screen bg-white">
       {/* HERO */}
       <section
-        className="relative h-[65vh] flex items-center justify-center text-center"
+        className="relative min-h-[65vh] pt-20 pb-16 flex items-center justify-center text-center"
         style={{
           backgroundImage: "url('/background/data-flow.webp')",
           backgroundSize: "cover",

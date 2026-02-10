@@ -2,6 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global fixes for navbar spacing and hero sections */
+@layer base {
+  /* Prevent hero section cut-off by accounting for navbar */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem; /* Account for sticky navbar */
+  }
+
+  body {
+    @apply antialiased;
+  }
+}
+
+@layer utilities {
+  /* Fixed navbar height compensation */
+  .page-hero {
+    min-height: calc(100vh - 6rem); /* 100vh minus navbar */
+    padding-top: 2rem;
+  }
+
+  .page-hero-full {
+    min-height: 100vh;
+    padding-top: 6rem; /* Match navbar height */
+  }
+
+  /* Ensure content doesn't hide behind navbar */
+  .content-wrapper {
+    padding-top: 1rem;
+  }
+}
+
 /* Base styles */
 html, body {
   @apply bg-white text-gray-900 font-sans scroll-smooth;

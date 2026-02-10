@@ -184,7 +184,7 @@ export default function PremiumCareersPage() {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
 
       {/* HERO SECTION */}
-      <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[75vh] pt-24 pb-16 flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <div 

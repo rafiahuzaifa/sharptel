@@ -67,7 +67,7 @@ export default function CustomWebDevelopment() {
   return (
     <div className="bg-white text-gray-800">
       {/* HERO SECTION */}
-      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[70vh] pt-20 pb-16 flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center"

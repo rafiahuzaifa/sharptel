@@ -149,7 +149,7 @@ export default function PremiumNavbar() {
       {/* Top Bar - Red Theme */}
       <div className="bg-gradient-to-r from-red-700 via-red-600 to-red-800 text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between py-3 gap-2">
+          <div className="flex flex-col md:flex-row items-center justify-between py-2 gap-2">
             <div className="flex flex-wrap items-center justify-center gap-6">
               <div className="flex items-center gap-3">
                 <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center">
@@ -203,36 +203,36 @@ export default function PremiumNavbar() {
           : "bg-white"
       }`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-24 items-center justify-between">
+          <div className="flex h-16 items-center justify-between">
 
-            {/* Logo with Image - Replace /logo.png with your actual logo path */}
+            {/* Logo with Image */}
             <Link href="/" className="z-10">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                whileHover={{ scale: 1.05 }} 
-                whileTap={{ scale: 0.95 }} 
-                className="flex items-center gap-4"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-3"
               >
                 <div className="relative">
-  <div className="h-20 w-20 md:h-24 md:w-24 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden">
-    {/* Logo Image Only - No Background */}
-    <Image
-      src="/background/Sharp-logo-2.webp"
-      alt="Sharptel Logo"
-      width={200}
-      height={60}
-      className="object-contain"
-      priority
-    />
-  </div>
-</div>
+                  <div className="h-12 w-12 md:h-14 md:w-14 rounded-xl flex items-center justify-center overflow-hidden">
+                    {/* Logo Image Only */}
+                    <Image
+                      src="/background/Sharp-logo-2.webp"
+                      alt="Sharptel Logo"
+                      width={120}
+                      height={40}
+                      className="object-contain"
+                      priority
+                    />
+                  </div>
+                </div>
                 <div className="hidden lg:block">
-                  <div className="text-2xl font-black text-red-700 tracking-tight">
+                  <div className="text-xl font-black text-red-700 tracking-tight">
                     SharpTel
                   </div>
-                  <div className="text-xs font-medium text-black-600 uppercase tracking-wider mt-1">
-                    Technology Solutions Provider
+                  <div className="text-[10px] font-medium text-gray-600 uppercase tracking-wider">
+                    Technology Solutions
                   </div>
                 </div>
               </motion.div>

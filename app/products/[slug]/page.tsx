@@ -62,7 +62,7 @@ export default function ProductDetailPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* HERO */}
-      <section className="relative h-[50vh] flex items-center justify-center text-center">
+      <section className="relative min-h-[50vh] pt-20 pb-16 flex items-center justify-center text-center">
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative px-6">
           <h1 className="text-5xl md:text-6xl font-extrabold text-white">{product.title}</h1>

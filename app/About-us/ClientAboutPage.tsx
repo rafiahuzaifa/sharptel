@@ -115,7 +115,7 @@ export default function ClientAboutPage() {
     <div className="bg-white text-gray-800">
 
       {/* PREMIUM HERO SECTION WITH BACKGROUND IMAGE */}
-      <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[80vh] pt-20 pb-16 flex items-center justify-center overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
