@@ -14,11 +14,11 @@ const events = [
     venue: "Karachi Expo Center",
     attendees: "500+",
     category: "Technology Summit",
-    image: "/background/events/digital-summit.webp",
+    image: "/background/digital-summit.webp",
     description: "Annual technology summit bringing together industry leaders, innovators, and decision-makers to discuss the future of digital transformation in Pakistan.",
     highlights: ["Keynote Speakers", "Panel Discussions", "Networking Session", "Product Demos"],
     status: "upcoming",
-    registerLink: "/events/digital-summit"
+    registerLink: "/Contact-us"
   },
   {
     id: 2,
@@ -28,11 +28,11 @@ const events = [
     venue: "Sharptel Innovation Center",
     attendees: "150",
     category: "Training Workshop",
-    image: "/background/events/cybersecurity-workshop.webp",
+    image: "/background/cyber-security-conference.webp",
     description: "Intensive 3-day workshop focusing on advanced cybersecurity practices, threat detection, and defense strategies for enterprise security teams.",
     highlights: ["Hands-on Labs", "Certification", "Expert Trainers", "Case Studies"],
     status: "ongoing",
-    registerLink: "/events/cybersecurity-workshop"
+    registerLink: "/Contact-us"
   },
   {
     id: 3,
@@ -42,11 +42,11 @@ const events = [
     venue: "Marriott Hotel, Karachi",
     attendees: "300+",
     category: "Award Ceremony",
-    image: "/background/events/tech-awards.webp",
+    image: "/background/tech-awards.JFIF",
     description: "Recognizing outstanding achievements and innovations in Pakistan's technology sector. Celebrating excellence and groundbreaking contributions.",
     highlights: ["Award Ceremony", "Gala Dinner", "Networking", "Media Coverage"],
     status: "completed",
-    registerLink: "/events/tech-awards",
+    registerLink: "/Contact-us",
     winners: ["Best IT Service Provider", "Innovation Excellence", "Customer Service Award"]
   },
   {
@@ -57,11 +57,11 @@ const events = [
     venue: "Lahore Convention Center",
     attendees: "350+",
     category: "Industry Conference",
-    image: "/background/events/network-conference.webp",
+    image: "/background/network-conference.webp",
     description: "Focused on next-generation network infrastructure, 5G implementation, and enterprise connectivity solutions for Pakistani businesses.",
     highlights: ["Expert Talks", "Vendor Exhibition", "Live Demos", "Q&A Sessions"],
     status: "completed",
-    registerLink: "/events/network-conference"
+    registerLink: "/Contact-us"
   }
 ];
 
@@ -394,7 +394,7 @@ export default function EventsEngagements() {
                 Browse All Events
               </Link>
               <Link
-                href="/contact"
+                href="/Contact-us"
                 className="px-8 py-4 border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300 text-lg"
               >
                 Host an Event

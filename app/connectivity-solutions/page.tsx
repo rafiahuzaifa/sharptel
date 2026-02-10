@@ -304,10 +304,10 @@ export default function ConnectivityServices() {
               Request Free Consultation
             </Link>
             <Link 
-              href="tel:+922134567890" 
+              href="tel:+92-311-128-4373" 
               className="px-10 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all duration-300 text-lg"
             >
-              Call: +92 21 3456 7890
+              Call:+92-311-128-4373
             </Link>
           </div>
         </div>
