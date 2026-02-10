@@ -92,7 +92,7 @@ export default function SoftwareSolutions() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-black text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-red-900 to-red-500 text-white">
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
         <div className="absolute inset-0 opacity-20">
           <div className="absolute inset-0 bg-[url('/patterns/code-pattern.svg')] bg-cover"></div>
@@ -107,7 +107,7 @@ export default function SoftwareSolutions() {
             
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
               Transform Your Vision Into
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent block">
+              <span className="bg-gradient-to-r from-red-400 to-red-300 bg-clip-text text-transparent block">
                 Digital Reality
               </span>
             </h1>
@@ -120,7 +120,7 @@ export default function SoftwareSolutions() {
             <div className="flex flex-wrap gap-6 justify-center">
               <Link 
                 href="/contact" 
-                className="px-10 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold rounded-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                className="px-10 py-4 bg-gradient-to-r from-red-500 to-red-700 text-white font-bold rounded-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
               >
                 Start Your Project
               </Link>
