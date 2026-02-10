@@ -4,15 +4,22 @@ import Navbar from "../app/components/Navbar";
 import Footer from "../app/components/Footer";
 
 const poppins = Poppins({
-  weight: ["400","500","600","700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   subsets: ["latin"],
-  variable: "--font-poppins"
+  variable: "--font-poppins",
+  display: "swap",
+  preload: true,
 });
+
+export const metadata = {
+  title: "Sharptel - Technology Solutions Provider",
+  description: "Pakistan's leading ICT solutions provider offering connectivity, software, and managed services",
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={poppins.variable}>
-      <body className="antialiased bg-white text-text font-sans">
+      <body className={`${poppins.className} antialiased bg-white text-text`}>
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />

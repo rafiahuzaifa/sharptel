@@ -33,15 +33,20 @@
   }
 }
 
-/* Base styles */
+/* Base styles with consistent font rendering */
 html, body {
-  @apply bg-white text-gray-900 font-sans scroll-smooth;
+  @apply bg-white text-gray-900 scroll-smooth;
+  font-family: var(--font-poppins), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
 }
 
 * {
   @apply box-border;
+  font-family: inherit;
 }
 
 a {
@@ -49,7 +54,8 @@ a {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply font-sans font-bold text-gray-900 tracking-tight;
+  @apply font-bold text-gray-900 tracking-tight;
+  font-family: var(--font-poppins), sans-serif !important;
 }
 
 .container {

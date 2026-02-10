@@ -10,6 +10,11 @@ const config: Config = {
 
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-poppins)', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        poppins: ['var(--font-poppins)', 'sans-serif'],
+      },
+
       colors: {
         primary: {
           50:  "#fef2f2",
