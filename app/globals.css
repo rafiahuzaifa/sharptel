@@ -64,7 +64,37 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Premium glass card with red hover glow */
 .glass-card {
-  @apply bg-white/95 backdrop-blur-xl border border-gray-100 rounded-3xl shadow-card p-6 md:p-8 transition-all duration-300 hover:shadow-glass hover:shadow-primary/20 hover:-translate-y-2;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(243, 244, 246, 1);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  box-shadow: 0 20px 40px rgba(220, 38, 38, 0.12), 0 8px 32px rgba(239, 68, 68, 0.08);
+  border-color: rgba(220, 38, 38, 0.25);
+  transform: translateY(-4px);
+}
+
+/* Dark variant for sections with dark backgrounds */
+.glass-card-dark {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-dark:hover {
+  background: rgba(220, 38, 38, 0.12);
+  border-color: rgba(220, 38, 38, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(220, 38, 38, 0.2);
 }
 
 /* Red button styles */
@@ -77,10 +107,6 @@ h1, h2, h3, h4, h5, h6 {
   @apply outline-none ring-2 ring-primary-500/50 ring-offset-2 ring-offset-white;
 }
 
-/* Gradient text for logo/headings */
-.gradient-text {
-  @apply bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent;
-}
 /* Slow pulse animation for gradient text */
 .animate-pulse-slow {
   animation: pulse-slow 4s ease-in-out infinite;
@@ -112,20 +138,7 @@ h1, h2, h3, h4, h5, h6 {
   50% { background-position: 100% 50%; }
 }
 
-/* Red glass card hover effect */
-.glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(220, 38, 38, 0.2);
-  transition: all 0.3s ease;
-}
-
-.glass-card:hover {
-  background: rgba(220, 38, 38, 0.1);
-  border-color: rgba(220, 38, 38, 0.4);
-  transform: translateY(-2px);
-  box-shadow: 0 20px 40px rgba(220, 38, 38, 0.2);
-}
+/* glass-card-dark is used for dark background sections - see above */
 /* Navbar specific animations */
 @keyframes slideIn {
   from {
@@ -157,7 +170,9 @@ h1, h2, h3, h4, h5, h6 {
     background: #dc2626;
     border-radius: 2px;
   }
-  .form-input,
+}
+
+.form-input,
 .form-select,
 .form-textarea {
   @apply w-full px-4 py-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-[16px] leading-[1.4];
@@ -445,5 +460,4 @@ h1, h2, h3, h4, h5, h6 {
 
 .shine-effect:hover::after {
   transform: rotate(30deg) translate(20%, 20%);
-}
 }
