@@ -212,12 +212,12 @@ export default function PremiumNavbar() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center"
               >
-                <div className="relative h-14 w-auto md:h-20">
+                <div className="relative h-16 w-auto md:h-24">
                   <Image
                     src="/background/Sharp-logo-2.webp"
                     alt="Sharptel"
-                    width={300}
-                    height={100}
+                    width={330}
+                    height={110}
                     className="h-full w-auto object-contain"
                     priority
                   />
