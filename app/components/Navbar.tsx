@@ -230,7 +230,7 @@ export default function PremiumNavbar() {
               >
                 <div className="relative h-16 w-auto md:h-28">
                   <Image
-                    src="/background/Sharp-logo-2.webp"
+                    src="/background/Sharp-logo-2.png"
                     alt="Sharptel"
                     width={390}
                     height={130}
