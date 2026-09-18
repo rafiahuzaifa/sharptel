@@ -116,12 +116,12 @@ export default function ManagedServices() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50/30">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-primary-800 to-primary-900 text-white">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-        <div className="absolute right-0 top-0 w-1/3 h-full opacity-10">
-          <div className="absolute inset-0 bg-[url('/patterns/network-pattern.svg')] bg-cover"></div>
+      <section className="relative overflow-hidden text-white">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/background/OIP.webp')" }} />
+          <div className="absolute inset-0 bg-gradient-to-r from-red-900/90 to-red-900/80" />
         </div>
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-32 relative">
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8">
@@ -129,22 +129,22 @@ export default function ManagedServices() {
               <span className="font-medium">Comprehensive Managed Services</span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-white">
               Focus on Your Business
-              <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent block">
+              <span className="bg-gradient-to-r from-red-300 to-orange-200 bg-clip-text text-transparent block">
                 We Manage Your IT
               </span>
             </h1>
-            
-            <p className="text-xl text-blue-100 mb-12 max-w-3xl">
+
+            <p className="text-xl text-red-100 mb-12 max-w-3xl">
               Let Sharptel handle your IT infrastructure while you focus on core business activities. 
               Our managed services ensure reliability, security, and optimal performance.
             </p>
             
             <div className="flex flex-wrap gap-6">
-              <Link 
-                href="/contact" 
-                className="px-10 py-4 bg-white text-primary-700 font-bold rounded-lg hover:bg-blue-50 transition-all duration-300 hover:scale-105 shadow-lg"
+              <Link
+                href="/Contact-us"
+                className="px-10 py-4 bg-white text-primary-700 font-bold rounded-lg hover:bg-red-50 transition-all duration-300 hover:scale-105 shadow-lg"
               >
                 Get Managed Services Quote
               </Link>

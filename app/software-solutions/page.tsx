@@ -92,12 +92,12 @@ export default function SoftwareSolutions() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-red-900 to-red-500 text-white">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-[url('/patterns/code-pattern.svg')] bg-cover"></div>
+      <section className="relative overflow-hidden text-white">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/background/b6.jpg')" }} />
+          <div className="absolute inset-0 bg-gradient-to-br from-red-900/90 to-red-800/80" />
         </div>
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-20">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-8">
@@ -105,7 +105,7 @@ export default function SoftwareSolutions() {
               <span className="text-sm font-medium">Innovative Software Solutions</span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-white">
               Transform Your Vision Into
               <span className="bg-gradient-to-r from-red-400 to-red-300 bg-clip-text text-transparent block">
                 Digital Reality
@@ -118,8 +118,8 @@ export default function SoftwareSolutions() {
             </p>
             
             <div className="flex flex-wrap gap-6 justify-center">
-              <Link 
-                href="/contact" 
+              <Link
+                href="/Contact-us"
                 className="px-10 py-4 bg-gradient-to-r from-red-500 to-red-700 text-white font-bold rounded-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
               >
                 Start Your Project

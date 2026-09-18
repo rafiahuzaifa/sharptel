@@ -77,8 +77,23 @@ export default function PremiumNavbar() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [headerHeight, setHeaderHeight] = useState(0);
 
   const formRef = useRef<HTMLDivElement>(null);
+  const headerWrapperRef = useRef<HTMLDivElement>(null);
+
+  // Track the real rendered height of the top bar + main nav so the mobile
+  // menu overlay always starts exactly where the header ends, regardless of
+  // logo size or topbar content changes.
+  useEffect(() => {
+    const el = headerWrapperRef.current;
+    if (!el) return;
+    const update = () => setHeaderHeight(el.getBoundingClientRect().height);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // Scroll effect for navbar
   useEffect(() => {
@@ -146,10 +161,11 @@ export default function PremiumNavbar() {
 
   return (
     <>
+      <div ref={headerWrapperRef}>
       {/* Top Bar - Red Theme */}
       <div className="bg-gradient-to-r from-red-700 via-red-600 to-red-800 text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between py-2 gap-2">
+          <div className="flex flex-col md:flex-row items-center justify-between py-1.5 gap-2">
             <div className="flex flex-wrap items-center justify-center gap-6">
               <div className="flex items-center gap-3">
                 <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center">
@@ -201,7 +217,7 @@ export default function PremiumNavbar() {
           : "bg-white"
       }`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex min-h-16 py-2 items-center justify-between">
+          <div className="flex items-center justify-between">
 
             {/* Logo — image only, no duplicate wordmark (already baked into the logo art) */}
             <Link href="/" className="z-10">
@@ -212,12 +228,12 @@ export default function PremiumNavbar() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center"
               >
-                <div className="relative h-16 w-auto md:h-24">
+                <div className="relative h-16 w-auto md:h-28">
                   <Image
                     src="/background/Sharp-logo-2.webp"
                     alt="Sharptel"
-                    width={330}
-                    height={110}
+                    width={390}
+                    height={130}
                     className="h-full w-auto object-contain"
                     priority
                   />
@@ -516,7 +532,8 @@ export default function PremiumNavbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.98 }}
               transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
-              className="lg:hidden fixed inset-0 top-24 bg-white z-40 overflow-y-auto"
+              className="lg:hidden fixed inset-x-0 bottom-0 bg-white z-40 overflow-y-auto"
+              style={{ top: headerHeight || undefined }}
             >
               <div className="container mx-auto px-4 sm:px-6 py-8">
                 {/* Mobile Menu Items */}
@@ -656,6 +673,7 @@ export default function PremiumNavbar() {
           )}
         </AnimatePresence>
       </header>
+      </div>
     </>
   );
 }

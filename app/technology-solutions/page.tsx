@@ -163,12 +163,12 @@ export default function TechnologySolutions() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-red-900 via-red-800 to-red-900 text-white">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('/patterns/tech-pattern.svg')] opacity-10"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+      <section className="relative overflow-hidden text-white">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/background/b4.jpg')" }} />
+          <div className="absolute inset-0 bg-gradient-to-br from-red-900/90 via-red-800/85 to-red-900/80" />
         </div>
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-32 relative">
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8">
@@ -176,9 +176,9 @@ export default function TechnologySolutions() {
               <span className="font-medium">Future-Ready Technology Solutions</span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-white">
               Advanced Technology
-              <span className="bg-gradient-to-r from-blue-900 to-cyan-300 bg-clip-text text-transparent block">
+              <span className="bg-gradient-to-r from-red-300 to-orange-200 bg-clip-text text-transparent block">
                 Solutions for Tomorrow
               </span>
             </h1>
@@ -189,8 +189,8 @@ export default function TechnologySolutions() {
             </p>
             
             <div className="flex flex-wrap gap-6">
-              <Link 
-                href="/contact" 
+              <Link
+                href="/Contact-us"
                 className="px-10 py-4 bg-gradient-to-r from-red-600 to-red-900 text-white font-bold rounded-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
               >
                 Get Technology Assessment

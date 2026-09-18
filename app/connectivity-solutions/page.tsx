@@ -87,12 +87,12 @@ export default function ConnectivityServices() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50/30">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-primary-700 to-primary-900 text-white">
-        <div className="absolute inset-0 bg-black/20 z-0"></div>
-        <div className="absolute right-0 top-0 w-1/3 h-full opacity-10">
-          <div className="absolute inset-0 bg-[url('/patterns/circuit-board.svg')] bg-cover"></div>
+      <section className="relative overflow-hidden text-white">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/background/b2.jpg')" }} />
+          <div className="absolute inset-0 bg-gradient-to-r from-red-900/90 via-red-800/85 to-red-900/75" />
         </div>
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
@@ -100,22 +100,22 @@ export default function ConnectivityServices() {
               <span className="text-sm font-medium">Enterprise Connectivity Solutions</span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-white">
               Powering Digital<br />
-              <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-red-300 to-orange-200 bg-clip-text text-transparent">
                 Transformation
               </span>
             </h1>
-            
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl">
+
+            <p className="text-xl text-red-100 mb-8 max-w-2xl">
               Sharptel provides enterprise-grade connectivity solutions with unmatched reliability, 
               security, and performance for businesses across Pakistan.
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <Link 
-                href="/contact" 
-                className="px-8 py-4 bg-white text-primary-700 font-bold rounded-lg hover:bg-blue-50 transition-all duration-300 hover:scale-105 shadow-lg"
+              <Link
+                href="/Contact-us"
+                className="px-8 py-4 bg-white text-primary-700 font-bold rounded-lg hover:bg-red-50 transition-all duration-300 hover:scale-105 shadow-lg"
               >
                 Get Enterprise Quote
               </Link>
