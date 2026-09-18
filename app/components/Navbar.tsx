@@ -201,7 +201,7 @@ export default function PremiumNavbar() {
           : "bg-white"
       }`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
+          <div className="flex min-h-16 py-2 items-center justify-between">
 
             {/* Logo — image only, no duplicate wordmark (already baked into the logo art) */}
             <Link href="/" className="z-10">
@@ -212,12 +212,12 @@ export default function PremiumNavbar() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center"
               >
-                <div className="relative h-12 w-auto md:h-16">
+                <div className="relative h-16 w-auto md:h-24">
                   <Image
                     src="/background/Sharp-logo-2.webp"
                     alt="Sharptel"
-                    width={210}
-                    height={70}
+                    width={270}
+                    height={90}
                     className="h-full w-auto object-contain"
                     priority
                   />
@@ -314,7 +314,7 @@ export default function PremiumNavbar() {
             </nav>
 
             {/* Get Quote Button - Opens Form */}
-            <div className="hidden lg:flex items-center">
+            <div className="hidden lg:flex items-center flex-shrink-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -323,13 +323,13 @@ export default function PremiumNavbar() {
               >
                 <button
                   onClick={() => setShowQuoteForm(true)}
-                  className="group relative px-8 py-3.5 bg-gradient-to-r from-red-700 to-red-600 text-white font-bold rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
+                  className="group relative px-7 py-3 bg-gradient-to-r from-red-700 to-red-600 text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 whitespace-nowrap"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-red-800 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  <div className="relative flex items-center gap-3 text-[15px] tracking-wide">
+
+                  <div className="relative flex items-center gap-2.5 text-[14px] tracking-wide">
                     <span>Get Free Quote</span>
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
@@ -516,7 +516,7 @@ export default function PremiumNavbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.98 }}
               transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
-              className="lg:hidden fixed inset-0 top-24 bg-white z-40 overflow-y-auto"
+              className="lg:hidden fixed inset-0 top-20 bg-white z-40 overflow-y-auto"
             >
               <div className="container mx-auto px-4 sm:px-6 py-8">
                 {/* Mobile Menu Items */}
