@@ -98,7 +98,7 @@ export default function CapabilitiesSection() {
                     <cap.icon className="w-6 h-6 text-white" />
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-red-600">{cap.stat}</div>
+                    <div className="font-mono text-2xl font-semibold text-red-600">{cap.stat}</div>
                     <div className="text-xs text-gray-400 uppercase tracking-wider">{cap.statLabel}</div>
                   </div>
                 </div>

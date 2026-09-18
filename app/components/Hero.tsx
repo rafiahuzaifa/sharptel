@@ -298,7 +298,7 @@ function StatNumber({ target, suffix, isVisible }: { target: number; suffix: str
   const display = target % 1 !== 0 ? count.toFixed(1) : Math.floor(count).toString();
 
   return (
-    <div className="text-2xl md:text-3xl font-bold text-white mb-1 group-hover:text-red-400 transition-colors">
+    <div className="font-mono text-2xl md:text-3xl font-semibold text-white mb-1 group-hover:text-red-400 transition-colors">
       {display}
       <span className="text-red-400">{suffix}</span>
     </div>

@@ -172,7 +172,7 @@ export default function PartnersSection() {
               key={idx}
               className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 text-center border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300"
             >
-              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-600 to-red-800 bg-clip-text text-transparent mb-2">
+              <div className="font-mono text-3xl md:text-4xl font-semibold bg-gradient-to-r from-red-600 to-red-800 bg-clip-text text-transparent mb-2">
                 {stat.number}
               </div>
               <div className="text-gray-600 font-medium">{stat.label}</div>

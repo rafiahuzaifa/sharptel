@@ -203,35 +203,24 @@ export default function PremiumNavbar() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
 
-            {/* Logo with Image */}
+            {/* Logo — image only, no duplicate wordmark (already baked into the logo art) */}
             <Link href="/" className="z-10">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-3"
+                className="flex items-center"
               >
-                <div className="relative">
-                  <div className="h-12 w-12 md:h-14 md:w-14 rounded-xl flex items-center justify-center overflow-hidden">
-                    {/* Logo Image Only */}
-                    <Image
-                      src="/background/Sharp-logo-2.webp"
-                      alt="Sharptel Logo"
-                      width={120}
-                      height={40}
-                      className="object-contain"
-                      priority
-                    />
-                  </div>
-                </div>
-                <div className="hidden lg:block">
-                  <div className="text-xl font-black text-red-700 tracking-tight">
-                    SharpTel
-                  </div>
-                  <div className="text-[10px] font-medium text-gray-600 uppercase tracking-wider">
-                    Technology Solutions
-                  </div>
+                <div className="relative h-9 w-auto md:h-11">
+                  <Image
+                    src="/background/Sharp-logo-2.webp"
+                    alt="Sharptel"
+                    width={168}
+                    height={56}
+                    className="h-full w-auto object-contain"
+                    priority
+                  />
                 </div>
               </motion.div>
             </Link>

@@ -1,16 +1,31 @@
 import "./globals.css";
-import { Poppins } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import type { Metadata } from "next";
 import Navbar from "../app/components/Navbar";
 import Footer from "../app/components/Footer";
 import ChatWidget from "../app/components/ChatWidget";
 
-const poppins = Poppins({
-  weight: ["300", "400", "500", "600", "700", "800"],
+const spaceGrotesk = Space_Grotesk({
+  weight: ["500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-heading",
   display: "swap",
   preload: true,
+});
+
+const inter = Inter({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+  preload: true,
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  weight: ["500", "600"],
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
 const SITE_URL = "https://www.sharptel.pk";
@@ -94,8 +109,8 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={poppins.variable}>
-      <body className={`${poppins.className} antialiased bg-white text-text`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className={`${inter.className} antialiased bg-white text-text`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

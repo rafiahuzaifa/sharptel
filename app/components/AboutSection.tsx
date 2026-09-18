@@ -122,7 +122,7 @@ export default function AboutSection() {
               transition={{ delay: 0.6 }}
               className="absolute -bottom-6 -left-6 md:-left-10 bg-white p-5 rounded-2xl shadow-xl border border-gray-100"
             >
-              <div className="text-3xl font-bold text-red-600">10+</div>
+              <div className="font-mono text-3xl font-semibold text-red-600">10+</div>
               <div className="text-sm text-gray-500 font-medium">Years Experience</div>
             </motion.div>
 
@@ -133,7 +133,7 @@ export default function AboutSection() {
               transition={{ delay: 0.8 }}
               className="absolute -top-4 -right-4 md:-right-8 bg-gradient-to-br from-red-600 to-red-700 text-white p-5 rounded-2xl shadow-xl"
             >
-              <div className="text-3xl font-bold">500+</div>
+              <div className="font-mono text-3xl font-semibold">500+</div>
               <div className="text-sm text-red-100 font-medium">Happy Clients</div>
             </motion.div>
           </motion.div>
