@@ -212,12 +212,12 @@ export default function PremiumNavbar() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center"
               >
-                <div className="relative h-16 w-auto md:h-24">
+                <div className="relative h-20 w-auto md:h-32">
                   <Image
                     src="/background/Sharp-logo-2.webp"
                     alt="Sharptel"
-                    width={270}
-                    height={90}
+                    width={360}
+                    height={120}
                     className="h-full w-auto object-contain"
                     priority
                   />
@@ -516,7 +516,7 @@ export default function PremiumNavbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.98 }}
               transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
-              className="lg:hidden fixed inset-0 top-20 bg-white z-40 overflow-y-auto"
+              className="lg:hidden fixed inset-0 top-24 bg-white z-40 overflow-y-auto"
             >
               <div className="container mx-auto px-4 sm:px-6 py-8">
                 {/* Mobile Menu Items */}
