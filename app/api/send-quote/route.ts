@@ -53,9 +53,9 @@ async function sendQuoteEmails(formData: {
   // Admin notification
   await transporter.sendMail({
     from: `"Sharptel Quote Request" <${process.env.EMAIL_FROM || process.env.EMAIL_USER}>`,
-    to: process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
+    to: process.env.SALES_EMAIL || process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
     replyTo: formData.email,
-    subject: `New Quote Request: ${escapeHTML(formData.service)} - ${escapeHTML(formData.name)}`,
+    subject: `💰 New Quote Request: ${escapeHTML(formData.service)} - ${escapeHTML(formData.name)}`,
     html: `
       <!DOCTYPE html>
       <html>

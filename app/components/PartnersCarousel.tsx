@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
+import Eyebrow from "./Eyebrow";
 
 const partners = [
   { name: "Sangfor", logo: "/background/sangfor.webp" },
@@ -79,18 +80,10 @@ export default function PartnersSection() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600/10 to-black-600/10 rounded-full px-4 py-2 mb-4">
-            <div className="h-2 w-2 bg-red-500 rounded-full animate-pulse"></div>
-            <span className="text-sm font-semibold text-red-600">
-              Technology Partners
-            </span>
-          </div>
+          <Eyebrow label="Technology Partners" />
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Strategic{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-800">
-              Partners
-            </span>
+          <h2 className="section-title mb-6">
+            Strategic <span className="accent">Partners</span>
           </h2>
 
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">

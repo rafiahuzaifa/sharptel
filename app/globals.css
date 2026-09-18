@@ -99,12 +99,30 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Red button styles */
 .btn-primary {
-  @apply bg-primary-600 text-white font-medium px-6 py-3 rounded-xl hover:bg-primary-700 active:bg-primary-800 shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300;
+  @apply inline-flex items-center justify-center gap-2 bg-primary-600 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-primary-700 active:bg-primary-800 shadow-lg shadow-primary-600/20 hover:shadow-xl hover:shadow-primary-600/30 hover:-translate-y-0.5 transition-all duration-300 tracking-wide;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 border-2 border-gray-200 text-gray-800 font-semibold px-7 py-3.5 rounded-xl hover:border-primary-600 hover:text-primary-600 hover:-translate-y-0.5 transition-all duration-300 tracking-wide;
+}
+
+/* Consistent, restrained section headings for a more premium, less "loud" feel */
+.section-title {
+  @apply text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight;
+}
+
+.section-title .accent {
+  @apply text-primary-600;
 }
 
 /* Focus ring - red theme */
 :focus-visible {
   @apply outline-none ring-2 ring-primary-500/50 ring-offset-2 ring-offset-white;
+}
+
+::selection {
+  background: rgba(220, 38, 38, 0.18);
+  color: #7f1d1d;
 }
 
 /* Slow pulse animation for gradient text */

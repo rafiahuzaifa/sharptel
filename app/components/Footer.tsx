@@ -8,7 +8,8 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-b from-gray-900 to-gray-800 text-gray-300">
+    <footer className="bg-gradient-to-b from-gray-900 to-gray-800 text-gray-300 relative">
+      <div className="h-[3px] bg-gradient-to-r from-red-700 via-red-500 to-red-700" />
       {/* Main Footer Content */}
       <div className="container mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
@@ -51,7 +52,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {[
                 { label: "Home", href: "/" },
-                { label: "events", href: "/events" },
+                { label: "Events", href: "/events" },
                 { label: "About", href: "/About-us" },
                 { label: "Contact", href: "/Contact-us" },
                 { label: "Career", href: "/career" },

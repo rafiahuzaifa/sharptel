@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Target, Eye, CheckCircle } from "lucide-react";
+import Eyebrow from "./Eyebrow";
 
 const highlights = [
   "ISO Certified Operations",
@@ -26,13 +27,10 @@ export default function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <div className="inline-flex items-center gap-2 bg-red-50 rounded-full px-4 py-2 mb-5">
-              <div className="h-2 w-2 bg-red-500 rounded-full animate-pulse" />
-              <span className="text-sm font-semibold text-red-600">About Us</span>
-            </div>
+            <Eyebrow label="About Us" />
 
-            <h2 className="text-4xl md:text-5xl font-extrabold gradient-text mb-8">
-              About SharpTel
+            <h2 className="section-title mb-8">
+              About <span className="accent">SharpTel</span>
             </h2>
 
             <p className="text-lg text-gray-700 leading-relaxed mb-8">

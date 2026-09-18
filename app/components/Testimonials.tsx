@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import Eyebrow from "./Eyebrow";
 
 const testimonials = [
   {
@@ -74,12 +75,9 @@ export default function TestimonialsSection() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <div className="inline-flex items-center gap-2 bg-red-50 rounded-full px-4 py-2 mb-5">
-            <div className="h-2 w-2 bg-red-500 rounded-full animate-pulse" />
-            <span className="text-sm font-semibold text-red-600">Testimonials</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold gradient-text mb-4">
-            What Our Clients Say
+          <Eyebrow label="Testimonials" />
+          <h2 className="section-title mb-4">
+            What Our <span className="accent">Clients</span> Say
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Trusted by leading enterprises across Pakistan and beyond.

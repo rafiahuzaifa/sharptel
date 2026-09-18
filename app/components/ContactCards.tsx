@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, ArrowRight, Clock } from "lucide-react";
 import Link from "next/link";
+import Eyebrow from "./Eyebrow";
 
 interface ContactItem {
   label: string;
@@ -68,11 +69,8 @@ export default function ContactSection() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 mb-5">
-            <div className="h-2 w-2 bg-red-400 rounded-full animate-pulse" />
-            <span className="text-sm font-semibold text-red-300">Get In Touch</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+          <Eyebrow label="Get In Touch" dark />
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
             Reach <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-300">Us Anytime</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">

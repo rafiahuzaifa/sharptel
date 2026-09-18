@@ -157,9 +157,7 @@ export default function PremiumNavbar() {
                 </div>
                 <div>
                   <div className="text-xs text-red-100">Call us 24/7</div>
-                  <div className="text-sm font-bold tracking-wide">+92-311-128-4373
-
-</div>
+                  <div className="text-sm font-bold tracking-wide">+92-311-128-4373</div>
                 </div>
               </div>
               
@@ -198,8 +196,8 @@ export default function PremiumNavbar() {
 
       {/* Main Navbar - Black & White Theme */}
       <header className={`sticky top-0 z-50 w-full transition-all duration-500 ${
-        scrolled 
-          ? "bg-white shadow-2xl border-b border-gray-200" 
+        scrolled
+          ? "bg-white/90 backdrop-blur-xl shadow-lg border-b border-gray-100"
           : "bg-white"
       }`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -638,7 +636,7 @@ export default function PremiumNavbar() {
                         </div>
                         <div>
                           <div className="text-sm text-gray-500">24/7 Support</div>
-                          <div className="text-lg font-bold text-gray-800">+92 21 3456 7890</div>
+                          <div className="text-lg font-bold text-gray-800">+92-311-128-4373</div>
                         </div>
                       </div>
                       

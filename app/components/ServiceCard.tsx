@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
+import Eyebrow from "./Eyebrow";
 
 const services = [
   {
@@ -119,12 +120,9 @@ export default function ServiceCards() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 bg-red-50 rounded-full px-4 py-2 mb-5">
-            <div className="h-2 w-2 bg-red-500 rounded-full animate-pulse" />
-            <span className="text-sm font-semibold text-red-600">Our Services</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold gradient-text mb-5">
-            What We Offer
+          <Eyebrow label="Our Services" />
+          <h2 className="section-title mb-5">
+            What We <span className="accent">Offer</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             From high-speed connectivity to advanced security and automation — empowering businesses across Pakistan with reliable, future-ready ICT services.

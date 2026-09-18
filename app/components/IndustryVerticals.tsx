@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Building2, Landmark, Banknote, Store, Shield } from "lucide-react";
+import Eyebrow from "./Eyebrow";
 
 const verticals = [
   {
@@ -47,12 +48,9 @@ export default function IndustryVerticals() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <div className="inline-flex items-center gap-2 bg-red-50 rounded-full px-4 py-2 mb-5">
-            <div className="h-2 w-2 bg-red-500 rounded-full animate-pulse" />
-            <span className="text-sm font-semibold text-red-600">Industries</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold gradient-text mb-4">
-            Industry Verticals We Serve
+          <Eyebrow label="Industries" />
+          <h2 className="section-title mb-4">
+            Industry <span className="accent">Verticals</span> We Serve
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Tailored solutions for diverse sectors across Pakistan and beyond.

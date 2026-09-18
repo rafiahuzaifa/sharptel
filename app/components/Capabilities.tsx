@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Globe, Users, Award, Cpu, Shield, Zap } from "lucide-react";
+import Eyebrow from "./Eyebrow";
 
 const capabilities = [
   {
@@ -68,12 +69,9 @@ export default function CapabilitiesSection() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <div className="inline-flex items-center gap-2 bg-red-50 rounded-full px-4 py-2 mb-5">
-            <div className="h-2 w-2 bg-red-500 rounded-full animate-pulse" />
-            <span className="text-sm font-semibold text-red-600">Why Choose Us</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold gradient-text mb-4">
-            Our Capabilities
+          <Eyebrow label="Why Choose Us" />
+          <h2 className="section-title mb-4">
+            Our <span className="accent">Capabilities</span>
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Delivering excellence through expertise, partnerships, and nationwide presence.
