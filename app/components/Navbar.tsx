@@ -157,7 +157,7 @@ export default function PremiumNavbar() {
                 </div>
                 <div>
                   <div className="text-xs text-red-100">Call us 24/7</div>
-                  <div className="text-sm font-bold tracking-wide">+92-311-128-4373</div>
+                  <div className="text-sm font-semibold tracking-wide">+92-311-128-4373</div>
                 </div>
               </div>
               
@@ -167,7 +167,7 @@ export default function PremiumNavbar() {
                 </div>
                 <div>
                   <div className="text-xs text-red-100">Email Support</div>
-                  <div className="text-sm font-bold tracking-wide">info@sharptel.pk</div>
+                  <div className="text-sm font-semibold tracking-wide">info@sharptel.pk</div>
                 </div>
               </div>
               
@@ -177,7 +177,7 @@ export default function PremiumNavbar() {
                 </div>
                 <div>
                   <div className="text-xs text-red-100">Business Hours</div>
-                  <div className="text-sm font-bold tracking-wide">Mon - Sat: 9AM - 6PM</div>
+                  <div className="text-sm font-semibold tracking-wide">Mon - Sat: 9AM - 6PM</div>
                 </div>
               </div>
             </div>
@@ -212,12 +212,12 @@ export default function PremiumNavbar() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center"
               >
-                <div className="relative h-9 w-auto md:h-11">
+                <div className="relative h-12 w-auto md:h-16">
                   <Image
                     src="/background/Sharp-logo-2.webp"
                     alt="Sharptel"
-                    width={168}
-                    height={56}
+                    width={210}
+                    height={70}
                     className="h-full w-auto object-contain"
                     priority
                   />
@@ -240,7 +240,7 @@ export default function PremiumNavbar() {
                   >
                     <Link
                       href={href}
-                      className={`group flex items-center gap-2 px-5 py-3 text-[15px] font-bold transition-all duration-300 ${
+                      className={`group flex items-center gap-2 px-5 py-3 text-[15px] font-medium transition-all duration-300 ${
                         isHovered 
                           ? "text-red-600" 
                           : "text-gray-800 hover:text-red-500"
@@ -280,7 +280,7 @@ export default function PremiumNavbar() {
                               <div className="bg-gradient-to-r from-red-700 to-red-600 text-white px-6 py-4">
                                 <div className="flex items-center gap-3">
                                   <div className="h-2 w-2 bg-white/90 rounded-full" />
-                                  <span className="text-[15px] font-bold tracking-wide">{label}</span>
+                                  <span className="text-[15px] font-semibold tracking-wide">{label}</span>
                                 </div>
                               </div>
                               <div className="py-2 px-3">
@@ -530,7 +530,7 @@ export default function PremiumNavbar() {
                         <div className="flex flex-col">
                           <Link
                             href={href}
-                            className="group relative flex justify-between items-center px-5 py-4 text-gray-800 font-bold text-[16px] rounded-2xl hover:bg-red-50 transition-all duration-300"
+                            className="group relative flex justify-between items-center px-5 py-4 text-gray-800 font-medium text-[16px] rounded-2xl hover:bg-red-50 transition-all duration-300"
                             onClick={(e) => {
                               if (hasSubmenu) {
                                 e.preventDefault();
