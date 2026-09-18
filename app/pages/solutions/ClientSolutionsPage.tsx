@@ -42,7 +42,7 @@ const solutions = [
   {
     name: "Wi-Fi & Hotspot",
     slug: "wi-fi-hotspot",
-    image: "/background/wi-fi-hotspot.webp",
+    image: "/background/wifi-hotspot.webp",
     icon: Wifi,
     description: "High-performance wireless networks with secure access and centralized management.",
     features: ["Enterprise Wi-Fi", "Guest Management", "Mesh Networking"],
@@ -73,7 +73,11 @@ export default function ClientSolutionsPage() {
     <div className="min-h-screen bg-white">
 
       {/* Hero Section - Red Theme */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-red-700 via-red-600 to-red-800 text-white">
+      <section className="relative overflow-hidden text-white">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/background/connectivity.webp')" }} />
+          <div className="absolute inset-0 bg-gradient-to-r from-red-900/90 via-red-800/85 to-red-900/75" />
+        </div>
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
@@ -103,7 +107,7 @@ export default function ClientSolutionsPage() {
                 </ol>
               </nav>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
                 Our Technology Solutions
               </h1>
 
@@ -128,13 +132,6 @@ export default function ClientSolutionsPage() {
               </div>
             </motion.div>
           </div>
-        </div>
-
-        {/* Bottom wave */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg className="w-full h-16" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 55C840 50 960 40 1080 35C1200 30 1320 30 1380 30L1440 30V0H1380C1320 0 1200 0 1080 0C960 0 840 0 720 0C600 0 480 0 360 0C240 0 120 0 60 0H0V120Z" fill="#ffffff" />
-          </svg>
         </div>
       </section>
 

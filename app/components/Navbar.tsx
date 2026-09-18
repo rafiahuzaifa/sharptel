@@ -212,12 +212,12 @@ export default function PremiumNavbar() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center"
               >
-                <div className="relative h-20 w-auto md:h-32">
+                <div className="relative h-14 w-auto md:h-20">
                   <Image
                     src="/background/Sharp-logo-2.webp"
                     alt="Sharptel"
-                    width={360}
-                    height={120}
+                    width={300}
+                    height={100}
                     className="h-full w-auto object-contain"
                     priority
                   />
@@ -240,7 +240,7 @@ export default function PremiumNavbar() {
                   >
                     <Link
                       href={href}
-                      className={`group flex items-center gap-2 px-5 py-3 text-[15px] font-medium transition-all duration-300 ${
+                      className={`group flex items-center gap-2 px-4 py-3 text-[16px] font-medium transition-all duration-300 ${
                         isHovered 
                           ? "text-red-600" 
                           : "text-gray-800 hover:text-red-500"
@@ -323,11 +323,11 @@ export default function PremiumNavbar() {
               >
                 <button
                   onClick={() => setShowQuoteForm(true)}
-                  className="group relative px-7 py-3 bg-gradient-to-r from-red-700 to-red-600 text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 whitespace-nowrap"
+                  className="group relative px-7 py-3.5 bg-gradient-to-r from-red-700 to-red-600 text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 whitespace-nowrap"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-red-800 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                  <div className="relative flex items-center gap-2.5 text-[14px] tracking-wide">
+                  <div className="relative flex items-center gap-2.5 text-[15px] tracking-wide">
                     <span>Get Free Quote</span>
                     <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
