@@ -217,10 +217,10 @@ export default function PremiumNavbar() {
           : "bg-white"
       }`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+          <div className="flex h-20 items-center justify-between">
 
             {/* Logo — image only, no duplicate wordmark (already baked into the logo art) */}
-            <Link href="/" className="z-10">
+            <Link href="/" className="z-10 flex-shrink-0">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -228,12 +228,12 @@ export default function PremiumNavbar() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center"
               >
-                <div className="relative h-24 w-auto md:h-[200px]">
+                <div className="relative h-11 w-auto md:h-14">
                   <Image
                     src="/background/Sharp-logo-2.png"
                     alt="Sharptel"
-                    width={600}
-                    height={200}
+                    width={300}
+                    height={100}
                     className="h-full w-auto object-contain"
                     priority
                   />
