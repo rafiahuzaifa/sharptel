@@ -232,7 +232,7 @@ export default function PremiumNavbar() {
                   <Image
                     src="/background/Sharp-logo-2.png"
                     alt="Sharptel"
-                    width={593}
+                    width={600}
                     height={200}
                     className="h-full w-auto object-contain"
                     priority
