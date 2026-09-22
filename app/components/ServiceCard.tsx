@@ -3,14 +3,16 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useLayoutEffect, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Eyebrow from "./Eyebrow";
 
 const services = [
   {
     title: "Enterprise Internet",
     desc: "High-speed, reliable dedicated internet with CIR over fiber & microwave for mission-critical operations.",
-    image: "/images/enterprise-internet.jpg",
+    image: "/background/enterprise-internet-bg.webp",
     href: "/connectivity-solutions/enterprise-solutions",
   },
   {
@@ -83,7 +85,44 @@ const services = [
 
 export default function ServiceCards() {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [isPaused, setIsPaused] = useState(false);
+
+  // GSAP ScrollTrigger: stagger-reveal the service cards as the section scrolls into view
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.from(".service-card", {
+          opacity: 0,
+          y: 40,
+          scale: 0.94,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: "back.out(1.4)",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        });
+      });
+    }, sectionRef);
+
+    // Images loading after this effect runs can change page layout and throw off
+    // ScrollTrigger's initial measurements, so re-measure once everything has settled.
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener("load", refresh);
+    const t = setTimeout(refresh, 1000);
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener("load", refresh);
+      clearTimeout(t);
+    };
+  }, []);
 
   useEffect(() => {
     const carousel = carouselRef.current;
@@ -112,7 +151,7 @@ export default function ServiceCards() {
   }, [isPaused]);
 
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-b from-gray-50/80 to-white overflow-hidden">
+    <section ref={sectionRef} className="py-20 md:py-28 bg-gradient-to-b from-gray-50/80 to-white overflow-hidden">
       <div className="container mx-auto px-6 text-center mb-14">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -144,7 +183,9 @@ export default function ServiceCards() {
             <Link
               key={idx}
               href={service.href}
-              className="block flex-shrink-0 w-[300px] md:w-[360px]"
+              className={`block flex-shrink-0 w-[300px] md:w-[360px] ${
+                idx < services.length ? "service-card" : ""
+              }`}
             >
               <motion.div
                 className="group h-full bg-white rounded-2xl md:rounded-3xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-2xl hover:shadow-red-500/10 transition-all duration-500"
