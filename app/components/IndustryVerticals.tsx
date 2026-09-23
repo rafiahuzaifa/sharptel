@@ -4,41 +4,16 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Building2, Landmark, Banknote, Store, Shield } from "lucide-react";
 import Eyebrow from "./Eyebrow";
+import type { SiteContent } from "@/lib/content";
 
-const verticals = [
-  {
-    title: "Government Sector",
-    desc: "Secure infrastructure & digital transformation for public institutions.",
-    image: "/background/gov.webp",
-    icon: Landmark,
-  },
-  {
-    title: "Enterprise Sector",
-    desc: "Scalable connectivity & IT solutions for large corporations.",
-    image: "/background/enterprise.webp",
-    icon: Building2,
-  },
-  {
-    title: "Financial Sector",
-    desc: "Compliant, high-security networks for banks & financial services.",
-    image: "/background/financial.webp",
-    icon: Banknote,
-  },
-  {
-    title: "Small & Medium Enterprise",
-    desc: "Affordable, reliable tech solutions tailored for growing businesses.",
-    image: "/background/sme.webp",
-    icon: Store,
-  },
-  {
-    title: "Defense Sector",
-    desc: "Mission-critical communications & encrypted secure networks.",
-    image: "/background/defence.webp",
-    icon: Shield,
-  },
-];
+// Icons are fixed per card position; text/image content comes from admin-managed props.
+const icons = [Landmark, Building2, Banknote, Store, Shield];
 
-export default function IndustryVerticals() {
+interface IndustryVerticalsProps {
+  industries: SiteContent["industries"];
+}
+
+export default function IndustryVerticals({ industries: verticals }: IndustryVerticalsProps) {
   return (
     <section className="py-20 md:py-28 bg-white">
       <div className="container mx-auto px-6">
@@ -59,7 +34,9 @@ export default function IndustryVerticals() {
 
         {/* Top row: 3 items */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-8">
-          {verticals.slice(0, 3).map((vert, idx) => (
+          {verticals.slice(0, 3).map((vert, idx) => {
+            const Icon = icons[idx];
+            return (
             <motion.div
               key={idx}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -81,7 +58,7 @@ export default function IndustryVerticals() {
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-red-600/80 transition-all duration-300">
-                      <vert.icon className="w-5 h-5 text-white" />
+                      <Icon className="w-5 h-5 text-white" />
                     </div>
                     <h3 className="text-xl md:text-2xl font-bold text-white">{vert.title}</h3>
                   </div>
@@ -92,12 +69,15 @@ export default function IndustryVerticals() {
                 </div>
               </div>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Bottom row: 2 items centered */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
-          {verticals.slice(3).map((vert, idx) => (
+          {verticals.slice(3).map((vert, idx) => {
+            const Icon = icons[idx + 3];
+            return (
             <motion.div
               key={idx + 3}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -119,7 +99,7 @@ export default function IndustryVerticals() {
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-red-600/80 transition-all duration-300">
-                      <vert.icon className="w-5 h-5 text-white" />
+                      <Icon className="w-5 h-5 text-white" />
                     </div>
                     <h3 className="text-xl md:text-2xl font-bold text-white">{vert.title}</h3>
                   </div>
@@ -130,7 +110,8 @@ export default function IndustryVerticals() {
                 </div>
               </div>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

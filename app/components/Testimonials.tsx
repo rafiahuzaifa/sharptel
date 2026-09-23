@@ -4,32 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import Eyebrow from "./Eyebrow";
+import type { SiteContent } from "@/lib/content";
 
-const testimonials = [
-  {
-    quote: "SharpTel provides professional & accommodating service as a best source for all of the information you are looking for. Technician are skilled, knowledgeable & friendly. We find SharpTel as the best deal for the service received.",
-    author: "Mr. Naghman Ahsan",
-    position: "Technical Manager",
-    company: "ETIHAD LUBE OIL COMPANY (PVT) LTD.",
-    rating: 5,
-  },
-  {
-    quote: "Dear SharpTel Team, I wanted to let you know how much I appreciated your help and support with the different projects. I know how much time and effort the team invested... You are a valued member of our company team.",
-    author: "Mr. Kashif Rehman",
-    position: "Manager Admin",
-    company: "Rozee.pk",
-    rating: 5,
-  },
-  {
-    quote: "I am pleased to recommend the internet services provided by Sharp Telecom (Pvt) Ltd. The speed service is excellent and the best in the market. We have had no complaints in the last one year.",
-    author: "Mr. Syed Faraz Ali",
-    position: "AVP",
-    company: "Al-Baraka Bank Pakistan",
-    rating: 5,
-  },
-];
+interface TestimonialsProps {
+  testimonials: SiteContent["testimonials"];
+}
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ testimonials }: TestimonialsProps) {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
 

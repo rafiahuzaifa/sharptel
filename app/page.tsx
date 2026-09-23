@@ -7,19 +7,24 @@ import AboutSection from "@/app/components/AboutSection";
 import TestimonialsSection from "@/app/components/Testimonials";
 import IndustryVerticals from "@/app/components/IndustryVerticals";
 import ContactSection from "@/app/components/ContactCards";
+import { getSiteContent } from "@/lib/content";
 
-export default function Home() {
+export const revalidate = 0;
+
+export default async function Home() {
+  const content = await getSiteContent();
+
   return (
     <>
-      <HeroSection />
-      <WhatWeOffer />
+      <HeroSection hero={content.hero} />
+      <WhatWeOffer services={content.services} />
       <PartnersSection />
-      <CapabilitiesSection />
-      <AboutSection />
-     
-      <TestimonialsSection />
-      <IndustryVerticals />
-      <ContactSection />
+      <CapabilitiesSection capabilities={content.capabilities} />
+      <AboutSection about={content.about} />
+
+      <TestimonialsSection testimonials={content.testimonials} />
+      <IndustryVerticals industries={content.industries} />
+      <ContactSection contact={content.contact} />
     </>
   );
 }

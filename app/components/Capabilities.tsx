@@ -3,59 +3,23 @@
 import { motion } from "framer-motion";
 import { Globe, Users, Award, Cpu, Shield, Zap } from "lucide-react";
 import Eyebrow from "./Eyebrow";
+import type { SiteContent } from "@/lib/content";
 
-const capabilities = [
-  {
-    icon: Globe,
-    title: "Global Presence",
-    desc: "International clients, satisfied global clientele, swift reply & well-trained professionals.",
-    color: "from-red-500 to-red-700",
-    stat: "15+",
-    statLabel: "Countries",
-  },
-  {
-    icon: Users,
-    title: "Skilled Resources",
-    desc: "Qualified project managers, certified engineers & industry-specific knowledge.",
-    color: "from-red-600 to-red-800",
-    stat: "200+",
-    statLabel: "Engineers",
-  },
-  {
-    icon: Award,
-    title: "Technology Partners",
-    desc: "Multiple technology partners, training & certification by manufacturers, implementation support.",
-    color: "from-red-500 to-red-700",
-    stat: "50+",
-    statLabel: "Partners",
-  },
-  {
-    icon: Cpu,
-    title: "Local Presence",
-    desc: "Presence across Pakistan, fully staffed project office at site.",
-    color: "from-red-600 to-red-800",
-    stat: "4+",
-    statLabel: "Cities",
-  },
-  {
-    icon: Shield,
-    title: "Security First",
-    desc: "Enterprise-grade security solutions with ISO-compliant infrastructure and 24/7 monitoring.",
-    color: "from-red-500 to-red-700",
-    stat: "99.9%",
-    statLabel: "Uptime",
-  },
-  {
-    icon: Zap,
-    title: "Fast Deployment",
-    desc: "Rapid project execution with agile methodologies and dedicated project management teams.",
-    color: "from-red-600 to-red-800",
-    stat: "48hr",
-    statLabel: "Response",
-  },
+// Icon + color are fixed per card position; text content comes from admin-managed props.
+const iconStyle = [
+  { icon: Globe, color: "from-red-500 to-red-700" },
+  { icon: Users, color: "from-red-600 to-red-800" },
+  { icon: Award, color: "from-red-500 to-red-700" },
+  { icon: Cpu, color: "from-red-600 to-red-800" },
+  { icon: Shield, color: "from-red-500 to-red-700" },
+  { icon: Zap, color: "from-red-600 to-red-800" },
 ];
 
-export default function CapabilitiesSection() {
+interface CapabilitiesProps {
+  capabilities: SiteContent["capabilities"];
+}
+
+export default function CapabilitiesSection({ capabilities }: CapabilitiesProps) {
   return (
     <section className="py-20 md:py-28 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
       {/* Background decorative */}
@@ -79,7 +43,9 @@ export default function CapabilitiesSection() {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {capabilities.map((cap, idx) => (
+          {capabilities.map((cap, idx) => {
+            const style = iconStyle[idx % iconStyle.length];
+            return (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 40 }}
@@ -94,8 +60,8 @@ export default function CapabilitiesSection() {
 
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-6">
-                  <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${cap.color} shadow-lg shadow-red-600/20 group-hover:scale-110 transition-transform duration-300`}>
-                    <cap.icon className="w-6 h-6 text-white" />
+                  <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${style.color} shadow-lg shadow-red-600/20 group-hover:scale-110 transition-transform duration-300`}>
+                    <style.icon className="w-6 h-6 text-white" />
                   </div>
                   <div className="text-right">
                     <div className="font-mono text-2xl font-semibold text-red-600">{cap.stat}</div>
@@ -109,7 +75,8 @@ export default function CapabilitiesSection() {
                 <p className="text-gray-600 leading-relaxed">{cap.desc}</p>
               </div>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

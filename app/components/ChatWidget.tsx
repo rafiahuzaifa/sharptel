@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
 
 interface ChatMessage {
@@ -16,6 +17,7 @@ const WELCOME_MESSAGE: ChatMessage = {
 };
 
 export default function ChatWidget() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([WELCOME_MESSAGE]);
   const [input, setInput] = useState("");
@@ -55,6 +57,8 @@ export default function ChatWidget() {
       setIsLoading(false);
     }
   };
+
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <>

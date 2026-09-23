@@ -4,15 +4,14 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Target, Eye, CheckCircle } from "lucide-react";
 import Eyebrow from "./Eyebrow";
+import type { SiteContent } from "@/lib/content";
 
-const highlights = [
-  "ISO Certified Operations",
-  "24/7 Network Operations Center",
-  "Tier-3 Data Center Infrastructure",
-  "Pan-Pakistan Coverage",
-];
+interface AboutSectionProps {
+  about: SiteContent["about"];
+}
 
-export default function AboutSection() {
+export default function AboutSection({ about }: AboutSectionProps) {
+  const highlights = about.highlights;
   return (
     <section className="py-20 md:py-28 bg-white relative overflow-hidden">
       {/* Decorative background */}
@@ -33,9 +32,7 @@ export default function AboutSection() {
               About <span className="accent">SharpTel</span>
             </h2>
 
-            <p className="text-lg text-gray-700 leading-relaxed mb-8">
-              SharpTel services are vital to the successful implementation and integration of technology-related projects. SharpTel has a vision of indulging our customers with a diversified portfolio of Software Services, Connectivity, Data Center and Colocation, Information Security, IT Security, automation services through state-of-the-art technology solutions.
-            </p>
+            <p className="text-lg text-gray-700 leading-relaxed mb-8">{about.paragraph}</p>
 
             {/* Highlights */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
@@ -68,9 +65,7 @@ export default function AboutSection() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 mb-2">Our Vision</h3>
-                    <p className="text-gray-700">
-                      To provide quality services that exceeds the expectations of our esteemed customers.
-                    </p>
+                    <p className="text-gray-700">{about.visionText}</p>
                   </div>
                 </div>
               </motion.div>
@@ -88,9 +83,7 @@ export default function AboutSection() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 mb-2">Our Mission</h3>
-                    <p className="text-gray-700">
-                      To empower businesses by providing next generation ICT solutions and services to be used as a competitive advantage.
-                    </p>
+                    <p className="text-gray-700">{about.missionText}</p>
                   </div>
                 </div>
               </motion.div>
@@ -106,7 +99,7 @@ export default function AboutSection() {
           >
             <div className="rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src="/background/team.webp"
+                src={about.teamImage}
                 alt="SharpTel Team"
                 width={600}
                 height={500}
@@ -122,7 +115,7 @@ export default function AboutSection() {
               transition={{ delay: 0.6 }}
               className="absolute -bottom-6 -left-6 md:-left-10 bg-white p-5 rounded-2xl shadow-xl border border-gray-100"
             >
-              <div className="font-mono text-3xl font-semibold text-red-600">10+</div>
+              <div className="font-mono text-3xl font-semibold text-red-600">{about.yearsExperience}</div>
               <div className="text-sm text-gray-500 font-medium">Years Experience</div>
             </motion.div>
 
@@ -133,7 +126,7 @@ export default function AboutSection() {
               transition={{ delay: 0.8 }}
               className="absolute -top-4 -right-4 md:-right-8 bg-gradient-to-br from-red-600 to-red-700 text-white p-5 rounded-2xl shadow-xl"
             >
-              <div className="font-mono text-3xl font-semibold">500+</div>
+              <div className="font-mono text-3xl font-semibold">{about.happyClients}</div>
               <div className="text-sm text-red-100 font-medium">Happy Clients</div>
             </motion.div>
           </motion.div>

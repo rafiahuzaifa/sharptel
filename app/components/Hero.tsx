@@ -4,22 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import type { SiteContent } from "@/lib/content";
 
-const backgrounds = [
-  "/background/OIP.webp",
-  "/background/fiber-trails.webp",
-  "/background/data-flow.webp",
-  "/background/connectivity.webp",
-];
-
-const stats = [
-  { number: 500, suffix: "+", label: "Clients Served" },
-  { number: 50, suffix: "+", label: "Tech Partners" },
-  { number: 99.9, suffix: "%", label: "Uptime SLA" },
-  { number: 24, suffix: "/7", label: "Support" },
-];
-
-const words = ["Digital Connectivity", "Business Growth", "Smart Solutions", "Future Networks"];
+interface HeroProps {
+  hero: SiteContent["hero"];
+}
 
 function useCountUp(target: number, duration: number = 2000, startCounting: boolean = false) {
   const [count, setCount] = useState(0);
@@ -52,7 +41,11 @@ function useCountUp(target: number, duration: number = 2000, startCounting: bool
   return count;
 }
 
-export default function Hero() {
+export default function Hero({ hero }: HeroProps) {
+  const backgrounds = hero.backgrounds;
+  const words = hero.words;
+  const stats = hero.stats;
+
   const [currentBg, setCurrentBg] = useState(0);
   const [currentWord, setCurrentWord] = useState(0);
   const [statsVisible, setStatsVisible] = useState(false);
@@ -63,14 +56,14 @@ export default function Hero() {
       setCurrentBg((prev) => (prev + 1) % backgrounds.length);
     }, 8000);
     return () => clearInterval(interval);
-  }, []);
+  }, [backgrounds.length]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWord((prev) => (prev + 1) % words.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [words.length]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -167,7 +160,7 @@ export default function Hero() {
             className="inline-block mb-6"
           >
             <span className="text-red-300 text-sm font-semibold tracking-wider uppercase bg-red-900/30 px-5 py-2.5 rounded-full backdrop-blur-sm border border-red-700/30">
-              Enterprise Solutions
+              {hero.badge}
             </span>
           </motion.div>
 
@@ -196,10 +189,7 @@ export default function Hero() {
             transition={{ delay: 0.8, duration: 1 }}
             className="text-lg sm:text-xl md:text-2xl text-gray-300 font-light mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed"
           >
-            Next-generation telecom & ICT solutions built with{" "}
-            <span className="text-red-400 font-semibold">innovation</span>,{" "}
-            <span className="text-red-400 font-semibold">reliability</span>, and{" "}
-            <span className="text-red-400 font-semibold">uncompromising integrity</span>.
+            {hero.subtitle}
           </motion.p>
 
           <motion.div

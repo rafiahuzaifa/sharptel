@@ -7,83 +7,13 @@ import { useRef, useEffect, useLayoutEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Eyebrow from "./Eyebrow";
+import type { SiteContent } from "@/lib/content";
 
-const services = [
-  {
-    title: "Enterprise Internet",
-    desc: "High-speed, reliable dedicated internet with CIR over fiber & microwave for mission-critical operations.",
-    image: "/background/enterprise-internet-bg.webp",
-    href: "/connectivity-solutions/enterprise-solutions",
-  },
-  {
-    title: "Data Solutions",
-    desc: "MPLS, Layer-2 transport, dark fiber, and advanced data connectivity tailored to your bandwidth needs.",
-    image: "/background/data-solutions.webp",
-    href: "/connectivity-solutions/data-solutions",
-  },
-  {
-    title: "Wireless Services",
-    desc: "Robust LTE/4G/5G private networks, wireless broadband, and hotspot solutions for mobility.",
-    image: "/background/wireless-services.jpg",
-    href: "/connectivity-solutions/wireless-connectivity",
-  },
-  {
-    title: "Banking Enterprise",
-    desc: "Secure, compliant connectivity designed specifically for financial institutions and banking operations.",
-    image: "/background/banking-enterprise.jpeg",
-    href: "/connectivity-solutions/banking-enterprise",
-  },
-  {
-    title: "Call Center Services",
-    desc: "Scalable VoIP-based call center infrastructure with high uptime and quality voice solutions.",
-    image: "/background/call-center.webp",
-    href: "/connectivity-solutions/call-service",
-  },
-  {
-    title: "Cyber Security",
-    desc: "Advanced threat protection, firewalls, endpoint security, and proactive cyber defense for enterprises.",
-    image: "/background/cyber-security.webp",
-    href: "/technology-solutions/cyber-security",
-  },
-  {
-    title: "Data Center & Colocation",
-    desc: "Tier-3 certified data centers with colocation, power redundancy, and 24/7 monitoring.",
-    image: "/background/data-center.webp",
-    href: "/technology-solutions/data-center",
-  },
-  {
-    title: "Wi-Fi & Hotspot",
-    desc: "Enterprise-grade managed Wi-Fi, event hotspots, offloading, and cloud-controlled access points.",
-    image: "/background/wifi-hotspot.webp",
-    href: "/technology-solutions/hotspot-wifi",
-  },
-  {
-    title: "IoT & Automation",
-    desc: "IoT connectivity, smart automation, sensors, and integration for industrial & smart city applications.",
-    image: "/background/iot-automation.webp",
-    href: "/technology-solutions/iot-automation",
-  },
-  {
-    title: "Voice Over IP (VoIP)",
-    desc: "Hosted PBX, unified communications, scalable VoIP solutions to reduce costs and improve collaboration.",
-    image: "/background/voip.webp",
-    href: "/technology-solutions/voice-over",
-  },
-  {
-    title: "Managed Services",
-    desc: "End-to-end IT/network/security management, NOC, backup, and disaster recovery for peace of mind.",
-    image: "/background/managed-services.webp",
-    href: "/manage-technology",
-  },
-  {
-    title: "Satellite Service",
-    desc: "High-speed satellite internet for remote/rural areas with low latency and reliable coverage.",
-    image: "/background/satellite-service.webp",
-    href: "/connectivity-solutions/satellite-service",
-  },
-];
+interface ServiceCardsProps {
+  services: SiteContent["services"];
+}
 
-export default function ServiceCards() {
+export default function ServiceCards({ services }: ServiceCardsProps) {
   const carouselRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [isPaused, setIsPaused] = useState(false);

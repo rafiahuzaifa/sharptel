@@ -4,48 +4,19 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, ArrowRight, Clock } from "lucide-react";
 import Link from "next/link";
 import Eyebrow from "./Eyebrow";
+import type { SiteContent } from "@/lib/content";
 
-interface ContactItem {
-  label: string;
-  value: string;
-  href?: string;
+interface ContactSectionProps {
+  contact: SiteContent["contact"];
 }
 
-const contactCards: { icon: typeof Mail; title: string; subtitle: string; items: ContactItem[] }[] = [
-  {
-    icon: Mail,
-    title: "Email Us",
-    subtitle: "We respond within 24 hours",
-    items: [
-      { label: "Customer Care", value: "info@sharptel.pk", href: "mailto:info@sharptel.pk" },
-      { label: "Support", value: "servicedesk@sharptel.pk", href: "mailto:servicedesk@sharptel.pk" },
-      { label: "Careers", value: "careers@sharptel.pk", href: "mailto:careers@sharptel.pk" },
-    ],
-  },
-  {
-    icon: Phone,
-    title: "Call Us",
-    subtitle: "Available 24/7 for support",
-    items: [
-      { label: "Sales", value: "+92-311-1123104", href: "tel:+923111123104" },
-      { label: "Sales", value: "+92-311-1123105", href: "tel:+923111123105" },
-      { label: "Support", value: "+92-311-128-4373", href: "tel:+923111284373" },
-    ],
-  },
-  {
-    icon: MapPin,
-    title: "Our Offices",
-    subtitle: "Pan-Pakistan presence",
-    items: [
-      { label: "Head Office (Karachi)", value: "DHA Phase VIII" },
-      { label: "Islamabad", value: "F-8 Markaz" },
-      { label: "Lahore", value: "Main Boulevard" },
-      { label: "AJK", value: "Mirpur" },
-    ],
-  },
-];
+export default function ContactSection({ contact }: ContactSectionProps) {
+  const contactCards = [
+    { icon: Mail, title: "Email Us", subtitle: "We respond within 24 hours", items: contact.emails },
+    { icon: Phone, title: "Call Us", subtitle: "Available 24/7 for support", items: contact.phones },
+    { icon: MapPin, title: "Our Offices", subtitle: "Pan-Pakistan presence", items: contact.offices },
+  ];
 
-export default function ContactSection() {
   return (
     <section className="py-20 md:py-28 bg-gradient-to-br from-gray-900 via-red-950 to-gray-900 text-white relative overflow-hidden">
       {/* Background decorative elements */}
@@ -130,8 +101,8 @@ export default function ContactSection() {
             </div>
             <div>
               <h4 className="font-bold text-white">Business Hours</h4>
-              <p className="text-gray-400 text-sm">Monday - Saturday: 9:00 AM - 6:00 PM</p>
-              <p className="text-red-400 text-sm font-medium">Support: 24/7 Available</p>
+              <p className="text-gray-400 text-sm">{contact.businessHours}</p>
+              <p className="text-red-400 text-sm font-medium">{contact.supportAvailability}</p>
             </div>
           </motion.div>
 

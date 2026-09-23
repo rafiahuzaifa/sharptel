@@ -2,10 +2,14 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { Facebook, Linkedin, Mail, Phone, MapPin } from "lucide-react";
 
 export default function Footer() {
+  const pathname = usePathname();
   const currentYear = new Date().getFullYear();
+
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <footer className="bg-gradient-to-b from-gray-900 to-gray-800 text-gray-300 relative">

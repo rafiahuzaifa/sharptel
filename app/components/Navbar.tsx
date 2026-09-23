@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, Phone, Mail, Clock, MapPin, XCircle } from "lucide-react";
 
 const menuItems = [
@@ -63,6 +64,7 @@ const menuItems = [
 ];
 
 export default function PremiumNavbar() {
+  const pathname = usePathname();
   const [hoverMenu, setHoverMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMobileMenu, setActiveMobileMenu] = useState<string | null>(null);
@@ -158,6 +160,8 @@ export default function PremiumNavbar() {
       [e.target.name]: e.target.value,
     });
   };
+
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <>
