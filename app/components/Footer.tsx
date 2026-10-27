@@ -1,9 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { Facebook, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Linkedin, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+
+const quickLinks = [
+  { label: "Home", href: "/" },
+  { label: "Events", href: "/events" },
+  { label: "About", href: "/About-us" },
+  { label: "Contact", href: "/Contact-us" },
+  { label: "Career", href: "/career" },
+];
+
+const services = [
+  "Enterprise Internet",
+  "Cyber Security",
+  "Data Center & Colocation",
+  "Wi-Fi & Hotspot",
+  "Voice Over IP (VoIP)",
+  "Managed Services",
+];
+
+const socials = [
+  { label: "Facebook", href: "https://www.facebook.com/SharpTel.pk", icon: Facebook },
+  { label: "LinkedIn", href: "https://pk.linkedin.com/company/sharp-telecom-private-limited", icon: Linkedin },
+];
 
 export default function Footer() {
   const pathname = usePathname();
@@ -12,127 +33,109 @@ export default function Footer() {
   if (pathname?.startsWith("/admin")) return null;
 
   return (
-    <footer className="bg-gradient-to-b from-gray-900 to-gray-800 text-gray-300 relative">
-      <div className="h-[3px] bg-gradient-to-r from-red-700 via-red-500 to-red-700" />
-      {/* Main Footer Content */}
-      <div className="container mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
-          {/* Company Info */}
-          <div className="space-y-6">
-            <Link href="/" className="text-3xl font-extrabold gradient-text block">
-              Sharptel
-            </Link>
-            <p className="text-gray-400 leading-relaxed">
-              Innovative ICT & Connectivity Solutions – Empowering enterprises with reliable, secure, and future-ready telecom services across Pakistan.
-            </p>
+    <footer className="relative overflow-hidden border-t border-white/5 bg-gray-950 text-gray-400">
+      <div className="h-px bg-gradient-to-r from-transparent via-red-600 to-transparent" />
 
-            {/* Social Icons */}
-            <div className="flex gap-5">
-              <a
-                href="https://www.facebook.com/SharpTel.pk"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary-500 transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-6 h-6" />
-              </a>
-              <a
-                href="https://pk.linkedin.com/company/sharp-telecom-private-limited"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary-500 transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-6 h-6" />
-              </a>
-              {/* Add Instagram/Twitter/X if available */}
+      <div className="container mx-auto px-6 pb-10 pt-20">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12">
+          {/* Brand */}
+          <div className="lg:col-span-4">
+            <Link href="/" className="mb-6 inline-flex items-baseline font-heading text-3xl font-semibold text-white" style={{ letterSpacing: "-0.04em" }}>
+              Sharptel<span className="text-red-600">.</span>
+            </Link>
+            <p className="mb-8 max-w-sm leading-relaxed">
+              Innovative ICT &amp; Connectivity Solutions — empowering enterprises with reliable, secure, and future-ready telecom services across Pakistan.
+            </p>
+            <div className="flex gap-3">
+              {socials.map(({ label, href, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-gray-400 transition-all hover:border-red-600 hover:bg-red-600 hover:text-white"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              ))}
             </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold text-white mb-6">Quick Links</h4>
+          <div className="lg:col-span-2">
+            <h4 className="mb-6 font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-white">Company</h4>
             <ul className="space-y-3">
-              {[
-                { label: "Home", href: "/" },
-                { label: "Events", href: "/events" },
-                { label: "About", href: "/About-us" },
-                { label: "Contact", href: "/Contact-us" },
-                { label: "Career", href: "/career" },
-              ].map((item) => (
+              {quickLinks.map((item) => (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-gray-400 hover:text-primary-500 transition-colors hover:translate-x-1 inline-block"
-                  >
+                  <Link href={item.href} className="group inline-flex items-center gap-1 transition-colors hover:text-white">
                     {item.label}
+                    <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Services Highlights */}
-          <div>
-            <h4 className="text-lg font-semibold text-white mb-6">Key Services</h4>
+          {/* Services */}
+          <div className="lg:col-span-3">
+            <h4 className="mb-6 font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-white">Key Services</h4>
             <ul className="space-y-3">
-              <li className="text-gray-400">Enterprise Internet</li>
-              <li className="text-gray-400">Cyber Security</li>
-              <li className="text-gray-400">Data Center & Colocation</li>
-              <li className="text-gray-400">Wi-Fi & Hotspot</li>
-              <li className="text-gray-400">Voice Over IP (VoIP)</li>
-              <li className="text-gray-400">Managed Services</li>
+              {services.map((s) => (
+                <li key={s}>{s}</li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact & Offices */}
-          <div className="space-y-6">
-            <h4 className="text-lg font-semibold text-white mb-6">Contact Us</h4>
+          {/* Contact */}
+          <div className="space-y-5 lg:col-span-3">
+            <h4 className="mb-6 font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-white">Contact</h4>
 
-            {/* Emails */}
             <div className="flex items-start gap-3">
-              <Mail className="w-5 h-5 text-primary-500 mt-1 flex-shrink-0" />
-              <div>
-                <p className="text-gray-400">Customer Care: info@sharptel.pk</p>
-                <p className="text-gray-400">Support: servicedesk@sharptel.pk</p>
-                <p className="text-gray-400">Careers: careers@sharptel.pk</p>
+              <Mail className="mt-1 h-4 w-4 flex-shrink-0 text-red-500" />
+              <div className="space-y-1 text-sm">
+                <p>Customer Care: <a href="mailto:info@sharptel.pk" className="text-gray-300 hover:text-white">info@sharptel.pk</a></p>
+                <p>Support: <a href="mailto:servicedesk@sharptel.pk" className="text-gray-300 hover:text-white">servicedesk@sharptel.pk</a></p>
+                <p>Careers: <a href="mailto:careers@sharptel.pk" className="text-gray-300 hover:text-white">careers@sharptel.pk</a></p>
               </div>
             </div>
 
-            {/* Phones */}
             <div className="flex items-start gap-3">
-              <Phone className="w-5 h-5 text-primary-500 mt-1 flex-shrink-0" />
-              <div>
-                <p className="text-gray-400">Sales: +92-311-1123104 / +92-311-1123105</p>
-                <p className="text-gray-400">Support: +92-311-128-4373</p>
+              <Phone className="mt-1 h-4 w-4 flex-shrink-0 text-red-500" />
+              <div className="space-y-1 text-sm">
+                <p>Sales: +92-311-1123104 / +92-311-1123105</p>
+                <p>Support: +92-311-128-4373</p>
               </div>
             </div>
 
-            {/* Head Office (Karachi focus) */}
             <div className="flex items-start gap-3">
-              <MapPin className="w-5 h-5 text-primary-500 mt-1 flex-shrink-0" />
-              <div>
-                <p className="text-gray-400 font-medium">Head Office (Karachi)</p>
-                <p className="text-gray-400 text-sm">
-                  Office 104 & 105, 1st Floor, Plot #54-C, Al-Murtaza Commercial Lane-2, DHA Phase VIII, Karachi, Pakistan
-                </p>
+              <MapPin className="mt-1 h-4 w-4 flex-shrink-0 text-red-500" />
+              <div className="text-sm">
+                <p className="font-medium text-gray-300">Head Office (Karachi)</p>
+                <p>Office 104 &amp; 105, 1st Floor, Plot #54-C, Al-Murtaza Commercial Lane-2, DHA Phase VIII, Karachi, Pakistan</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-gray-700/50 bg-gray-900/80 backdrop-blur-sm">
-        <div className="container mx-auto px-6 py-6 text-center text-gray-500 text-sm">
-          <p>© {currentYear} Sharp Communications (Pvt.) Ltd. | All Rights Reserved.</p>
-          <div className="mt-2 flex justify-center gap-6">
-            <Link href="/privacy-policy" className="hover:text-primary-500 transition-colors">
+        {/* Oversized wordmark */}
+        <div
+          aria-hidden
+          className="pointer-events-none mt-20 select-none bg-gradient-to-b from-white/[0.07] to-transparent bg-clip-text text-center font-heading text-[18vw] font-semibold leading-[0.8] text-transparent lg:text-[14rem]"
+          style={{ letterSpacing: "-0.06em" }}
+        >
+          SHARPTEL
+        </div>
+
+        {/* Bottom bar */}
+        <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-gray-500 md:flex-row">
+          <p>© {currentYear} Sharp Communications (Pvt.) Ltd. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link href="/privacy-policy" className="transition-colors hover:text-white">
               Privacy Policy
             </Link>
-            <Link href="/terms-conditions" className="hover:text-primary-500 transition-colors">
-              Terms & Conditions
+            <Link href="/terms-conditions" className="transition-colors hover:text-white">
+              Terms &amp; Conditions
             </Link>
           </div>
         </div>

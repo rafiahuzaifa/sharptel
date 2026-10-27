@@ -15,101 +15,66 @@ interface IndustryVerticalsProps {
 
 export default function IndustryVerticals({ industries: verticals }: IndustryVerticalsProps) {
   return (
-    <section className="py-20 md:py-28 bg-white">
+    <section className="bg-white py-24 md:py-32">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-14"
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-14 grid items-end gap-8 lg:grid-cols-12"
         >
-          <Eyebrow label="Industries" />
-          <h2 className="section-title mb-4">
-            Industry <span className="accent">Verticals</span> We Serve
-          </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <div className="lg:col-span-7">
+            <Eyebrow label="Industries" />
+            <h2 className="section-title">
+              Industry <span className="accent">verticals</span> we serve
+            </h2>
+          </div>
+          <p className="section-lead lg:col-span-5">
             Tailored solutions for diverse sectors across Pakistan and beyond.
           </p>
         </motion.div>
 
-        {/* Top row: 3 items */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-8">
-          {verticals.slice(0, 3).map((vert, idx) => {
-            const Icon = icons[idx];
+        {/* Bento: first two items wide, the rest in thirds */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-6">
+          {verticals.map((vert, idx) => {
+            const Icon = icons[idx % icons.length];
+            const wide = idx < 2;
             return (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              whileHover={{ y: -8 }}
-              className="group rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-red-500/10 relative cursor-pointer transition-all duration-500"
-            >
-              <div className="relative h-64 md:h-72">
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className={`group relative overflow-hidden rounded-3xl bg-gray-900 ${
+                  wide ? "h-80 lg:col-span-3 lg:h-[26rem]" : "h-80 lg:col-span-2"
+                } ${idx === verticals.length - 1 && verticals.length % 2 === 1 ? "md:col-span-2" : ""}`}
+              >
                 <Image
                   src={vert.image}
                   alt={vert.title}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                  sizes={wide ? "(max-width: 1024px) 100vw, 50vw" : "(max-width: 1024px) 100vw, 33vw"}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:from-red-900/80 group-hover:via-red-900/30 transition-all duration-500" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-red-600/80 transition-all duration-300">
-                      <Icon className="w-5 h-5 text-white" />
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-white">{vert.title}</h3>
-                  </div>
-                  <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 ml-13">
-                    {vert.desc}
-                  </p>
-                  <div className="h-1 w-12 bg-red-500 rounded-full mt-3 group-hover:w-20 transition-all duration-500" />
-                </div>
-              </div>
-            </motion.div>
-            );
-          })}
-        </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-red-950/80 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-        {/* Bottom row: 2 items centered */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
-          {verticals.slice(3).map((vert, idx) => {
-            const Icon = icons[idx + 3];
-            return (
-            <motion.div
-              key={idx + 3}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: (idx + 3) * 0.1 }}
-              whileHover={{ y: -8 }}
-              className="group rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-red-500/10 relative cursor-pointer transition-all duration-500"
-            >
-              <div className="relative h-64 md:h-72">
-                <Image
-                  src={vert.image}
-                  alt={vert.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:from-red-900/80 group-hover:via-red-900/30 transition-all duration-500" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-red-600/80 transition-all duration-300">
-                      <Icon className="w-5 h-5 text-white" />
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-white">{vert.title}</h3>
-                  </div>
-                  <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 ml-13">
+                <div className="absolute left-6 top-6 flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white backdrop-blur-md transition-colors duration-300 group-hover:border-red-500 group-hover:bg-red-600">
+                  <Icon className="h-5 w-5" strokeWidth={1.75} />
+                </div>
+
+                <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+                  <h3 className="mb-2 text-2xl font-semibold text-white" style={{ letterSpacing: "-0.02em" }}>
+                    {vert.title}
+                  </h3>
+                  <p className="max-w-md text-sm leading-relaxed text-gray-300 transition-colors duration-300 group-hover:text-white">
                     {vert.desc}
                   </p>
-                  <div className="h-1 w-12 bg-red-500 rounded-full mt-3 group-hover:w-20 transition-all duration-500" />
+                  <div className="mt-5 h-0.5 w-10 rounded-full bg-red-500 transition-all duration-500 group-hover:w-24" />
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
             );
           })}
         </div>

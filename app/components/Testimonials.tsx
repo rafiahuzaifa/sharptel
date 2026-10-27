@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight, Star } from "lucide-react";
 import Eyebrow from "./Eyebrow";
 import type { SiteContent } from "@/lib/content";
 
@@ -10,17 +10,24 @@ interface TestimonialsProps {
   testimonials: SiteContent["testimonials"];
 }
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function TestimonialsSection({ testimonials }: TestimonialsProps) {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
+  const total = testimonials.length;
 
+  // Restarts whenever the slide changes, so manual navigation gets a full 6s before auto-advance.
   useEffect(() => {
-    const timer = setInterval(() => {
+    if (total < 2) return;
+    const timer = setTimeout(() => {
       setDirection(1);
-      setCurrent((prev) => (prev + 1) % testimonials.length);
+      setCurrent((prev) => (prev + 1) % total);
     }, 6000);
-    return () => clearInterval(timer);
-  }, []);
+    return () => clearTimeout(timer);
+  }, [current, total]);
+
+  if (total === 0) return null;
 
   const goTo = (index: number) => {
     setDirection(index > current ? 1 : -1);
@@ -29,116 +36,130 @@ export default function TestimonialsSection({ testimonials }: TestimonialsProps)
 
   const goNext = () => {
     setDirection(1);
-    setCurrent((prev) => (prev + 1) % testimonials.length);
+    setCurrent((prev) => (prev + 1) % total);
   };
 
   const goPrev = () => {
     setDirection(-1);
-    setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setCurrent((prev) => (prev - 1 + total) % total);
   };
 
   const variants = {
-    enter: (d: number) => ({ x: d > 0 ? 300 : -300, opacity: 0 }),
+    enter: (d: number) => ({ x: d > 0 ? 60 : -60, opacity: 0 }),
     center: { x: 0, opacity: 1 },
-    exit: (d: number) => ({ x: d > 0 ? -300 : 300, opacity: 0 }),
+    exit: (d: number) => ({ x: d > 0 ? -60 : 60, opacity: 0 }),
   };
 
+  const t = testimonials[current];
+
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
-      {/* Decorative */}
-      <div className="absolute top-10 right-10 w-72 h-72 bg-red-50 rounded-full blur-3xl opacity-40" />
-      <div className="absolute bottom-10 left-10 w-64 h-64 bg-red-50 rounded-full blur-3xl opacity-30" />
+    <section className="relative overflow-hidden bg-gray-50 py-24 md:py-32">
+      <div className="hairline-grid-light absolute inset-0" />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-14"
-        >
-          <Eyebrow label="Testimonials" />
-          <h2 className="section-title mb-4">
-            What Our <span className="accent">Clients</span> Say
-          </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Trusted by leading enterprises across Pakistan and beyond.
-          </p>
-        </motion.div>
-
-        {/* Carousel */}
-        <div className="max-w-4xl mx-auto relative">
-          {/* Navigation Arrows */}
-          <button
-            onClick={goPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-14 z-20 w-12 h-12 rounded-full bg-white shadow-lg border border-gray-100 flex items-center justify-center hover:bg-red-50 hover:border-red-200 transition-all group"
+      <div className="container relative mx-auto px-6">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          {/* Heading + controls */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease }}
+            className="flex flex-col lg:col-span-4"
           >
-            <ChevronLeft className="w-5 h-5 text-gray-600 group-hover:text-red-600" />
-          </button>
-          <button
-            onClick={goNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-14 z-20 w-12 h-12 rounded-full bg-white shadow-lg border border-gray-100 flex items-center justify-center hover:bg-red-50 hover:border-red-200 transition-all group"
-          >
-            <ChevronRight className="w-5 h-5 text-gray-600 group-hover:text-red-600" />
-          </button>
+            <Eyebrow label="Testimonials" />
+            <h2 className="section-title mb-5">
+              Trusted by <span className="accent">leaders</span>
+            </h2>
+            <p className="section-lead mb-10">
+              Leading enterprises across Pakistan and beyond rely on SharpTel every day.
+            </p>
 
-          {/* Testimonial Card */}
-          <div className="overflow-hidden rounded-2xl md:rounded-3xl">
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={current}
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="bg-white p-8 md:p-12 rounded-2xl md:rounded-3xl border border-gray-100 shadow-xl"
+            <div className="mt-auto flex items-center gap-6">
+              <div className="flex gap-3">
+                <button
+                  onClick={goPrev}
+                  aria-label="Previous testimonial"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-700 transition-all hover:border-gray-900 hover:bg-gray-900 hover:text-white"
+                >
+                  <ArrowLeft className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={goNext}
+                  aria-label="Next testimonial"
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white transition-all hover:bg-red-700"
+                >
+                  <ArrowRight className="h-5 w-5" />
+                </button>
+              </div>
+              <span className="font-mono text-sm text-gray-400">
+                <span className="text-gray-900">{String(current + 1).padStart(2, "0")}</span> / {String(total).padStart(2, "0")}
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Quote card */}
+          <div className="lg:col-span-8">
+            <div className="relative overflow-hidden rounded-[2rem] border border-gray-200/70 bg-white shadow-xl shadow-gray-900/5">
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-red-700 via-red-500 to-red-700" />
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -top-6 right-8 select-none font-heading text-[12rem] leading-none text-red-50"
               >
-                {/* Stars */}
-                <div className="flex gap-1 mb-6">
-                  {[...Array(testimonials[current].rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
+                &rdquo;
+              </span>
 
-                {/* Quote */}
-                <div className="relative mb-8">
-                  <svg className="absolute -top-4 -left-2 w-12 h-12 text-red-100" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
-                  </svg>
-                  <p className="text-gray-700 text-lg md:text-xl leading-relaxed pl-8">
-                    &ldquo;{testimonials[current].quote}&rdquo;
-                  </p>
-                </div>
-
-                {/* Author */}
-                <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                    {testimonials[current].author.charAt(0)}
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={current}
+                  custom={direction}
+                  variants={variants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.45, ease }}
+                  className="relative p-8 md:p-14"
+                >
+                  <div className="mb-8 flex gap-1">
+                    {[...Array(t.rating)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-red-500 text-red-500" />
+                    ))}
                   </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 text-lg">{testimonials[current].author}</h4>
-                    <p className="text-gray-500">{testimonials[current].position}</p>
-                    <p className="text-red-600 text-sm font-semibold">{testimonials[current].company}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
 
-          {/* Dots */}
-          <div className="flex justify-center gap-3 mt-8">
-            {testimonials.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => goTo(idx)}
-                className={`transition-all duration-300 rounded-full ${
-                  idx === current
-                    ? "w-8 h-3 bg-red-600"
-                    : "w-3 h-3 bg-gray-300 hover:bg-red-300"
-                }`}
-              />
-            ))}
+                  <blockquote
+                    className="mb-12 text-xl font-medium leading-snug text-gray-900 md:text-[1.75rem] md:leading-[1.35]"
+                    style={{ letterSpacing: "-0.02em" }}
+                  >
+                    &ldquo;{t.quote}&rdquo;
+                  </blockquote>
+
+                  <div className="flex items-center gap-4 border-t border-gray-100 pt-8">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-950 text-lg font-semibold text-white">
+                      {t.author.charAt(0)}
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-900">{t.author}</div>
+                      <div className="text-sm text-gray-500">
+                        {t.position} · <span className="font-medium text-red-600">{t.company}</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Progress dots */}
+            <div className="mt-6 flex gap-2">
+              {testimonials.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => goTo(idx)}
+                  aria-label={`Go to testimonial ${idx + 1}`}
+                  className={`h-1 rounded-full transition-all duration-500 ${
+                    idx === current ? "w-10 bg-red-600" : "w-4 bg-gray-300 hover:bg-gray-400"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

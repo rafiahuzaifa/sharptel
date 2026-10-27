@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Target, Eye, CheckCircle } from "lucide-react";
+import Link from "next/link";
+import { Target, Eye, Check, ArrowRight } from "lucide-react";
 import Eyebrow from "./Eyebrow";
 import type { SiteContent } from "@/lib/content";
 
@@ -10,125 +11,105 @@ interface AboutSectionProps {
   about: SiteContent["about"];
 }
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function AboutSection({ about }: AboutSectionProps) {
   const highlights = about.highlights;
+  const pillars = [
+    { icon: Eye, title: "Our Vision", text: about.visionText },
+    { icon: Target, title: "Our Mission", text: about.missionText },
+  ];
+
   return (
-    <section className="py-20 md:py-28 bg-white relative overflow-hidden">
-      {/* Decorative background */}
-      <div className="absolute top-20 left-0 w-72 h-72 bg-red-50 rounded-full blur-3xl opacity-40" />
-      <div className="absolute bottom-20 right-0 w-96 h-96 bg-red-50 rounded-full blur-3xl opacity-30" />
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <section className="relative overflow-hidden bg-white py-24 md:py-32">
+      <div className="container mx-auto px-6">
+        <div className="grid items-center gap-16 lg:grid-cols-12 lg:gap-20">
+          {/* Image column */}
           <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 1, ease }}
+            className="relative lg:col-span-5"
           >
-            <Eyebrow label="About Us" />
-
-            <h2 className="section-title mb-8">
-              About <span className="accent">SharpTel</span>
-            </h2>
-
-            <p className="text-lg text-gray-700 leading-relaxed mb-8">{about.paragraph}</p>
-
-            {/* Highlights */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-              {highlights.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 + i * 0.1 }}
-                  className="flex items-center gap-3"
-                >
-                  <CheckCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
-                  <span className="text-gray-700 font-medium">{item}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="space-y-6">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="bg-gradient-to-r from-red-50 to-red-100/50 p-6 rounded-2xl border border-red-100 group hover:shadow-lg hover:shadow-red-500/5 transition-all duration-300"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                    <Eye className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Our Vision</h3>
-                    <p className="text-gray-700">{about.visionText}</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="bg-gradient-to-r from-red-50 to-red-100/50 p-6 rounded-2xl border border-red-100 group hover:shadow-lg hover:shadow-red-500/5 transition-all duration-300"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                    <Target className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Our Mission</h3>
-                    <p className="text-gray-700">{about.missionText}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="rounded-3xl overflow-hidden shadow-2xl">
+            <div className="absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-br from-red-50 to-transparent" />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-2xl shadow-gray-900/10">
               <Image
                 src={about.teamImage}
                 alt="SharpTel Team"
-                width={600}
-                height={500}
-                className="object-cover w-full h-auto"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 40vw"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-950/50 via-transparent to-transparent" />
             </div>
 
-            {/* Floating stats card */}
+            {/* Floating stats */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
-              className="absolute -bottom-6 -left-6 md:-left-10 bg-white p-5 rounded-2xl shadow-xl border border-gray-100"
+              transition={{ delay: 0.4, duration: 0.8, ease }}
+              className="absolute -bottom-8 left-6 right-6 grid grid-cols-2 divide-x divide-gray-100 rounded-2xl border border-gray-100 bg-white/95 p-5 shadow-xl shadow-gray-900/10 backdrop-blur-md sm:left-auto sm:right-[-1.5rem] sm:w-80"
             >
-              <div className="font-mono text-3xl font-semibold text-red-600">{about.yearsExperience}</div>
-              <div className="text-sm text-gray-500 font-medium">Years Experience</div>
+              <div className="pr-4">
+                <div className="text-3xl font-semibold text-gray-900" style={{ letterSpacing: "-0.04em" }}>
+                  {about.yearsExperience}
+                </div>
+                <div className="mt-1 text-[11px] uppercase tracking-[0.15em] text-gray-500">Years Experience</div>
+              </div>
+              <div className="pl-5">
+                <div className="text-3xl font-semibold text-red-600" style={{ letterSpacing: "-0.04em" }}>
+                  {about.happyClients}
+                </div>
+                <div className="mt-1 text-[11px] uppercase tracking-[0.15em] text-gray-500">Happy Clients</div>
+              </div>
             </motion.div>
+          </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.8 }}
-              className="absolute -top-4 -right-4 md:-right-8 bg-gradient-to-br from-red-600 to-red-700 text-white p-5 rounded-2xl shadow-xl"
-            >
-              <div className="font-mono text-3xl font-semibold">{about.happyClients}</div>
-              <div className="text-sm text-red-100 font-medium">Happy Clients</div>
-            </motion.div>
+          {/* Copy column */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.15, ease }}
+            className="lg:col-span-7"
+          >
+            <Eyebrow label="About Us" />
+            <h2 className="section-title mb-8">
+              Connecting Pakistan&apos;s enterprises to <span className="accent">what&apos;s next</span>
+            </h2>
+
+            <p className="mb-10 text-lg leading-relaxed text-gray-600">{about.paragraph}</p>
+
+            {/* Highlights */}
+            <ul className="mb-12 grid grid-cols-1 gap-x-8 sm:grid-cols-2">
+              {highlights.map((item, i) => (
+                <li key={i} className="flex items-center gap-3 border-b border-gray-100 py-3.5">
+                  <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-red-600">
+                    <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+                  </span>
+                  <span className="font-medium text-gray-800">{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mb-10 grid gap-4 sm:grid-cols-2">
+              {pillars.map(({ icon: Icon, title, text }) => (
+                <div key={title} className="premium-card group p-6">
+                  <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-gray-950 text-white transition-colors duration-300 group-hover:bg-red-600">
+                    <Icon className="h-5 w-5" strokeWidth={1.75} />
+                  </div>
+                  <h3 className="mb-2 text-lg font-semibold text-gray-900">{title}</h3>
+                  <p className="text-sm leading-relaxed text-gray-600">{text}</p>
+                </div>
+              ))}
+            </div>
+
+            <Link href="/About-us" className="btn-secondary group">
+              More about SharpTel
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
           </motion.div>
         </div>
       </div>

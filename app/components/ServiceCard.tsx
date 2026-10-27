@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRef, useEffect, useLayoutEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Eyebrow from "./Eyebrow";
 import type { SiteContent } from "@/lib/content";
 
@@ -81,21 +82,35 @@ export default function ServiceCards({ services }: ServiceCardsProps) {
   }, [isPaused]);
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 bg-gradient-to-b from-gray-50/80 to-white overflow-hidden">
-      <div className="container mx-auto px-6 text-center mb-14">
+    <section ref={sectionRef} className="relative overflow-hidden bg-gray-50 py-24 md:py-32">
+      <div className="hairline-grid-light absolute inset-0" />
+
+      <div className="container relative mx-auto mb-14 px-6 md:mb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="grid items-end gap-8 lg:grid-cols-12"
         >
-          <Eyebrow label="Our Services" />
-          <h2 className="section-title mb-5">
-            What We <span className="accent">Offer</span>
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            From high-speed connectivity to advanced security and automation — empowering businesses across Pakistan with reliable, future-ready ICT services.
-          </p>
+          <div className="lg:col-span-7">
+            <Eyebrow label="Our Services" />
+            <h2 className="section-title">
+              What we <span className="accent">offer</span>
+            </h2>
+          </div>
+          <div className="lg:col-span-5">
+            <p className="section-lead mb-6">
+              From high-speed connectivity to advanced security and automation — empowering businesses across Pakistan with reliable, future-ready ICT services.
+            </p>
+            <Link
+              href="/pages/services"
+              className="group inline-flex items-center gap-2 text-sm font-semibold text-gray-900 hover:text-red-600"
+            >
+              View all services
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
         </motion.div>
       </div>
 
@@ -103,7 +118,7 @@ export default function ServiceCards({ services }: ServiceCardsProps) {
       <div className="relative">
         <div
           ref={carouselRef}
-          className="flex gap-6 md:gap-8 overflow-x-hidden py-4 px-4"
+          className="flex gap-5 overflow-x-hidden px-4 py-4 md:gap-6"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onTouchStart={() => setIsPaused(true)}
@@ -113,61 +128,49 @@ export default function ServiceCards({ services }: ServiceCardsProps) {
             <Link
               key={idx}
               href={service.href}
-              className={`block flex-shrink-0 w-[300px] md:w-[360px] ${
+              aria-hidden={idx >= services.length ? true : undefined}
+              tabIndex={idx >= services.length ? -1 : undefined}
+              className={`group relative block h-[420px] w-[290px] flex-shrink-0 overflow-hidden rounded-3xl bg-gray-900 md:h-[460px] md:w-[340px] ${
                 idx < services.length ? "service-card" : ""
               }`}
             >
-              <motion.div
-                className="group h-full bg-white rounded-2xl md:rounded-3xl overflow-hidden border border-gray-100 shadow-lg hover:shadow-2xl hover:shadow-red-500/10 transition-all duration-500"
-                whileHover={{ y: -8, scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                {/* Image */}
-                <div className="relative h-44 md:h-52 overflow-hidden">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 768px) 300px, 360px"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">
-                      {service.title}
-                    </span>
-                  </div>
-                </div>
+              <Image
+                src={service.image}
+                alt={service.title}
+                fill
+                className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+                sizes="(max-width: 768px) 290px, 340px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-gray-950/0 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-red-950/90 via-red-900/30 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-                {/* Content */}
-                <div className="p-5 md:p-6">
-                  <h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-red-600 transition-colors mb-2.5 line-clamp-1">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-4 line-clamp-3">
-                    {service.desc}
-                  </p>
+              {/* Top row: index + arrow */}
+              <div className="absolute inset-x-0 top-0 flex items-center justify-between p-6">
+                <span className="font-mono text-xs tracking-[0.2em] text-white/70">
+                  {String((idx % services.length) + 1).padStart(2, "0")}
+                </span>
+                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-md transition-all duration-500 group-hover:rotate-45 group-hover:border-red-500 group-hover:bg-red-600">
+                  <ArrowUpRight className="h-5 w-5" />
+                </span>
+              </div>
 
-                  <span className="inline-flex items-center text-red-600 font-semibold text-sm group-hover:text-red-700 transition-colors">
-                    Learn More
-                    <svg
-                      className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </span>
+              {/* Bottom copy */}
+              <div className="absolute inset-x-0 bottom-0 p-6 md:p-7">
+                <h3 className="mb-3 text-2xl font-semibold leading-tight text-white" style={{ letterSpacing: "-0.02em" }}>
+                  {service.title}
+                </h3>
+                <p className="line-clamp-3 text-sm leading-relaxed text-gray-300">{service.desc}</p>
+                <div className="mt-5 h-px w-full bg-white/15">
+                  <div className="h-px w-0 bg-red-500 transition-all duration-700 group-hover:w-full" />
                 </div>
-              </motion.div>
+              </div>
             </Link>
           ))}
         </div>
 
         {/* Gradient fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-r from-gray-50 to-transparent pointer-events-none z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
+        <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-12 bg-gradient-to-r from-gray-50 to-transparent md:w-32" />
+        <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-12 bg-gradient-to-l from-gray-50 to-transparent md:w-32" />
       </div>
     </section>
   );

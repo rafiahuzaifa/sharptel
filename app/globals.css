@@ -105,20 +105,100 @@
 
 /* Red button styles */
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 bg-primary-600 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-primary-700 active:bg-primary-800 shadow-lg shadow-primary-600/20 hover:shadow-xl hover:shadow-primary-600/30 hover:-translate-y-0.5 transition-all duration-300 tracking-wide;
+  @apply inline-flex items-center justify-center gap-2 bg-primary-600 text-white font-semibold px-7 py-3.5 rounded-full hover:bg-primary-700 active:bg-primary-800 hover:-translate-y-0.5 transition-all duration-300;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 10px 30px -10px rgba(220, 38, 38, 0.6);
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 border-2 border-gray-200 text-gray-800 font-semibold px-7 py-3.5 rounded-xl hover:border-primary-600 hover:text-primary-600 hover:-translate-y-0.5 transition-all duration-300 tracking-wide;
+  @apply inline-flex items-center justify-center gap-2 border border-gray-300 bg-white text-gray-900 font-semibold px-7 py-3.5 rounded-full hover:border-gray-900 hover:-translate-y-0.5 transition-all duration-300;
+}
+
+.btn-ghost-dark {
+  @apply inline-flex items-center justify-center gap-2 border border-white/20 bg-white/5 text-white font-semibold px-7 py-3.5 rounded-full backdrop-blur-md hover:bg-white/10 hover:border-white/40 transition-all duration-300;
 }
 
 /* Consistent, restrained section headings for a more premium, less "loud" feel */
 .section-title {
-  @apply text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight;
+  @apply text-4xl md:text-5xl lg:text-[3.5rem] font-semibold text-gray-900 leading-[1.08];
+  letter-spacing: -0.035em;
 }
 
 .section-title .accent {
   @apply text-primary-600;
+}
+
+.section-title-dark {
+  @apply text-4xl md:text-5xl lg:text-[3.5rem] font-semibold text-white leading-[1.08];
+  letter-spacing: -0.035em;
+}
+
+.section-title-dark .accent {
+  @apply text-primary-500;
+}
+
+.section-lead {
+  @apply text-base md:text-lg text-gray-500 leading-relaxed;
+}
+
+/* Fine film grain for dark premium surfaces */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Thin hairline grid used as a quiet texture */
+.hairline-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+.hairline-grid-light {
+  background-image:
+    linear-gradient(to right, rgba(17, 24, 39, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 24, 39, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at top, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at top, black 20%, transparent 70%);
+}
+
+/* Gradient hairline border that lights up red on hover */
+.premium-card {
+  @apply relative rounded-3xl bg-white border border-gray-200/70 transition-all duration-500;
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 8px 24px -12px rgba(17, 24, 39, 0.08);
+}
+
+.premium-card:hover {
+  @apply border-red-200;
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04), 0 30px 60px -24px rgba(220, 38, 38, 0.22);
+}
+
+/* Infinite marquee (pauses on hover) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
 }
 
 /* Focus ring - red theme */

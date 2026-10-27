@@ -10,6 +10,8 @@ interface ContactSectionProps {
   contact: SiteContent["contact"];
 }
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function ContactSection({ contact }: ContactSectionProps) {
   const contactCards = [
     { icon: Mail, title: "Email Us", subtitle: "We respond within 24 hours", items: contact.emails },
@@ -18,68 +20,66 @@ export default function ContactSection({ contact }: ContactSectionProps) {
   ];
 
   return (
-    <section className="py-20 md:py-28 bg-gradient-to-br from-gray-900 via-red-950 to-gray-900 text-white relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-600/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-red-500/5 rounded-full blur-3xl" />
-        {/* Grid pattern */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
-      </div>
+    <section className="grain relative isolate overflow-hidden bg-gray-950 py-24 text-white md:py-32">
+      <div className="hairline-grid absolute inset-0 -z-10" />
+      <div className="absolute left-1/2 top-0 -z-10 h-[28rem] w-[56rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-600/25 blur-[140px]" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container relative mx-auto px-6">
+        {/* CTA heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-14"
+          transition={{ duration: 0.7, ease }}
+          className="mb-16 grid items-end gap-10 lg:grid-cols-12"
         >
-          <Eyebrow label="Get In Touch" dark />
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Reach <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-300">Us Anytime</span>
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            We are always ready to help. Reach out to us through any of the channels below.
-          </p>
+          <div className="lg:col-span-8">
+            <Eyebrow label="Get In Touch" dark />
+            <h2 className="section-title-dark">
+              Let&apos;s build your <span className="accent">network</span> of tomorrow.
+            </h2>
+          </div>
+          <div className="flex flex-col gap-4 lg:col-span-4 lg:items-end">
+            <p className="text-gray-400 lg:text-right">
+              We are always ready to help. Reach out through any of the channels below.
+            </p>
+            <Link href="/Contact-us" className="btn-primary group px-8 py-4">
+              Contact Us
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
           {contactCards.map((card, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.15 }}
-              whileHover={{ y: -8 }}
-              className="glass-card-dark p-8 md:p-10 rounded-2xl md:rounded-3xl"
+              transition={{ delay: idx * 0.1, duration: 0.7, ease }}
+              className="group rounded-3xl border border-white/10 bg-white/[0.03] p-8 backdrop-blur-sm transition-all duration-500 hover:border-red-500/40 hover:bg-white/[0.06]"
             >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-red-600 to-red-700 shadow-lg shadow-red-600/20">
-                  <card.icon className="w-6 h-6 text-white" />
+              <div className="mb-8 flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-600 text-white shadow-lg shadow-red-600/30">
+                  <card.icon className="h-5 w-5" strokeWidth={1.75} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">{card.title}</h3>
-                  <p className="text-gray-400 text-sm">{card.subtitle}</p>
+                  <h3 className="text-lg font-semibold text-white">{card.title}</h3>
+                  <p className="text-sm text-gray-500">{card.subtitle}</p>
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="divide-y divide-white/5">
                 {card.items.map((item, i) => (
-                  <div key={i} className="flex items-center justify-between group/item">
-                    <span className="text-gray-400 text-sm">{item.label}</span>
+                  <div key={i} className="flex items-center justify-between gap-4 py-3">
+                    <span className="text-xs uppercase tracking-[0.12em] text-gray-500">{item.label}</span>
                     {item.href ? (
-                      <Link href={item.href} className="text-white hover:text-red-300 transition-colors font-medium text-sm">
+                      <Link href={item.href} className="text-right text-sm font-medium text-white transition-colors hover:text-red-400">
                         {item.value}
                       </Link>
                     ) : (
-                      <span className="text-white font-medium text-sm">{item.value}</span>
+                      <span className="text-right text-sm font-medium text-white">{item.value}</span>
                     )}
                   </div>
                 ))}
@@ -88,39 +88,27 @@ export default function ContactSection({ contact }: ContactSectionProps) {
           ))}
         </div>
 
-        {/* Business Hours + CTA */}
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-4 glass-card-dark p-6 rounded-2xl"
-          >
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center flex-shrink-0">
-              <Clock className="w-5 h-5 text-white" />
-            </div>
+        {/* Business hours strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2, ease }}
+          className="mt-5 flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:flex-row sm:items-center sm:justify-between md:px-8"
+        >
+          <div className="flex items-center gap-4">
+            <Clock className="h-5 w-5 text-red-500" strokeWidth={1.75} />
             <div>
-              <h4 className="font-bold text-white">Business Hours</h4>
-              <p className="text-gray-400 text-sm">{contact.businessHours}</p>
-              <p className="text-red-400 text-sm font-medium">{contact.supportAvailability}</p>
+              <span className="font-semibold text-white">Business Hours</span>
+              <span className="mx-3 text-gray-600">·</span>
+              <span className="text-sm text-gray-400">{contact.businessHours}</span>
             </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="text-center md:text-right"
-          >
-            <Link
-              href="/Contact-us"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold rounded-xl hover:from-red-700 hover:to-red-800 transition-all duration-300 shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/30 group"
-            >
-              Contact Us
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </motion.div>
-        </div>
+          </div>
+          <div className="flex items-center gap-2 text-sm font-medium text-red-400">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
+            {contact.supportAvailability}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
