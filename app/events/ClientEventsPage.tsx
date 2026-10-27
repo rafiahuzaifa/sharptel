@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Calendar, Users, MapPin, ArrowRight, Clock, Trophy } from "lucide-react";
+import { Calendar, Users, MapPin, ArrowRight, Clock, Presentation, GraduationCap, Briefcase, Mic } from "lucide-react";
+import { Accent, CTASection, PageHero } from "@/app/components/premium";
 import Link from "next/link";
 
 const events = [
@@ -42,7 +43,7 @@ const events = [
     venue: "Marriott Hotel, Karachi",
     attendees: "300+",
     category: "Award Ceremony",
-    image: "/background/tech-awards.JFIF",
+    image: "/background/tech-awards.jfif",
     description: "Recognizing outstanding achievements and innovations in Pakistan's technology sector. Celebrating excellence and groundbreaking contributions.",
     highlights: ["Award Ceremony", "Gala Dinner", "Networking", "Media Coverage"],
     status: "completed",
@@ -73,7 +74,7 @@ const engagements = [
     location: "Karachi & Lahore",
     participants: "1000+ Students",
     duration: "Ongoing",
-    icon: "👨‍🏫",
+    icon: Presentation,
     description: "Providing digital skills training to underprivileged students across Pakistan.",
     impact: "Trained 1000+ students in basic computer skills",
     color: "bg-gradient-to-r from-red-50 to-white"
@@ -85,7 +86,7 @@ const engagements = [
     location: "NED, FAST, LUMS",
     participants: "500+ Students",
     duration: "Annual",
-    icon: "🎓",
+    icon: GraduationCap,
     description: "Collaborating with top universities for internships and research projects.",
     impact: "50+ student placements in tech roles",
     color: "bg-gradient-to-r from-white to-red-50"
@@ -97,7 +98,7 @@ const engagements = [
     location: "Nationwide",
     participants: "200+ Companies",
     duration: "Monthly",
-    icon: "💼",
+    icon: Briefcase,
     description: "Customized training programs for corporate clients on emerging technologies.",
     impact: "Trained 2000+ professionals across industries",
     color: "bg-gradient-to-r from-red-50 to-white"
@@ -109,7 +110,7 @@ const engagements = [
     location: "Online & On-site",
     participants: "10,000+ Viewers",
     duration: "Quarterly",
-    icon: "🎤",
+    icon: Mic,
     description: "Live tech talks and webinars featuring industry experts and thought leaders.",
     impact: "10,000+ professionals reached through sessions",
     color: "bg-gradient-to-r from-white to-red-50"
@@ -118,55 +119,24 @@ const engagements = [
 
 export default function ClientEventsPage() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white via-red-50/20 to-white">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-red-100/10 to-transparent rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-red-100/10 to-transparent rounded-full blur-3xl" />
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-red-200/5 rounded-full blur-3xl" />
-      </div>
-
+    <>
+      <PageHero
+        eyebrow="Events & Engagements"
+        title="Shaping Pakistan's"
+        accent="Digital Future"
+        subtitle="Driving innovation through industry events, community engagements, and strategic partnerships across Pakistan."
+        image="/background/digital-summit.webp"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Events", href: "/events" }]}
+        actions={{ primary: { label: "Register Interest", href: "/Contact-us" } }}
+        stats={[
+          { number: "50+", label: "Events Organized" },
+          { number: "10,000+", label: "Participants" },
+          { number: "100+", label: "Partners" },
+          { number: "25+", label: "Cities Covered" },
+        ]}
+      />
+    <section className="relative overflow-hidden bg-white">
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600/10 to-red-700/10 rounded-full px-6 py-3 mb-6 border border-red-500/20">
-            <div className="h-3 w-3 bg-red-500 rounded-full animate-pulse" />
-            <span className="text-sm font-semibold text-red-700">Events & Engagements</span>
-          </div>
-
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            <span className="text-gray-900">Shaping Pakistan's</span>{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-700">Digital Future</span>
-          </h2>
-
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
-            Driving innovation through industry events, community engagements, and strategic partnerships across Pakistan.
-          </p>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
-            {[
-              { number: "50+", label: "Events Organized" },
-              { number: "10,000+", label: "Participants" },
-              { number: "100+", label: "Partners" },
-              { number: "25+", label: "Cities Covered" },
-            ].map((stat, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
-              >
-                <div className="text-3xl md:text-4xl font-bold text-red-600 mb-2">{stat.number}</div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* Upcoming Events Highlight */}
         <motion.div
@@ -207,8 +177,8 @@ export default function ClientEventsPage() {
                       event.status === 'upcoming'
                         ? 'bg-red-100 text-red-700 border border-red-200'
                         : event.status === 'ongoing'
-                        ? 'bg-amber-100 text-amber-700 border border-amber-200'
-                        : 'bg-emerald-100 text-emerald-700 border border-emerald-200'
+                        ? 'bg-gray-100 text-gray-700 border border-gray-200'
+                        : 'bg-red-100 text-red-700 border border-red-200'
                     }`}>
                       {event.status === 'upcoming' ? 'Upcoming' : event.status === 'ongoing' ? 'Ongoing' : 'Completed'}
                     </span>
@@ -314,10 +284,10 @@ export default function ClientEventsPage() {
           viewport={{ once: true }}
         >
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">
-              Community <span className="text-red-600">Engagements</span>
+            <h3 className="section-title mb-5">
+              Community <span className="accent">engagements</span>
             </h3>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="section-lead mx-auto max-w-3xl">
               Building strong connections with communities, universities, and industry partners across Pakistan.
             </p>
           </div>
@@ -331,10 +301,10 @@ export default function ClientEventsPage() {
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
-                className={`${engagement.color} rounded-3xl p-8 border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-500`}
+                className="premium-card group h-full p-8"
               >
                 <div className="flex items-start justify-between mb-6">
-                  <div className="text-4xl">{engagement.icon}</div>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-950 text-white transition-colors group-hover:bg-red-600"><engagement.icon className="h-5 w-5" /></div>
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700">
                     {engagement.type}
                   </span>
@@ -363,46 +333,16 @@ export default function ClientEventsPage() {
           </div>
         </motion.div>
 
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-20 bg-gradient-to-r from-red-600 to-red-700 rounded-3xl p-12 text-center text-white relative overflow-hidden"
-        >
-          {/* Background Elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-          </div>
-
-          <div className="relative z-10">
-            <Trophy className="h-16 w-16 mx-auto mb-6 text-white/90" />
-            <h3 className="text-3xl md:text-4xl font-bold mb-6">
-              Join Our Next Event
-            </h3>
-            <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
-              Be part of Pakistan's largest technology community. Network, learn, and grow with industry leaders.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link
-                href="/events"
-                className="px-8 py-4 bg-white text-red-600 font-bold rounded-xl hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg text-lg"
-              >
-                Browse All Events
-              </Link>
-              <Link
-                href="/Contact-us"
-                className="px-8 py-4 border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300 text-lg"
-              >
-                Host an Event
-              </Link>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
+
+      <CTASection
+        eyebrow="Join Us"
+        title={<>Join our next <Accent>event</Accent></>}
+        text="Be part of Pakistan's largest technology community. Network, learn, and grow with industry leaders."
+        primary={{ label: "Register Interest", href: "/Contact-us" }}
+        secondary={{ label: "Host an Event", href: "/Contact-us" }}
+      />
+    </>
   );
 }

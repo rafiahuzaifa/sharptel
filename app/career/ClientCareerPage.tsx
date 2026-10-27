@@ -4,6 +4,7 @@ import { useState, useRef } from 'react'
 import { Briefcase, Clock, DollarSign, MapPin, Send, X, Users, Award, TrendingUp, Building, Mail, Phone } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import { Accent, CTASection, PageHero } from "@/app/components/premium"
 
 const jobOpenings = [
   { 
@@ -183,96 +184,24 @@ export default function ClientCareerPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
 
-      {/* HERO SECTION */}
-      <section className="relative min-h-[75vh] pt-24 pb-16 flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: "url('/background/fiber-trails.webp')",
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-        </div>
-        
-        {/* Animated Pattern */}
-        <div className="absolute inset-0 z-10 opacity-20">
-          <div className="absolute inset-0 bg-[url('/patterns/circuit-board.svg')] bg-cover"></div>
-        </div>
-
-        {/* Hero Content */}
-        <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600/20 to-red-700/20 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-red-500/30">
-              <div className="h-3 w-3 bg-red-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-semibold text-red-100">Join Our Team</span>
-            </div>
-            
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 text-white leading-tight"
-            >
-              Build Your
-              <span className="block bg-gradient-to-r from-red-500 via-orange-400 to-yellow-500 bg-clip-text text-transparent">
-                Future With Us
-              </span>
-            </motion.h1>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10"
-            >
-              Join Pakistan's leading ICT solutions provider and work on cutting-edge 
-              technology projects that shape the digital future of businesses.
-            </motion.p>
-
-            {/* Stats Banner */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16"
-            >
-              {[
-                { icon: <Users className="h-6 w-6 text-red-400" />, number: '200+', label: 'Team Members' },
-                { icon: <Building className="h-6 w-6 text-red-400" />, number: '3', label: 'Cities' },
-                { icon: <Award className="h-6 w-6 text-red-400" />, number: '15+', label: 'Years Excellence' },
-                { icon: <TrendingUp className="h-6 w-6 text-red-400" />, number: '50+', label: 'Career Paths' },
-              ].map((stat, idx) => (
-                <div key={idx} className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-                  <div className="flex items-center justify-center gap-3 mb-3">
-                    {stat.icon}
-                    <div className="text-3xl md:text-4xl font-bold text-white">{stat.number}</div>
-                  </div>
-                  <div className="text-sm font-medium text-red-100">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
-        >
-          <div className="h-10 w-10 rounded-full border-2 border-white/30 flex items-center justify-center">
-            <div className="h-3 w-3 rounded-full bg-red-500"></div>
-          </div>
-        </motion.div>
-      </section>
+      <PageHero
+        eyebrow="Join Our Team"
+        title="Build Your"
+        accent="Future With Us"
+        subtitle="Join Pakistan's leading ICT solutions provider and work on cutting-edge technology projects that shape the digital future of businesses."
+        image="/background/fiber-trails.webp"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Careers", href: "/career" }]}
+        actions={{
+          primary: { label: "View Open Positions", href: "#openings" },
+          secondary: { label: "careers@sharptel.pk", href: "mailto:careers@sharptel.pk" },
+        }}
+        stats={[
+          { number: "200+", label: "Team Members" },
+          { number: "3", label: "Cities" },
+          { number: "15+", label: "Years Excellence" },
+          { number: "50+", label: "Career Paths" },
+        ]}
+      />
 
       {/* WHY JOIN US SECTION */}
       <section className="py-24 bg-white">
@@ -284,12 +213,12 @@ export default function ClientCareerPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 bg-red-50 text-red-700 rounded-full px-4 py-2 mb-6">
-              <div className="h-2 w-2 bg-red-600 rounded-full"></div>
-              <span className="text-sm font-semibold">Why Sharptel?</span>
+            <div className="inline-flex items-center gap-3 mb-5">
+              <span className="h-px w-8 bg-red-600"></span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Why Sharptel?</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="section-title mb-6">
               Why <span className="text-red-600">Join</span> Our Team?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -313,7 +242,7 @@ export default function ClientCareerPage() {
                   <p className="text-gray-600">{benefit.desc}</p>
                   
                   <div className="mt-6 pt-6 border-t border-gray-100">
-                    <div className="h-1 w-16 bg-gradient-to-r from-red-500 to-orange-500 rounded-full"></div>
+                    <div className="h-1 w-16 bg-gradient-to-r from-red-500 to-red-500 rounded-full"></div>
                   </div>
                 </div>
               </motion.div>
@@ -323,7 +252,7 @@ export default function ClientCareerPage() {
       </section>
 
       {/* JOB OPENINGS SECTION */}
-      <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
+      <section id="openings" className="py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -332,12 +261,12 @@ export default function ClientCareerPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 bg-red-50 text-red-700 rounded-full px-4 py-2 mb-6">
-              <div className="h-2 w-2 bg-red-600 rounded-full"></div>
-              <span className="text-sm font-semibold">Current Openings</span>
+            <div className="inline-flex items-center gap-3 mb-5">
+              <span className="h-px w-8 bg-red-600"></span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Current Openings</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="section-title mb-6">
               Explore <span className="text-red-600">Career</span> Opportunities
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -528,7 +457,7 @@ export default function ClientCareerPage() {
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-400"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition placeholder-gray-400"
                           placeholder="John Smith"
                         />
                       </div>
@@ -544,7 +473,7 @@ export default function ClientCareerPage() {
                             value={formData.email}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-400"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition placeholder-gray-400"
                             placeholder="john@company.com"
                           />
                         </div>
@@ -559,7 +488,7 @@ export default function ClientCareerPage() {
                             value={formData.phone}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-400"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition placeholder-gray-400"
                             placeholder="+92 300 1234567"
                           />
                         </div>
@@ -644,68 +573,13 @@ export default function ClientCareerPage() {
         )}
       </AnimatePresence>
 
-      {/* CTA SECTION */}
-      <section className="py-24 bg-gradient-to-r from-red-700 to-red-600 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-8">
-              Not Finding the Right <span className="text-yellow-300">Role?</span>
-            </h2>
-            
-            <p className="text-xl text-red-100 mb-12 max-w-3xl mx-auto">
-              Send us your CV anyway! We're always looking for talented individuals 
-              and may have upcoming opportunities that match your skills.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Link
-                href="mailto:careers@sharptel.pk"
-                className="px-10 py-4 bg-white text-red-700 font-bold rounded-xl hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg text-lg"
-              >
-                <span className="flex items-center gap-3">
-                  <Mail className="h-5 w-5" />
-                  Email Your CV: careers@sharptel.pk
-                </span>
-              </Link>
-              
-              <div className="text-blue-100">
-                <div className="flex items-center gap-3">
-                  <Phone className="h-5 w-5" />
-                  <div>
-                    <div className="font-bold">HR Contact</div>
-                    <div>+92 21 3456 7890</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-12 pt-8 border-t border-blue-500/30">
-              <div className="text-blue-200">
-                <div className="flex flex-wrap gap-8 justify-center text-sm">
-                  <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 bg-white rounded-full"></div>
-                    Equal Opportunity Employer
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 bg-white rounded-full"></div>
-                    Fast-Track Career Growth
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 bg-white rounded-full"></div>
-                    International Certifications
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <CTASection
+        eyebrow="Open Application"
+        title={<>Not finding the right <Accent>role?</Accent></>}
+        text="Send us your CV anyway! We're always looking for talented individuals and may have upcoming opportunities that match your skills. Equal opportunity employer · Fast-track career growth · International certifications."
+        primary={{ label: "Email Your CV", href: "mailto:careers@sharptel.pk" }}
+        secondary={{ label: "Contact Us", href: "/Contact-us" }}
+      />
     </div>
   )
 }

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { useState } from "react"
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle, AlertCircle } from "lucide-react"
+import { Accent, CTASection, PageHero } from "@/app/components/premium"
 
 export default function ClientContactUsPage() {
   const [formData, setFormData] = useState({
@@ -44,7 +45,7 @@ export default function ClientContactUsPage() {
       phone: "+92-311-1123104 / +92-311-1123105",
       email: "lahore@sharptel.pk",
       icon: <MapPin className="h-6 w-6" />,
-      color: "from-orange-600 to-orange-500"
+      color: "from-red-600 to-red-500"
     },
     {
       title: "Islamabad Office",
@@ -52,7 +53,7 @@ export default function ClientContactUsPage() {
       phone: "+92-311-1123104 / +92-311-1123105",
       email: "islamabad@sharptel.pk",
       icon: <MapPin className="h-6 w-6" />,
-      color: "from-blue-600 to-blue-500"
+      color: "from-red-600 to-red-500"
     }
   ]
 
@@ -71,7 +72,7 @@ export default function ClientContactUsPage() {
       email: "support@sharptel.pk",
       icon: <Send className="h-5 w-5" />,
       hours: "24/7 Support Available",
-      color: "bg-gradient-to-r from-orange-600 to-orange-500"
+      color: "bg-gradient-to-r from-red-600 to-red-500"
     },
     {
       title: "General Information",
@@ -79,7 +80,7 @@ export default function ClientContactUsPage() {
       email: "info@sharptel.pk",
       icon: <Mail className="h-5 w-5" />,
       hours: "Mon - Sat: 8 AM - 8 PM",
-      color: "bg-gradient-to-r from-blue-600 to-blue-500"
+      color: "bg-gradient-to-r from-red-600 to-red-500"
     }
   ]
 
@@ -134,95 +135,25 @@ export default function ClientContactUsPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      {/* HERO SECTION WITH BACKGROUND IMAGE */}
-      <section className="relative min-h-[70vh] pt-20 pb-16 flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: "url('/background/data-flow.webp')",
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-        </div>
-        
-        {/* Animated Tech Pattern */}
-        <div className="absolute inset-0 z-10 opacity-20">
-          <div className="absolute inset-0 bg-[url('/patterns/circuit-board.svg')] bg-cover"></div>
-        </div>
-
-        {/* Hero Content */}
-        <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600/20 to-red-700/20 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-red-500/30">
-              <div className="h-3 w-3 bg-red-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-semibold text-red-100">Get In Touch</span>
-            </div>
-            
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 text-white leading-tight"
-            >
-              Let's Build
-              <span className="block bg-gradient-to-r from-red-500 via-orange-400 to-yellow-500 bg-clip-text text-transparent">
-                Together
-              </span>
-            </motion.h1>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10"
-            >
-              Connect with Pakistan's leading ICT solutions provider. 
-              Our team is ready to transform your business challenges into opportunities.
-            </motion.p>
-
-            {/* Quick Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16"
-            >
-              {[
-                { icon: <Phone className="h-6 w-6 text-red-400" />, text: "+92-311-128-4373", label: "Call Now" },
-                { icon: <Mail className="h-6 w-6 text-red-400" />, text: "info@sharptel.pk", label: "Email Us" },
-                { icon: <Clock className="h-6 w-6 text-red-400" />, text: "24/7 Support", label: "Always Available" },
-              ].map((item, idx) => (
-                <div key={idx} className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-                  <div className="flex items-center justify-center gap-3 mb-3">
-                    {item.icon}
-                    <div className="text-xl font-bold text-white">{item.text}</div>
-                  </div>
-                  <div className="text-sm font-medium text-red-100">{item.label}</div>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
-        >
-          <div className="h-10 w-10 rounded-full border-2 border-white/30 flex items-center justify-center">
-            <div className="h-3 w-3 rounded-full bg-red-500"></div>
-          </div>
-        </motion.div>
-      </section>
+      <PageHero
+        compact
+        eyebrow="Get In Touch"
+        title="Let's Build"
+        accent="Together"
+        subtitle="Connect with Pakistan's leading ICT solutions provider. Our team is ready to transform your business challenges into opportunities."
+        image="/background/data-flow.webp"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contact Us", href: "/Contact-us" }]}
+        actions={{
+          primary: { label: "Call +92-311-128-4373", href: "tel:+92-311-128-4373" },
+          secondary: { label: "info@sharptel.pk", href: "mailto:info@sharptel.pk" },
+        }}
+        stats={[
+          { number: "24/7", label: "Support" },
+          { number: "< 24h", label: "Response Time" },
+          { number: "50+", label: "Cities" },
+          { number: "19+", label: "Years Experience" },
+        ]}
+      />
 
       {/* CONTACT FORM & INFORMATION */}
       <section className="py-24 relative">
@@ -239,9 +170,9 @@ export default function ClientContactUsPage() {
               className="bg-white rounded-3xl shadow-2xl p-8 md:p-12"
             >
               <div className="mb-10">
-                <div className="inline-flex items-center gap-2 bg-red-50 text-red-700 rounded-full px-4 py-2 mb-6">
-                  <div className="h-2 w-2 bg-red-600 rounded-full"></div>
-                  <span className="text-sm font-semibold">Send Message</span>
+                <div className="inline-flex items-center gap-3 mb-5">
+              <span className="h-px w-8 bg-red-600"></span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Send Message</span>
                 </div>
                 
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -551,7 +482,7 @@ export default function ClientContactUsPage() {
                 <div className="space-y-4">
                   {[
                     { day: "Monday - Friday", hours: "9:00 AM - 6:00 PM", color: "text-green-600" },
-                    { day: "Saturday", hours: "10:00 AM - 4:00 PM", color: "text-blue-600" },
+                    { day: "Saturday", hours: "10:00 AM - 4:00 PM", color: "text-red-600" },
                     { day: "Sunday", hours: "Closed", color: "text-gray-400" },
                     { day: "Emergency Support", hours: "24/7 Available", color: "text-red-600" },
                   ].map((schedule, idx) => (
@@ -562,7 +493,7 @@ export default function ClientContactUsPage() {
                   ))}
                 </div>
                 
-                <div className="mt-8 p-4 bg-gradient-to-r from-red-50 to-orange-50 rounded-xl">
+                <div className="mt-8 p-4 bg-gradient-to-r from-red-50 to-red-50 rounded-xl">
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-10 rounded-full bg-gradient-to-r from-red-600 to-red-500 flex items-center justify-center">
                       <Phone className="h-5 w-5 text-white" />
@@ -589,12 +520,12 @@ export default function ClientContactUsPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 bg-red-50 text-red-700 rounded-full px-4 py-2 mb-6">
-              <div className="h-2 w-2 bg-red-600 rounded-full"></div>
-              <span className="text-sm font-semibold">FAQs</span>
+            <div className="inline-flex items-center gap-3 mb-5">
+              <span className="h-px w-8 bg-red-600"></span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">FAQs</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="section-title mb-6">
               Frequently Asked <span className="text-red-600">Questions</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -645,61 +576,12 @@ export default function ClientContactUsPage() {
         </div>
       </section>
 
-      {/* CTA SECTION */}
-      <section className="py-24 bg-gradient-to-r from-red-700 via-red-600 to-red-800 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-8">
-              Ready to Transform Your <span className="text-yellow-300">Business?</span>
-            </h2>
-            
-            <p className="text-xl text-red-100 mb-12 max-w-3xl mx-auto">
-              Contact us today for a free consultation and discover how Sharptel can help 
-              your business achieve digital excellence.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a
-                href="tel:+922134567890"
-                className="px-10 py-4 bg-white text-red-700 font-bold rounded-xl hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg text-lg"
-              >
-                Call Now:  +92-311-1123104
-              </a>
-              <a
-                href="mailto:info@sharptel.pk"
-                className="px-10 py-4 border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300 text-lg"
-              >
-                Email: info@sharptel.pk
-              </a>
-            </div>
-            
-            <div className="mt-12 pt-8 border-t border-red-500/30">
-              <div className="text-red-200">
-                <div className="flex flex-wrap gap-8 justify-center text-sm">
-                  <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 bg-white rounded-full"></div>
-                    Free Initial Consultation
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 bg-white rounded-full"></div>
-                    24/7 Technical Support
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 bg-white rounded-full"></div>
-                    Nationwide Service Coverage
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <CTASection
+        title={<>Ready to transform your <Accent>business?</Accent></>}
+        text="Contact us today for a free consultation and discover how Sharptel can help your business achieve digital excellence. Free initial consultation · 24/7 technical support · Nationwide service coverage."
+        primary={{ label: "Call +92-311-1123104", href: "tel:+92-311-1123104" }}
+        secondary={{ label: "info@sharptel.pk", href: "mailto:info@sharptel.pk" }}
+      />
     </div>
   )
 }

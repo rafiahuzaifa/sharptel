@@ -3,7 +3,8 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
-import { MapPin, Users, Target, Award, Shield, Clock, Globe, Building, Phone, Mail } from "lucide-react"
+import { MapPin, Users, Target, Award, Shield, Clock, Globe, Building, Phone, Mail, Rocket, Handshake, Star, Zap, UsersRound } from "lucide-react"
+import { Accent, CTASection, FeatureGrid, PageHero, Section, SectionHeader } from "@/app/components/premium"
 
 export default function ClientAboutPage() {
   const leaders = [
@@ -55,51 +56,39 @@ export default function ClientAboutPage() {
   const values = [
     { 
       title: "Innovation", 
-      icon: <div className="h-12 w-12 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center">
-        <span className="text-2xl">🚀</span>
-      </div>, 
+      icon: <Rocket />, 
       desc: "Adopting cutting-edge technologies for next-gen solutions.",
-      color: "from-blue-500 to-cyan-500"
+      color: "from-red-500 to-red-500"
     },
     { 
       title: "Integrity", 
-      icon: <div className="h-12 w-12 bg-gradient-to-br from-emerald-500 to-green-400 rounded-xl flex items-center justify-center">
-        <span className="text-2xl">🤝</span>
-      </div>, 
+      icon: <Handshake />, 
       desc: "Operating with transparency and ethical principles.",
-      color: "from-emerald-500 to-green-500"
+      color: "from-red-500 to-red-500"
     },
     { 
       title: "Excellence", 
-      icon: <div className="h-12 w-12 bg-gradient-to-br from-amber-500 to-yellow-400 rounded-xl flex items-center justify-center">
-        <span className="text-2xl">⭐</span>
-      </div>, 
+      icon: <Star />, 
       desc: "Delivering superior quality in every engagement.",
-      color: "from-amber-500 to-yellow-500"
+      color: "from-red-500 to-red-500"
     },
     { 
       title: "Customer Focus", 
-      icon: <div className="h-12 w-12 bg-gradient-to-br from-red-500 to-pink-400 rounded-xl flex items-center justify-center">
-        <span className="text-2xl">👥</span>
-      </div>, 
+      icon: <Users />, 
       desc: "Prioritizing client goals in every solution.",
-      color: "from-red-500 to-pink-500"
+      color: "from-red-500 to-red-500"
     },
     { 
       title: "Reliability", 
-      icon: <div className="h-12 w-12 bg-gradient-to-br from-purple-500 to-violet-400 rounded-xl flex items-center justify-center">
-        <span className="text-2xl">⚡</span>
-      </div>, 
+      icon: <Zap />, 
       desc: "High uptime, stable networks, trusted services.",
-      color: "from-purple-500 to-violet-500"
+      color: "from-red-500 to-red-500"
     },
     { 
       title: "Teamwork", 
-      icon: <div className="h-12 w-12 bg-gradient-to-br from-indigo-500 to-blue-400 rounded-xl flex items-center justify-center">
-        <span className="text-2xl">👨‍💼</span>
-      </div>, 
+      icon: <UsersRound />, 
       desc: "Collaborating to drive success together.",
-      color: "from-indigo-500 to-blue-500"
+      color: "from-red-500 to-red-500"
     },
   ]
 
@@ -114,97 +103,24 @@ export default function ClientAboutPage() {
   return (
     <div className="bg-white text-gray-800">
 
-      {/* PREMIUM HERO SECTION WITH BACKGROUND IMAGE */}
-      <section className="relative min-h-[80vh] pt-20 pb-16 flex items-center justify-center overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/background/connectivity.webp"
-            alt="Sharptel About Background"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-        </div>
-        
-        {/* Animated Tech Pattern */}
-        <div className="absolute inset-0 z-10 opacity-10">
-          <div className="absolute inset-0 bg-[url('/patterns/circuit-board.svg')] bg-cover"></div>
-        </div>
-
-        {/* Hero Content */}
-        <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-red-600/20 to-red-700/20 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-red-500/30">
-              <div className="h-3 w-3 bg-red-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-semibold text-red-100">Trusted Since 2005</span>
-            </div>
-            
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 text-white leading-tight"
-            >
-              Shaping The
-              <span className="block bg-gradient-to-r from-red-500 via-orange-400 to-yellow-500 bg-clip-text text-transparent">
-                Digital Future
-              </span>
-            </motion.h1>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10"
-            >
-              Leading Pakistan's ICT revolution with innovative solutions, 
-              enterprise-grade services, and trusted partnerships since 2005.
-            </motion.p>
-
-            {/* Stats Banner */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16"
-            >
-              {[
-                { number: "19+", label: "Years Experience", icon: <Clock className="h-5 w-5 text-red-400" /> },
-                { number: "5000+", label: "Clients Served", icon: <Users className="h-5 w-5 text-red-400" /> },
-                { number: "50+", label: "Cities Coverage", icon: <MapPin className="h-5 w-5 text-red-400" /> },
-                { number: "99.9%", label: "Uptime SLA", icon: <Shield className="h-5 w-5 text-red-400" /> },
-              ].map((stat, idx) => (
-                <div key={idx} className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
-                  <div className="flex items-center justify-center gap-3 mb-3">
-                    {stat.icon}
-                    <div className="text-3xl md:text-4xl font-bold text-white">{stat.number}</div>
-                  </div>
-                  <div className="text-sm font-medium text-red-100">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
-        >
-          <div className="h-10 w-10 rounded-full border-2 border-white/30 flex items-center justify-center">
-            <div className="h-3 w-3 rounded-full bg-red-500"></div>
-          </div>
-        </motion.div>
-      </section>
+      <PageHero
+        eyebrow="Trusted Since 2005"
+        title="Shaping The"
+        accent="Digital Future"
+        subtitle="Leading Pakistan's ICT revolution with innovative solutions, enterprise-grade services, and trusted partnerships since 2005."
+        image="/background/connectivity.webp"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "About Us", href: "/About-us" }]}
+        actions={{
+          primary: { label: "Get In Touch", href: "/Contact-us" },
+          secondary: { label: "Explore Services", href: "/pages/services" },
+        }}
+        stats={[
+          { number: "19+", label: "Years Experience" },
+          { number: "5000+", label: "Clients Served" },
+          { number: "50+", label: "Cities Coverage" },
+          { number: "99.9%", label: "Uptime SLA" },
+        ]}
+      />
 
       {/* OUR STORY SECTION */}
       <section className="py-24 relative overflow-hidden">
@@ -218,12 +134,12 @@ export default function ClientAboutPage() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="inline-flex items-center gap-2 bg-red-50 text-red-700 rounded-full px-4 py-2 mb-6">
-                <div className="h-2 w-2 bg-red-600 rounded-full"></div>
-                <span className="text-sm font-semibold">Our Journey</span>
+              <div className="inline-flex items-center gap-3 mb-5">
+              <span className="h-px w-8 bg-red-600"></span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Our Journey</span>
               </div>
               
-              <h2 className="text-4xl md:text-5xl font-bold mb-8">
+              <h2 className="section-title mb-8">
                 Pioneering ICT Solutions
                 <span className="block text-red-600">Since 2005</span>
               </h2>
@@ -310,12 +226,12 @@ export default function ClientAboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 bg-red-50 text-red-700 rounded-full px-4 py-2 mb-6">
-              <div className="h-2 w-2 bg-red-600 rounded-full"></div>
-              <span className="text-sm font-semibold">Leadership Team</span>
+            <div className="inline-flex items-center gap-3 mb-5">
+              <span className="h-px w-8 bg-red-600"></span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Leadership Team</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="section-title mb-6">
               Meet Our <span className="text-red-600">Visionaries</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -381,55 +297,15 @@ export default function ClientAboutPage() {
       </section>
 
       {/* CORE VALUES SECTION */}
-      <section className="py-24 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <div className="inline-flex items-center gap-2 bg-red-600/20 text-red-300 rounded-full px-4 py-2 mb-6">
-              <div className="h-2 w-2 bg-red-400 rounded-full animate-pulse"></div>
-              <span className="text-sm font-semibold">Our Principles</span>
-            </div>
-            
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Core Values That <span className="text-red-400">Define Us</span>
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              The foundation of our success and the guiding principles for everything we do.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {values.map((v, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="group"
-              >
-                <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 border border-gray-700 hover:border-red-500/30 transition-all duration-500 group-hover:-translate-y-2">
-                  <div className="mb-6">
-                    {v.icon}
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-white mb-4">{v.title}</h3>
-                  <p className="text-gray-300 leading-relaxed">{v.desc}</p>
-                  
-                  <div className="mt-6 pt-6 border-t border-gray-700">
-                    <div className={`h-1 w-16 bg-gradient-to-r ${v.color} rounded-full`}></div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Section tone="dark">
+        <SectionHeader
+          dark
+          eyebrow="Our Principles"
+          title={<>Core values that <Accent>define us</Accent></>}
+          lead="The foundation of our success and the guiding principles for everything we do."
+        />
+        <FeatureGrid dark columns={3} items={values.map((v) => ({ icon: v.icon, title: v.title, desc: v.desc }))} />
+      </Section>
 
       {/* QUALITY & PARTNERS SECTION */}
       <section className="py-24 bg-white">
@@ -442,9 +318,9 @@ export default function ClientAboutPage() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="inline-flex items-center gap-2 bg-red-50 text-red-700 rounded-full px-4 py-2 mb-6">
-                <div className="h-2 w-2 bg-red-600 rounded-full"></div>
-                <span className="text-sm font-semibold">Quality Commitment</span>
+              <div className="inline-flex items-center gap-3 mb-5">
+              <span className="h-px w-8 bg-red-600"></span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Quality Commitment</span>
               </div>
               
               <h2 className="text-4xl font-bold mb-8">
@@ -481,13 +357,13 @@ export default function ClientAboutPage() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 rounded-full px-4 py-2 mb-6">
-                <div className="h-2 w-2 bg-blue-600 rounded-full"></div>
-                <span className="text-sm font-semibold">Strategic Partnerships</span>
+              <div className="inline-flex items-center gap-3 mb-5">
+              <span className="h-px w-8 bg-red-600"></span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Strategic Partnerships</span>
               </div>
               
               <h2 className="text-4xl font-bold mb-8">
-                Global <span className="text-blue-600">Technology Partners</span>
+                Global <span className="text-red-600">Technology Partners</span>
               </h2>
               
               <p className="text-lg text-gray-700 mb-10">
@@ -535,12 +411,12 @@ export default function ClientAboutPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 bg-red-50 text-red-700 rounded-full px-4 py-2 mb-6">
-              <div className="h-2 w-2 bg-red-600 rounded-full"></div>
-              <span className="text-sm font-semibold">Find Us</span>
+            <div className="inline-flex items-center gap-3 mb-5">
+              <span className="h-px w-8 bg-red-600"></span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Find Us</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <h2 className="section-title mb-6">
               Our <span className="text-red-600">Presence</span> Across Pakistan
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -710,61 +586,13 @@ export default function ClientAboutPage() {
         </div>
       </section>
 
-      {/* CTA SECTION */}
-      <section className="py-24 bg-gradient-to-r from-red-700 via-red-600 to-red-800 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-8">
-              Ready to Partner With <span className="text-yellow-300">Pakistan's ICT Leader?</span>
-            </h2>
-            
-            <p className="text-xl text-red-100 mb-12 max-w-3xl mx-auto">
-              Join 5000+ satisfied clients who trust Sharptel for their technology needs. 
-              Let's build your digital future together.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link
-                href="/contact-us"
-                className="px-10 py-4 bg-white text-red-700 font-bold rounded-xl hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg text-lg"
-              >
-                Get In Touch
-              </Link>
-              <Link
-                href="/services"
-                className="px-10 py-4 border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300 text-lg"
-              >
-                Explore Services
-              </Link>
-            </div>
-            
-            <div className="mt-12 pt-8 border-t border-red-500/30">
-              <div className="text-red-200">
-                <div className="flex flex-wrap gap-8 justify-center text-sm">
-                  <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 bg-white rounded-full"></div>
-                    19+ Years Experience
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 bg-white rounded-full"></div>
-                    24/7 Technical Support
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 bg-white rounded-full"></div>
-                    Nationwide Coverage
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <CTASection
+        eyebrow="Partner With Us"
+        title={<>Ready to partner with <Accent>Pakistan&apos;s ICT leader?</Accent></>}
+        text="Join 5000+ satisfied clients who trust Sharptel for their technology needs. Let's build your digital future together. 19+ years experience · 24/7 technical support · Nationwide coverage."
+        primary={{ label: "Get In Touch", href: "/Contact-us" }}
+        secondary={{ label: "Explore Services", href: "/pages/services" }}
+      />
     </div>
   )
 }

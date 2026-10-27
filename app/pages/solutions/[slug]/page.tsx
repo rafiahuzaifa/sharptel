@@ -2,7 +2,19 @@
 
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { motion } from 'framer-motion'
+import {
+  Accent,
+  CTASection,
+  DarkPanel,
+  FeatureGrid,
+  PageHero,
+  PanelChips,
+  PointList,
+  Section,
+  SectionHeader,
+  Split,
+  TagCloud,
+} from '@/app/components/premium'
 import { Shield, Server, Wifi, Cpu, Phone, ArrowLeft, CheckCircle, Users, Building, Zap, Clock, ShieldCheck, Target, BarChart3, Headphones, FileText, Globe, Lock, Database, Radio } from 'lucide-react'
 
 interface Solution {
@@ -316,6 +328,15 @@ const solutionContent: Record<string, Solution> = {
   }
 }
 
+// Hero imagery from public/background (the original /images/solutions/* files never existed).
+const heroImages: Record<string, string> = {
+  "cyber-security": "/background/cyber-security.webp",
+  "data-center": "/background/data-center.webp",
+  "wi-fi-hotspot": "/background/wifi-hotspot.webp",
+  "iot-automation": "/background/iot-automation.webp",
+  "voip-solutions": "/background/voip.webp",
+}
+
 export default function SolutionDetailPage() {
   const params = useParams()
   const slug = params.slug as string
@@ -323,368 +344,96 @@ export default function SolutionDetailPage() {
 
   if (!solution) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center p-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Solution Not Found</h2>
-          <p className="text-gray-600 mb-8">The solution you're looking for doesn't exist.</p>
-          <Link 
-            href="/pages/solutions" 
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
-          >
-            <ArrowLeft className="h-5 w-5" />
-            Back to Solutions
-          </Link>
-        </div>
+      <div className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-6 text-center">
+        <h1 className="section-title">Solution not <span className="accent">found</span></h1>
+        <p className="text-gray-600">The solution you&apos;re looking for doesn&apos;t exist.</p>
+        <Link href="/pages/solutions" className="btn-primary">
+          <ArrowLeft className="h-4 w-4" />
+          Back to Solutions
+        </Link>
       </div>
     )
   }
 
-  const IconComponent = solution.icon
+  const icons = featureIcons[slug as keyof typeof featureIcons] ?? []
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-red-700 via-red-600 to-red-800 text-white">
-        {/* Pattern Overlay */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            backgroundSize: '30px'
-          }} />
-        </div>
+    <div className="bg-white text-gray-800">
+      <PageHero
+        eyebrow={solution.keypoints.join(" · ")}
+        title={solution.title}
+        subtitle={solution.description}
+        image={heroImages[slug]}
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Solutions", href: "/pages/solutions" },
+          { label: solution.title, href: "#" },
+        ]}
+        actions={{
+          primary: { label: "Request Consultation", href: "/Contact-us" },
+          secondary: { label: "Call +92-311-128-4373", href: "tel:+92-311-128-4373" },
+        }}
+        stats={[
+          ...solution.stats.map((s) => ({ number: s.value, label: s.label })),
+          { number: "24/7", label: "Support" },
+        ].slice(0, 4)}
+      />
 
-        <div className="container mx-auto px-4 py-20 relative">
-          <div className="max-w-7xl mx-auto">
-            {/* Breadcrumb */}
-            <nav className="mb-8">
-              <ol className="flex items-center space-x-2 text-sm">
-                <li>
-                  <Link href="/" className="text-white/80 hover:text-white">Home</Link>
-                </li>
-                <li className="text-white/60">/</li>
-                <li>
-                  <Link href="/pages/solutions" className="text-white/80 hover:text-white">Solutions</Link>
-                </li>
-                <li className="text-white/60">/</li>
-                <li className="text-white font-semibold">{solution.title}</li>
-              </ol>
-            </nav>
+      <Section>
+        <SectionHeader
+          eyebrow="Capabilities"
+          title={<>Key <Accent>features</Accent></>}
+          lead={solution.description}
+        />
+        <FeatureGrid
+          columns={3}
+          items={solution.features.map((f, i) => {
+            const FIcon = f.icon ?? icons[i]
+            return { icon: FIcon ? <FIcon /> : undefined, title: f.title, desc: f.description }
+          })}
+        />
+      </Section>
 
-            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-              <div className="flex-1">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full mb-6">
-                  <IconComponent className="h-4 w-4" />
-                  <span className="text-sm font-medium">Enterprise Solution</span>
-                </div>
-                
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                  {solution.title}
-                </h1>
-                
-                <p className="text-xl text-white/90 max-w-3xl mb-8">
-                  {solution.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-4">
-                  <Link
-                    href="/contact-us"
-                    className="px-8 py-3 bg-white text-red-700 font-bold rounded-lg hover:bg-gray-100 transition-all shadow-lg"
-                  >
-                    Get Free Consultation
-                  </Link>
-                  <Link
-                    href="#features"
-                    className="px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all"
-                  >
-                    View Features
-                  </Link>
-                </div>
-              </div>
-              
-              {/* Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {solution.stats.map((stat, index) => {
-                  const StatIcon = stat.icon
-                  return (
-                    <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
-                      <div className="flex items-center gap-2 mb-2">
-                        <StatIcon className="h-5 w-5 text-white" />
-                        <div className="text-2xl font-bold">{stat.value}</div>
-                      </div>
-                      <div className="text-sm text-white/80">{stat.label}</div>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
+      <Section tone="muted">
+        <Split
+          left={
+            <>
+              <SectionHeader align="left" eyebrow="Outcomes" title={<>Business <Accent>benefits</Accent></>} className="!mb-8" />
+              <ul className="mb-14 grid gap-x-8 sm:grid-cols-2">
+                {solution.benefits.map((b) => (
+                  <li key={b} className="flex items-start gap-3 border-b border-gray-200/80 py-4 text-gray-800">
+                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-600" />
+                    {b}
+                  </li>
+                ))}
+              </ul>
+              <SectionHeader align="left" eyebrow="Use Cases" title={<>Where it <Accent>fits</Accent></>} className="!mb-8" />
+              <PointList items={solution.useCases.map((u) => ({ title: u }))} />
+            </>
+          }
+          right={
+            <DarkPanel
+              title="Technologies"
+              subtitle="Platforms we design, deploy and support."
+              footer={
+                <>
+                  <div className="mb-4 text-[11px] uppercase tracking-[0.18em] text-gray-400">Industries</div>
+                  <TagCloud dark items={solution.industries} />
+                </>
+              }
+            >
+              <PanelChips items={solution.technologies} />
+            </DarkPanel>
+          }
+        />
+      </Section>
 
-        {/* Bottom wave */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg className="w-full h-12" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 55C840 50 960 40 1080 35C1200 30 1320 30 1380 30L1440 30V0H1380C1320 0 1200 0 1080 0C960 0 840 0 720 0C600 0 480 0 360 0C240 0 120 0 60 0H0V120Z" fill="#ffffff" />
-          </svg>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <section className="container mx-auto px-4 py-12 -mt-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left Column - Main Features */}
-            <div className="lg:col-span-2 space-y-8">
-              {/* Key Points */}
-              <div id="features" className="bg-white rounded-xl border border-gray-200 shadow-sm p-8">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="p-2 bg-red-100 rounded-lg">
-                    <Zap className="h-6 w-6 text-red-600" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-900">Key Features</h2>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {solution.keypoints.map((point, index) => (
-                    <div key={index} className="flex items-start gap-3 p-4 hover:bg-gray-50 rounded-lg transition-colors">
-                      <div className="flex-shrink-0 w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-                        <CheckCircle className="h-4 w-4 text-red-600" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-gray-900 mb-1">{point}</h3>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Detailed Features */}
-              <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-8">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="p-2 bg-red-100 rounded-lg">
-                    <Shield className="h-6 w-6 text-red-600" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-900">Detailed Features</h2>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {solution.features.map((feature, index) => {
-                    const FeatureIcon = feature.icon
-                    return (
-                      <div key={index} className="p-6 border border-gray-200 rounded-xl hover:border-red-300 hover:shadow-md transition-all">
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="p-2 bg-red-50 rounded-lg">
-                            <FeatureIcon className="h-5 w-5 text-red-600" />
-                          </div>
-                          <h3 className="font-bold text-gray-900">{feature.title}</h3>
-                        </div>
-                        <p className="text-gray-600 text-sm">{feature.description}</p>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-
-              {/* Benefits */}
-              <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-8">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="p-2 bg-red-100 rounded-lg">
-                    <Target className="h-6 w-6 text-red-600" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-900">Business Benefits</h2>
-                </div>
-                
-                <div className="space-y-4">
-                  {solution.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-start gap-4 p-4 bg-gradient-to-r from-red-50 to-white border border-red-100 rounded-lg">
-                      <div className="flex-shrink-0 w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
-                        <span className="text-white font-bold">{index + 1}</span>
-                      </div>
-                      <div className="text-gray-800">{benefit}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column - Sidebar */}
-            <div className="space-y-8">
-              {/* Quick Info Card */}
-              <div className="bg-gradient-to-br from-red-700 to-red-800 rounded-xl shadow-lg p-6 text-white">
-                <div className="flex items-center gap-3 mb-6">
-                  <IconComponent className="h-6 w-6" />
-                  <h3 className="text-xl font-bold">Quick Overview</h3>
-                </div>
-                
-                <div className="space-y-4 mb-6">
-                  <div className="flex items-center justify-between py-2 border-b border-white/20">
-                    <span className="text-white/90">Implementation Time</span>
-                    <span className="font-semibold">2-4 Weeks</span>
-                  </div>
-                  <div className="flex items-center justify-between py-2 border-b border-white/20">
-                    <span className="text-white/90">Support Level</span>
-                    <span className="font-semibold">24/7 Premium</span>
-                  </div>
-                  <div className="flex items-center justify-between py-2">
-                    <span className="text-white/90">SLA Guarantee</span>
-                    <span className="font-semibold">99.9%</span>
-                  </div>
-                </div>
-                
-                <Link
-                  href="/contact-us"
-                  className="block w-full text-center py-3 bg-white text-red-700 font-bold rounded-lg hover:bg-gray-100 transition-colors mb-3"
-                >
-                  Request Quote
-                </Link>
-                
-                <Link
-                  href="/solutions"
-                  className="block w-full text-center py-3 bg-white/20 text-white font-semibold rounded-lg hover:bg-white/30 transition-colors border border-white/30"
-                >
-                  Compare Solutions
-                </Link>
-              </div>
-
-              {/* Use Cases */}
-              <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-red-100 rounded-lg">
-                    <Building className="h-5 w-5 text-red-600" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900">Use Cases</h3>
-                </div>
-                
-                <div className="space-y-3">
-                  {solution.useCases.map((useCase, index) => (
-                    <div key={index} className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                      <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                      <span className="text-gray-700">{useCase}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Technologies */}
-              <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-red-100 rounded-lg">
-                    <Server className="h-5 w-5 text-red-600" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900">Technologies</h3>
-                </div>
-                
-                <div className="flex flex-wrap gap-2">
-                  {solution.technologies.map((tech, index) => (
-                    <span 
-                      key={index}
-                      className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg border border-gray-200 text-sm font-medium hover:bg-gray-200 transition-colors"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Support Card */}
-              <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-red-100 rounded-lg">
-                    <Headphones className="h-5 w-5 text-red-600" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900">Support & Service</h3>
-                </div>
-                
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-700">Technical Support</span>
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-sm font-medium">24/7</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-700">On-site Support</span>
-                    <span className="text-sm font-medium text-red-600">Available</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="text-gray-700">Remote Monitoring</span>
-                    <span className="text-sm font-medium text-red-600">Included</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Industries Section */}
-          <div className="mt-16">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Industries We Serve</h2>
-              <div className="h-1 w-24 bg-red-600 mx-auto"></div>
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {solution.industries.map((industry, index) => (
-                <div key={index} className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:border-red-300 hover:shadow-md transition-all">
-                  <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Users className="h-8 w-8 text-red-600" />
-                  </div>
-                  <h4 className="font-bold text-gray-900">{industry}</h4>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Contact CTA */}
-          <div className="mt-16 bg-gradient-to-r from-red-700 to-red-800 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-white mb-4">Ready to Get Started?</h3>
-            <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-              Contact our experts for a personalized solution tailored to your business needs.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/contact-us"
-                className="px-8 py-3 bg-white text-red-700 font-bold rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
-              >
-                Get Free Consultation
-              </Link>
-              <a
-                href="tel:+925111174747"
-                className="px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors"
-              >
-                Call: +92 51 111 747 747
-              </a>
-            </div>
-          </div>
-
-          {/* Bottom Navigation */}
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <Link
-                href="/solutions"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium"
-              >
-                <ArrowLeft className="h-5 w-5" />
-                Back to All Solutions
-              </Link>
-              
-              <div className="flex items-center gap-4">
-                <span className="text-gray-600">Share this solution:</span>
-                <div className="flex gap-2">
-                  <button className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200">
-                    <span className="font-semibold">f</span>
-                  </button>
-                  <button className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200">
-                    <span className="font-semibold">in</span>
-                  </button>
-                  <button className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-gray-200">
-                    <span className="font-semibold">t</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title={<>Ready to deploy <Accent>{solution.title}?</Accent></>}
+        text="Connect with our solutions experts to design the right architecture for your business."
+        primary={{ label: "Request Consultation", href: "/Contact-us" }}
+        secondary={{ label: "All Solutions", href: "/pages/solutions" }}
+      />
     </div>
   )
 }
