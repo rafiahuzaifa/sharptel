@@ -171,16 +171,6 @@ export default function PremiumNavbar() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between py-1.5 gap-2">
             <div className="flex flex-wrap items-center justify-center gap-6">
-              <div className="flex items-center gap-3">
-                <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center">
-                  <Phone className="h-4 w-4 text-white" />
-                </div>
-                <div>
-                  <div className="text-xs text-red-100">Call us 24/7</div>
-                  <div className="text-sm font-semibold tracking-wide">+92-311-128-4373</div>
-                </div>
-              </div>
-              
               <div className="hidden md:flex items-center gap-3">
                 <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center">
                   <Mail className="h-4 w-4 text-white" />

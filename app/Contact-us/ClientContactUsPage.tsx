@@ -61,7 +61,7 @@ export default function ClientContactUsPage() {
     {
       title: "Sales & Inquiry",
       phone: "+92-311-128-4373",
-      email: "sales@sharptel.pk",
+      email: "info@sharptel.pk",
       icon: <Phone className="h-5 w-5" />,
       hours: "Mon - Fri: 9 AM - 6 PM",
       color: "bg-gradient-to-r from-red-600 to-red-500"
@@ -484,7 +484,7 @@ export default function ClientContactUsPage() {
                     { day: "Monday - Friday", hours: "9:00 AM - 6:00 PM", color: "text-green-600" },
                     { day: "Saturday", hours: "10:00 AM - 4:00 PM", color: "text-red-600" },
                     { day: "Sunday", hours: "Closed", color: "text-gray-400" },
-                    { day: "Emergency Support", hours: "24/7 Available", color: "text-red-600" },
+                    { day: "Technical Support", hours: "24/7 Available", color: "text-red-600" },
                   ].map((schedule, idx) => (
                     <div key={idx} className="flex justify-between items-center p-4 rounded-xl bg-gray-50">
                       <div className="font-medium text-gray-900">{schedule.day}</div>
@@ -499,7 +499,7 @@ export default function ClientContactUsPage() {
                       <Phone className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <div className="font-bold text-gray-900">sales Support</div>
+                      <div className="font-bold text-gray-900">Sales Support</div>
                       <div className="text-red-600 font-semibold"> +92-311-1123104 / +92-311-1123105</div>
                     </div>
                   </div>
