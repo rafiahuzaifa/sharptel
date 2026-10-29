@@ -468,11 +468,6 @@ export default function ClientAboutPage() {
                       <div className="font-bold text-gray-900">Lahore</div>
                     </div>
                   </div>
-                  <div className="absolute top-2/5 right-1/3">
-                    <div className="bg-white rounded-lg px-3 py-2 shadow-lg">
-                      <div className="font-bold text-gray-900">Islamabad</div>
-                    </div>
-                  </div>
                 </div>
               </div>
               
@@ -512,7 +507,7 @@ export default function ClientAboutPage() {
                     </div>
                     <div>
                       <div className="text-lg font-bold">Address</div>
-                      <div className="text-red-100">Plot # ABC, Street # 123, Block 4, Clifton, Karachi, Pakistan</div>
+                      <div className="text-red-100">Office 104 &amp; 105, 1st Floor, Plot #54-C, Al-Murtaza Commercial Lane-2, DHA Phase VIII, Karachi, Pakistan</div>
                     </div>
                   </div>
                   
@@ -544,7 +539,6 @@ export default function ClientAboutPage() {
                 <div className="space-y-4">
                   {[
                     { city: "Lahore", phone: "+92-311-1123104 / +92-311-1123105", address: "Main Boulevard, Gulberg" },
-                    { city: "Islamabad", phone: "+92-311-1123104 / +92-311-1123105", address: "Blue Area, Sector F-7" },
                     { city: "Faisalabad", phone: "+92-311-1123104 / +92-311-1123105", address: "Jinnah Road, Civic Centre" },
                   ].map((office, idx) => (
                     <div key={idx} className="flex items-center justify-between p-4 rounded-xl bg-gray-50 hover:bg-red-50 transition">

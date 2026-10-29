@@ -230,7 +230,6 @@ export const defaultContent: SiteContent = {
     ],
     offices: [
       { label: "Head Office (Karachi)", value: "DHA Phase VIII" },
-      { label: "Islamabad", value: "F-8 Markaz" },
       { label: "Lahore", value: "Main Boulevard" },
       { label: "AJK", value: "Mirpur" },
     ],

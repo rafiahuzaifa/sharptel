@@ -33,7 +33,7 @@ export default function ClientContactUsPage() {
   const contactPoints = [
     {
       title: "Karachi Headquarters",
-      address: "Plot # ABC, Street # 123, Block 4, Clifton, Karachi, Pakistan",
+      address: "Office 104 & 105, 1st Floor, Plot #54-C, Al-Murtaza Commercial Lane-2, DHA Phase VIII, Karachi, Pakistan",
       phone: "+92-311-128-4373",
       email: "hq@sharptel.pk",
       icon: <MapPin className="h-6 w-6" />,
@@ -47,14 +47,6 @@ export default function ClientContactUsPage() {
       icon: <MapPin className="h-6 w-6" />,
       color: "from-red-600 to-red-500"
     },
-    {
-      title: "Islamabad Office",
-      address: "Blue Area, Sector F-7, Islamabad, Pakistan",
-      phone: "+92-311-1123104 / +92-311-1123105",
-      email: "islamabad@sharptel.pk",
-      icon: <MapPin className="h-6 w-6" />,
-      color: "from-red-600 to-red-500"
-    }
   ]
 
   const contactInfo = [
@@ -416,13 +408,10 @@ export default function ClientContactUsPage() {
                           <circle cx="400" cy="200" r="10" fill="rgb(239, 68, 68)" className="animate-pulse">
                             <title>Lahore</title>
                           </circle>
-                          <circle cx="550" cy="220" r="10" fill="rgb(239, 68, 68)" className="animate-pulse">
-                            <title>Islamabad</title>
-                          </circle>
                           
                           {/* Network Lines */}
                           <path 
-                            d="M250,250 L400,200 L550,220" 
+                            d="M250,250 L400,200" 
                             stroke="rgba(220, 38, 38, 0.5)" 
                             strokeWidth="2"
                             fill="none"
@@ -439,11 +428,6 @@ export default function ClientContactUsPage() {
                         <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2">
                           <div className="bg-white text-gray-900 rounded-lg px-3 py-2 shadow-lg">
                             <div className="font-bold">Lahore</div>
-                          </div>
-                        </div>
-                        <div className="absolute top-1/4 right-1/4 transform -translate-x-1/2">
-                          <div className="bg-white text-gray-900 rounded-lg px-3 py-2 shadow-lg">
-                            <div className="font-bold">Islamabad</div>
                           </div>
                         </div>
                       </div>
@@ -537,7 +521,7 @@ export default function ClientContactUsPage() {
               },
               {
                 question: "What areas do you serve in Pakistan?",
-                answer: "We serve clients nationwide with headquarters in Karachi and regional offices in Lahore and Islamabad."
+                answer: "We serve clients nationwide with headquarters in Karachi and a regional office in Lahore."
               },
               {
                 question: "How do I get a quote for your services?",
