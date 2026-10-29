@@ -59,14 +59,6 @@ export default function ClientContactUsPage() {
 
   const contactInfo = [
     {
-      title: "Sales & Inquiry",
-      phone: "+92-311-128-4373",
-      email: "info@sharptel.pk",
-      icon: <Phone className="h-5 w-5" />,
-      hours: "Mon - Fri: 9 AM - 6 PM",
-      color: "bg-gradient-to-r from-red-600 to-red-500"
-    },
-    {
       title: "Technical Support",
       phone: "+92-311-128-4373",
       email: "support@sharptel.pk",
@@ -75,7 +67,7 @@ export default function ClientContactUsPage() {
       color: "bg-gradient-to-r from-red-600 to-red-500"
     },
     {
-      title: "General Information",
+      title: "Sales Information",
       phone: "+92-311-1123104 / +92-311-1123105",
       email: "info@sharptel.pk",
       icon: <Mail className="h-5 w-5" />,
