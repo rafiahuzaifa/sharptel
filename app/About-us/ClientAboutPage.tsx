@@ -11,7 +11,6 @@ export default function ClientAboutPage() {
     {
       name: "Wasim Ullah Khan",
       title: "HoD Technical Operations",
-      image: "/images/leadership/wasim-ullah-khan.jpg",
       desc: "Responsible for managing network operations and service delivery with focus on excellence.",
       experience: "15+ Years",
       department: "Technical"
@@ -19,7 +18,6 @@ export default function ClientAboutPage() {
     {
       name: "Farrukh Hussain",
       title: "HoD Commercial",
-      image: "/images/leadership/farrukh-hussain.jpg",
       desc: "Drives commercial strategy, partnerships and business growth across all verticals.",
       experience: "12+ Years",
       department: "Business"
@@ -27,7 +25,6 @@ export default function ClientAboutPage() {
     {
       name: "Ashraf Khan",
       title: "HoD Finance",
-      image: "/images/leadership/ashraf-khan.jpg",
       desc: "Guides financial planning and operational budgets ensuring sustainability.",
       experience: "18+ Years",
       department: "Finance"
@@ -35,7 +32,6 @@ export default function ClientAboutPage() {
     {
       name: "Shamim Sharafat",
       title: "HoD Credit & Collection",
-      image: "/images/leadership/shamim-sharafat.jpg",
       desc: "Oversees credit workflows, client invoicing and receivables management.",
       experience: "10+ Years",
       department: "Operations"
@@ -249,45 +245,25 @@ export default function ClientAboutPage() {
                 viewport={{ once: true }}
                 className="group"
               >
-                <div className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group-hover:-translate-y-2">
-                  {/* Image Container */}
-                  <div className="relative h-64 overflow-hidden">
-                    <Image
-                      src={leader.image}
-                      alt={leader.name}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                    
-                    {/* Experience Badge */}
-                    <div className="absolute top-4 right-4 bg-gradient-to-r from-red-600 to-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                <div className="premium-card h-full overflow-hidden">
+                  {/* Monogram panel (no leadership photos are published yet) */}
+                  <div className="grain relative isolate flex h-56 items-center justify-center overflow-hidden bg-gray-950">
+                    <div className="absolute -right-10 -top-10 -z-10 h-40 w-40 rounded-full bg-red-600/30 blur-[70px] transition-all duration-700 group-hover:bg-red-600/50" />
+                    <span className="text-6xl font-semibold text-white" style={{ letterSpacing: "-0.04em" }}>
+                      {leader.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                    </span>
+                    <div className="absolute right-4 top-4 rounded-full bg-red-600 px-3 py-1 text-xs font-semibold text-white">
                       {leader.experience}
                     </div>
-                    
-                    {/* Department Badge */}
-                    <div className="absolute bottom-4 left-4">
-                      <span className="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-1 rounded-full text-xs font-semibold">
-                        {leader.department}
-                      </span>
+                    <div className="absolute bottom-4 left-4 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-gray-200 backdrop-blur-md">
+                      {leader.department}
                     </div>
                   </div>
-                  
-                  {/* Content */}
+
                   <div className="p-6">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{leader.name}</h3>
-                    <p className="text-red-600 font-semibold mb-4">{leader.title}</p>
-                    <p className="text-gray-600">{leader.desc}</p>
-                    
-                    {/* Social Links */}
-                    <div className="flex gap-3 mt-6">
-                      <button className="h-9 w-9 rounded-full bg-gray-100 flex items-center justify-center hover:bg-red-50 hover:text-red-600 transition">
-                        <span className="text-lg">👔</span>
-                      </button>
-                      <button className="h-9 w-9 rounded-full bg-gray-100 flex items-center justify-center hover:bg-red-50 hover:text-red-600 transition">
-                        <span className="text-lg">💼</span>
-                      </button>
-                    </div>
+                    <h3 className="mb-1 text-xl font-semibold text-gray-900">{leader.name}</h3>
+                    <p className="mb-4 text-sm font-semibold text-red-600">{leader.title}</p>
+                    <p className="text-sm leading-relaxed text-gray-600">{leader.desc}</p>
                   </div>
                 </div>
               </motion.div>
