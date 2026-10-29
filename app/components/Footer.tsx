@@ -131,11 +131,11 @@ export default function Footer() {
         <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-gray-500 md:flex-row">
           <p>© {currentYear} Sharp Communications (Pvt.) Ltd. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/Contact-us" className="transition-colors hover:text-white">
-              Contact
+            <Link href="/privacy-policy" className="transition-colors hover:text-white">
+              Privacy Policy
             </Link>
-            <Link href="/career" className="transition-colors hover:text-white">
-              Careers
+            <Link href="/terms-conditions" className="transition-colors hover:text-white">
+              Terms &amp; Conditions
             </Link>
           </div>
         </div>

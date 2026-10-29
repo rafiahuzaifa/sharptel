@@ -8,6 +8,8 @@ const staticRoutes = [
   "/Contact-us",
   "/career",
   "/events",
+  "/privacy-policy",
+  "/terms-conditions",
   "/connectivity-solutions",
   "/connectivity-solutions/banking-enterprise",
   "/connectivity-solutions/call-service",
