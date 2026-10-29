@@ -76,7 +76,7 @@ export default function Hero({ hero }: HeroProps) {
       ([entry]) => {
         if (entry.isIntersecting) setStatsVisible(true);
       },
-      { threshold: 0.4 }
+      { threshold: 0.1 }
     );
     if (statsRef.current) observer.observe(statsRef.current);
     return () => observer.disconnect();
@@ -145,7 +145,7 @@ export default function Hero({ hero }: HeroProps) {
             style={{ letterSpacing: "-0.045em" }}
           >
             Empowering
-            <span className="relative block h-[1.12em] overflow-hidden pb-[0.12em]">
+            <span className="relative block h-[1.12em] overflow-hidden pb-[0.12em] text-[0.72em] sm:text-[1em]">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={currentWord}
@@ -153,9 +153,12 @@ export default function Hero({ hero }: HeroProps) {
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: "-100%", opacity: 0 }}
                   transition={{ duration: 0.6, ease }}
-                  className="inline-block whitespace-nowrap bg-gradient-to-r from-red-500 via-red-400 to-red-600 bg-clip-text text-transparent"
+                  className="inline-block whitespace-nowrap"
                 >
-                  {words[currentWord]}
+                  {/* Gradient lives on an inner span: background-clip:text on the transformed element can render blank */}
+                  <span className="bg-gradient-to-r from-red-500 via-red-400 to-red-600 bg-clip-text text-transparent">
+                    {words[currentWord]}
+                  </span>
                 </motion.span>
               </AnimatePresence>
             </span>
