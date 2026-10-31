@@ -79,6 +79,7 @@ export default function PremiumNavbar() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [quoteStatus, setQuoteStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
   const [headerHeight, setHeaderHeight] = useState(0);
 
   const formRef = useRef<HTMLDivElement>(null);
@@ -122,9 +123,9 @@ export default function PremiumNavbar() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+    setQuoteStatus(null);
+
     try {
-      // Here you would integrate with your NodeMailer API
       const response = await fetch('/api/send-quote', {
         method: 'POST',
         headers: {
@@ -132,9 +133,13 @@ export default function PremiumNavbar() {
         },
         body: JSON.stringify(formData),
       });
-      
-      if (response.ok) {
-        alert('Quote request submitted successfully! We will contact you soon.');
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok && data.success !== false) {
+        setQuoteStatus({
+          type: "success",
+          message: "Thank you! Your quote request has been sent. A confirmation email is on its way, and our team will contact you within 24 hours.",
+        });
         setFormData({
           name: "",
           email: "",
@@ -143,12 +148,21 @@ export default function PremiumNavbar() {
           service: "",
           message: "",
         });
-        setShowQuoteForm(false);
+        setTimeout(() => {
+          setShowQuoteForm(false);
+          setQuoteStatus(null);
+        }, 3500);
       } else {
-        alert('Failed to submit quote request. Please try again.');
+        setQuoteStatus({
+          type: "error",
+          message: data.message || "We couldn't send your request. Please try again, or email info@sharptel.pk.",
+        });
       }
     } catch (error) {
-      alert('Error submitting form. Please try again.');
+      setQuoteStatus({
+        type: "error",
+        message: "Network error. Please check your connection and try again, or email info@sharptel.pk.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -492,6 +506,19 @@ export default function PremiumNavbar() {
                       />
                     </div>
                   </div>
+
+                  {quoteStatus && (
+                    <div
+                      role="status"
+                      className={`rounded-lg border px-4 py-3 text-sm font-medium ${
+                        quoteStatus.type === "success"
+                          ? "border-green-200 bg-green-50 text-green-800"
+                          : "border-red-200 bg-red-50 text-red-800"
+                      }`}
+                    >
+                      {quoteStatus.message}
+                    </div>
+                  )}
 
                   <div className="flex items-center justify-between pt-6 border-t border-gray-200">
                     <div className="text-sm text-gray-600">
