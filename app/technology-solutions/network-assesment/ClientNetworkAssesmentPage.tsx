@@ -2,6 +2,7 @@
 
 import { Activity, AlertCircle, Server, Shield } from "lucide-react"
 import { Accent, CTASection, FeatureGrid, PageHero, Section, SectionHeader, Steps } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientNetworkAssesmentPage() {
   const assessments = [
@@ -40,7 +41,7 @@ export default function ClientNetworkAssesmentPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Network Analysis"
         title="Network"
         accent="Assessment"
@@ -56,32 +57,32 @@ export default function ClientNetworkAssesmentPage() {
           { number: "24/7", label: "Monitoring" },
           { number: "Detailed", label: "Reports" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="assessment-types" label="Assessment Types"><Section>
         <SectionHeader
           eyebrow="Assessment Types"
           title={<>Comprehensive <Accent>analysis</Accent></>}
           lead="Detailed network assessment services for optimal performance."
         />
         <FeatureGrid items={assessments} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="how-it-works" label="How It Works"><Section tone="muted">
         <SectionHeader
           eyebrow="How It Works"
           title={<>Assessment <Accent>process</Accent></>}
           lead="Our systematic approach to network assessment."
         />
         <Steps items={process} />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Optimize your <Accent>network</Accent></>}
         text="Get a professional network assessment to identify issues, improve performance, and enhance security."
         primary={{ label: "Schedule Assessment", href: "/Contact-us" }}
         secondary={{ label: "Call Network Expert", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

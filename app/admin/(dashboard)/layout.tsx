@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, FileEdit, ToggleLeft, LogOut, ExternalLink } from "lucide-react";
+import { LayoutDashboard, FileEdit, ToggleLeft, LogOut, ExternalLink, PanelsTopLeft } from "lucide-react";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/editor", label: "Page Editor", icon: PanelsTopLeft },
   { href: "/admin/homepage", label: "Homepage Content", icon: FileEdit },
-  { href: "/admin/pages", label: "Pages On/Off", icon: ToggleLeft },
+  { href: "/admin/pages", label: "All Pages", icon: ToggleLeft },
 ];
 
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
@@ -71,7 +72,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
 
       {/* Main content */}
       <main className="flex-1 overflow-y-auto">
-        <div className="max-w-5xl mx-auto p-8">{children}</div>
+        <div className={`${pathname === "/admin/editor" ? "max-w-none" : "max-w-5xl"} mx-auto p-8`}>{children}</div>
       </main>
     </div>
   );

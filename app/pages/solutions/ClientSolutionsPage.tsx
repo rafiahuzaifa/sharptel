@@ -13,6 +13,7 @@ import {
   SectionHeader,
   TagCloud,
 } from '@/app/components/premium'
+import { Managed, useCmsList } from "@/app/components/cms";
 
 const solutions = [
   {
@@ -58,9 +59,11 @@ const solutions = [
 ]
 
 export default function ClientSolutionsPage() {
+  const cmsSolutions = useCmsList("solutions", "solutions", "Solutions", solutions)
+
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Technology Solutions"
         title="Our Technology"
         accent="Solutions"
@@ -77,16 +80,16 @@ export default function ClientSolutionsPage() {
           { number: '99.9%', label: 'Client Satisfaction' },
           { number: '24/7', label: 'Support' },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="solutions" label="Solutions"><Section>
         <SectionHeader
           eyebrow="Solutions"
           title={<>Comprehensive <Accent>technology</Accent> solutions</>}
           lead="We provide end-to-end technology solutions that empower businesses to innovate, secure their operations, and achieve sustainable growth in today's digital landscape."
         />
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-6">
-          {solutions.map((s, i) => {
+          {cmsSolutions.map((s, i) => {
             const Icon = s.icon
             const wide = i < 2
             return (
@@ -131,9 +134,9 @@ export default function ClientSolutionsPage() {
             )
           })}
         </div>
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark">
+      <Managed id="why-sharptel" label="Why Sharptel"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="Why Sharptel"
@@ -149,9 +152,9 @@ export default function ClientSolutionsPage() {
             { icon: <Shield />, title: 'SLA Guarantee', desc: '99.9% uptime guarantee with comprehensive service level agreements.' },
           ]}
         />
-      </Section>
+      </Section></Managed>
 
-      <Section>
+      <Managed id="partners" label="Partners"><Section>
         <SectionHeader
           align="center"
           eyebrow="Partners"
@@ -161,14 +164,14 @@ export default function ClientSolutionsPage() {
         <div className="flex justify-center">
           <TagCloud items={['Cisco', 'Fortinet', 'VMware', 'HPE', 'Dell', 'Avaya']} />
         </div>
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Ready to transform your <Accent>business?</Accent></>}
         text="Connect with our solutions experts to discuss how we can help you achieve your business goals."
         primary={{ label: 'Schedule a Demo', href: '/Contact-us' }}
         secondary={{ label: 'Call +92-311-128-4373', href: 'tel:+92-311-128-4373' }}
-      />
+      /></Managed>
     </div>
   )
 }

@@ -42,3 +42,5 @@ next-env.d.ts
 *.mov
 
 .vercel
+/.cms/
+/public/cms-uploads/

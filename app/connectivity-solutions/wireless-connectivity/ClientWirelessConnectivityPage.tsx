@@ -12,6 +12,7 @@ import {
   SectionHeader,
   Split,
 } from "@/app/components/premium"
+import { Managed, useCmsList } from "@/app/components/cms";
 
 export default function ClientWirelessConnectivityPage() {
   const services = [
@@ -50,9 +51,11 @@ export default function ClientWirelessConnectivityPage() {
     { city: "Multan", type: "Partial Coverage", active: false }
   ]
 
+  const cmsCoverage = useCmsList("coverage", "coverage", "Coverage", coverage)
+
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Wireless Connectivity"
         title="Wireless"
         accent="Connectivity Solutions"
@@ -68,18 +71,18 @@ export default function ClientWirelessConnectivityPage() {
           { number: "99.5%", label: "Uptime" },
           { number: "24/7", label: "Support" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="our-wireless-services" label="Our Wireless Services"><Section>
         <SectionHeader
           eyebrow="Our Wireless Services"
           title={<>Wireless <Accent>solutions</Accent></>}
           lead="Comprehensive wireless connectivity options for every need."
         />
         <FeatureGrid items={services} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="coverage" label="Coverage"><Section tone="muted">
         <Split
           left={
             <>
@@ -91,7 +94,7 @@ export default function ClientWirelessConnectivityPage() {
                 className="!mb-8"
               />
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {coverage.map((c) => (
+                {cmsCoverage.map((c) => (
                   <div key={c.city} className="premium-card flex items-center justify-between p-5">
                     <div>
                       <div className="font-semibold text-gray-900">{c.city}</div>
@@ -124,14 +127,14 @@ export default function ClientWirelessConnectivityPage() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Need wireless <Accent>connectivity?</Accent></>}
         text="Contact our wireless experts for a free site survey and connectivity assessment."
         primary={{ label: "Request Site Survey", href: "/Contact-us" }}
         secondary={{ label: "Call +92-311-128-4373", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

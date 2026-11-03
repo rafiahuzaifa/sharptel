@@ -2,6 +2,7 @@
 
 import { Cloud, Phone, MessageSquare, Video, Globe, Shield, Users, Wallet, TrendingUp, Smartphone, ShieldCheck } from "lucide-react"
 import { Accent, BenefitsPanel, CTASection, FeatureGrid, PageHero, Section, SectionHeader } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientCloudSolutionsPage() {
   const services = [
@@ -40,7 +41,7 @@ export default function ClientCloudSolutionsPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Digital Solutions"
         title="Cloud &"
         accent="Communications"
@@ -56,18 +57,18 @@ export default function ClientCloudSolutionsPage() {
           { number: "24/7", label: "Support" },
           { number: "500+", label: "Clients" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="cloud-comms" label="Cloud & Comms"><Section>
         <SectionHeader
           eyebrow="Cloud & Comms"
           title={<>Integrated <Accent>solutions</Accent></>}
           lead="Complete cloud and communication services."
         />
         <FeatureGrid items={services} />
-      </Section>
+      </Section></Managed>
 
-      <BenefitsPanel
+      <Managed id="why-cloud" label="Why Cloud"><BenefitsPanel
         eyebrow="Why Cloud"
         title={<>Business <Accent>advantages</Accent></>}
         items={benefits}
@@ -79,14 +80,14 @@ export default function ClientCloudSolutionsPage() {
           { icon: <Users />, label: "User Capacity", value: "Unlimited" },
           { icon: <Cloud />, label: "Storage", value: "Scalable" },
         ]}
-      />
+      /></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Transform your <Accent>communication</Accent></>}
         text="Move to the cloud and enhance your business communications with our integrated solutions."
         primary={{ label: "Get Free Consultation", href: "/Contact-us" }}
         secondary={{ label: "Call Solutions Expert", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

@@ -11,6 +11,7 @@ import {
   SectionHeader,
   Split,
 } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 const managedServices = [
   {
@@ -69,7 +70,7 @@ const slaFeatures = [
 export default function ManagedServices() {
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Comprehensive Managed Services"
         title="Focus on Your Business."
         accent="We Manage Your IT."
@@ -80,18 +81,18 @@ export default function ManagedServices() {
           secondary: { label: "Explore Services", href: "#services" },
         }}
         stats={slaFeatures}
-      />
+      /></Managed>
 
-      <Section id="services">
+      <Managed id="managed-services" label="Managed Services"><Section id="services">
         <SectionHeader
           eyebrow="Managed Services"
           title={<>Our <Accent>managed</Accent> services</>}
           lead="Comprehensive managed services designed to keep your business running smoothly."
         />
         <FeatureGrid columns={3} items={managedServices} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark">
+      <Managed id="benefits" label="Benefits"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="Benefits"
@@ -99,9 +100,9 @@ export default function ManagedServices() {
           lead="Why businesses choose our managed services for their IT operations."
         />
         <FeatureGrid dark columns={3} items={benefits} />
-      </Section>
+      </Section></Managed>
 
-      <Section>
+      <Managed id="sla" label="SLA"><Section>
         <Split
           left={
             <>
@@ -128,14 +129,14 @@ export default function ManagedServices() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Focus on growth. <Accent>Let us handle your IT.</Accent></>}
         text="Schedule a free IT assessment and discover how our managed services can transform your business operations. No commitment assessment · Custom service proposal · Flexible contract terms."
         primary={{ label: "Request Free IT Assessment", href: "/Contact-us" }}
         secondary={{ label: "Call +92-311-128-4373", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

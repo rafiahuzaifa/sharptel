@@ -13,6 +13,7 @@ import {
   SectionHeader,
   Split,
 } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientCyberSecurityPage() {
   const services = [
@@ -51,7 +52,7 @@ export default function ClientCyberSecurityPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Security Solutions"
         title="Cyber"
         accent="Security"
@@ -67,18 +68,18 @@ export default function ClientCyberSecurityPage() {
           { number: "50+", label: "Protected Clients" },
           { number: "Zero", label: "Major Breaches" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="security-services" label="Security Services"><Section>
         <SectionHeader
           eyebrow="Security Services"
           title={<>Complete <Accent>protection</Accent></>}
           lead="End-to-end cybersecurity solutions for businesses of all sizes."
         />
         <FeatureGrid items={services} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="threat-defense" label="Threat Defense"><Section tone="muted">
         <Split
           left={
             <>
@@ -99,14 +100,14 @@ export default function ClientCyberSecurityPage() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Secure your <Accent>business</Accent></>}
         text="Don't wait for a security breach. Protect your business with our comprehensive cybersecurity solutions today."
         primary={{ label: "Get Security Audit", href: "/Contact-us" }}
         secondary={{ label: "Call Security Expert", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

@@ -13,6 +13,7 @@ import {
   SectionHeader,
   Split,
 } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientIotAutomationPage() {
   const solutions = [
@@ -51,7 +52,7 @@ export default function ClientIotAutomationPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Smart Solutions"
         title="IoT &"
         accent="Automation"
@@ -67,18 +68,18 @@ export default function ClientIotAutomationPage() {
           { number: "24/7", label: "Monitoring" },
           { number: "Real-time", label: "Analytics" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="iot-solutions" label="IoT Solutions"><Section>
         <SectionHeader
           eyebrow="IoT Solutions"
           title={<>Smart <Accent>automation</Accent></>}
           lead="Comprehensive IoT solutions for various applications."
         />
         <FeatureGrid items={solutions} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="technology" label="Technology"><Section tone="muted">
         <Split
           left={
             <>
@@ -99,14 +100,14 @@ export default function ClientIotAutomationPage() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Automate your <Accent>world</Accent></>}
         text="Transform your home, business, or city with our smart IoT and automation solutions."
         primary={{ label: "Get IoT Consultation", href: "/Contact-us" }}
         secondary={{ label: "Call IoT Expert", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

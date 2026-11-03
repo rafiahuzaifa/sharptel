@@ -13,6 +13,7 @@ import {
   SectionHeader,
   Split,
 } from "@/app/components/premium"
+import { Field, Managed, useCmsList } from "@/app/components/cms";
 
 type Status = "full" | "partial" | "soon"
 
@@ -109,7 +110,7 @@ function CoverageMap() {
         ].map((l) => (
           <span key={l.label} className="flex items-center gap-2">
             <span className={`h-2.5 w-2.5 rounded-full ${l.color}`} />
-            {l.label}
+            <Field name={`legend.${l.color}`}>{l.label}</Field>
           </span>
         ))}
       </div>
@@ -129,9 +130,12 @@ export default function ClientCoverageAreaPage() {
 
   const upcomingCities = ["Gujranwala", "Sialkot", "Bahawalpur", "Sargodha", "Quetta", "Peshawar"]
 
+  const cmsMajorCities = useCmsList("cities", "majorCities", "Major cities", majorCities)
+  const cmsUpcomingCities = useCmsList("expansion", "upcomingCities", "Upcoming cities", upcomingCities)
+
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Nationwide Coverage"
         title="Coverage"
         accent="Areas & Cities"
@@ -147,9 +151,9 @@ export default function ClientCoverageAreaPage() {
           { number: "24/7", label: "Local Support" },
           { number: "Expanding", label: "Continuously" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="network-coverage" label="Network Coverage"><Section>
         <SectionHeader
           eyebrow="Network Coverage"
           title={<>Our <Accent>coverage</Accent> map</>}
@@ -158,16 +162,16 @@ export default function ClientCoverageAreaPage() {
         <Reveal>
           <CoverageMap />
         </Reveal>
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="cities" label="Cities"><Section tone="muted">
         <SectionHeader
           eyebrow="Cities"
           title={<>Major <Accent>cities</Accent></>}
           lead="Detailed coverage information for major cities across Pakistan."
         />
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {majorCities.map((city, i) => (
+          {cmsMajorCities.map((city, i) => (
             <Reveal key={city.name} delay={(i % 3) * 0.06}>
               <div className="premium-card group h-full p-8">
                 <div className="mb-6 flex items-start justify-between">
@@ -187,7 +191,7 @@ export default function ClientCoverageAreaPage() {
                   </div>
                 </div>
                 <div className="mb-6">
-                  <div className="mb-3 text-[11px] uppercase tracking-[0.18em] text-gray-400">Available Services</div>
+                  <div className="mb-3 text-[11px] uppercase tracking-[0.18em] text-gray-400"><Field name="label.1">Available Services</Field></div>
                   <div className="flex flex-wrap gap-2">
                     {city.services.map((s) => (
                       <span key={s} className="rounded-full border border-gray-200 px-3 py-1 text-sm text-gray-700">
@@ -212,9 +216,9 @@ export default function ClientCoverageAreaPage() {
             </Reveal>
           ))}
         </div>
-      </Section>
+      </Section></Managed>
 
-      <Section>
+      <Managed id="expansion" label="Expansion"><Section>
         <Split
           left={
             <>
@@ -226,7 +230,7 @@ export default function ClientCoverageAreaPage() {
                 className="!mb-8"
               />
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {upcomingCities.map((city, i) => (
+                {cmsUpcomingCities.map((city, i) => (
                   <div key={city} className="premium-card flex items-center gap-3 p-4">
                     <span className="font-mono text-xs text-red-600">{String(i + 1).padStart(2, "0")}</span>
                     <span className="font-medium text-gray-900">{city}</span>
@@ -249,14 +253,14 @@ export default function ClientCoverageAreaPage() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Check <Accent>coverage</Accent> in your area</>}
         text="Contact us to check network availability in your specific location and discuss connectivity options for your business."
         primary={{ label: "Check Availability", href: "/Contact-us" }}
         secondary={{ label: "Call for Coverage Info", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

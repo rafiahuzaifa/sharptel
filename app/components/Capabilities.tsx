@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Globe, Users, Award, Cpu, Shield, Zap } from "lucide-react";
 import Eyebrow from "./Eyebrow";
 import type { SiteContent } from "@/lib/content";
+import { Field } from "@/app/components/cms";
 
 // Icon is fixed per card position; text content comes from admin-managed props.
 const icons = [Globe, Users, Award, Cpu, Shield, Zap];
@@ -29,11 +30,11 @@ export default function CapabilitiesSection({ capabilities }: CapabilitiesProps)
           <div className="lg:col-span-7">
             <Eyebrow label="Why Choose Us" dark />
             <h2 className="section-title-dark">
-              Capabilities that <span className="accent">scale</span> with you
+              <Field name="title.1">Capabilities that <span className="accent">scale</span> with you</Field>
             </h2>
           </div>
           <p className="text-base leading-relaxed text-gray-400 md:text-lg lg:col-span-5">
-            Delivering excellence through expertise, partnerships, and nationwide presence.
+            <Field name="text.1">Delivering excellence through expertise, partnerships, and nationwide presence.</Field>
           </p>
         </motion.div>
 

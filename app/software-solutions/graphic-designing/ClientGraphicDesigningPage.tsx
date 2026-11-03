@@ -2,6 +2,7 @@
 
 import { Palette, FileText, Monitor, Building2, Megaphone, MousePointerClick } from "lucide-react"
 import { Accent, ChecklistCards, CTASection, FeatureGrid, PageHero, Section, SectionHeader, Steps } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientGraphicDesigningPage() {
   const services = [
@@ -41,7 +42,7 @@ export default function ClientGraphicDesigningPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Visual Design"
         title="Graphic"
         accent="Design Services"
@@ -57,41 +58,41 @@ export default function ClientGraphicDesigningPage() {
           { number: "3-7 Days", label: "Turnaround Time" },
           { number: "Unlimited", label: "Revisions" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="our-services" label="Our Services"><Section>
         <SectionHeader
           eyebrow="Our Services"
           title={<>Creative <Accent>design</Accent> solutions</>}
           lead="Comprehensive graphic design services for all your needs."
         />
         <FeatureGrid columns={3} items={services} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="portfolio" label="Portfolio"><Section tone="muted">
         <SectionHeader
           eyebrow="Portfolio"
           title={<>Design <Accent>portfolio</Accent></>}
           lead="Wide range of design services for every business need."
         />
         <ChecklistCards items={designTypes} />
-      </Section>
+      </Section></Managed>
 
-      <Section>
+      <Managed id="how-we-work" label="How We Work"><Section>
         <SectionHeader
           eyebrow="How We Work"
           title={<>Design <Accent>process</Accent></>}
           lead="Our systematic approach ensures quality and consistency."
         />
         <Steps items={process} />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Elevate your <Accent>brand</Accent></>}
         text="Make a lasting impression with professional graphic design that communicates your brand's story and values."
         primary={{ label: "Start Design Project", href: "/Contact-us" }}
         secondary={{ label: "All Software Solutions", href: "/software-solutions" }}
-      />
+      /></Managed>
     </div>
   )
 }

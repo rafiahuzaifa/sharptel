@@ -13,6 +13,7 @@ import {
   SectionHeader,
   Split,
 } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientVoiceOverPage() {
   const solutions = [
@@ -51,7 +52,7 @@ export default function ClientVoiceOverPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Business Communication"
         title="Voice Over IP"
         accent="Solutions"
@@ -67,18 +68,18 @@ export default function ClientVoiceOverPage() {
           { number: "500+", label: "Clients" },
           { number: "24/7", label: "Support" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="voip-solutions" label="VoIP Solutions"><Section>
         <SectionHeader
           eyebrow="VoIP Solutions"
           title={<>Business <Accent>communication</Accent></>}
           lead="Complete VoIP solutions for modern businesses."
         />
         <FeatureGrid items={solutions} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="why-voip" label="Why VoIP"><Section tone="muted">
         <Split
           left={
             <>
@@ -99,14 +100,14 @@ export default function ClientVoiceOverPage() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Upgrade your <Accent>communication</Accent></>}
         text="Transform your business communication with modern VoIP solutions and start saving today."
         primary={{ label: "Get Free Demo", href: "/Contact-us" }}
         secondary={{ label: "Call VoIP Expert", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

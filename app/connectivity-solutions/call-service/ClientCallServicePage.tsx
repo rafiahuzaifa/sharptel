@@ -13,6 +13,7 @@ import {
   SectionHeader,
   Split,
 } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientCallServicePage() {
   const solutions = [
@@ -60,7 +61,7 @@ export default function ClientCallServicePage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Contact Center Solutions"
         title="Call Center"
         accent="Services"
@@ -76,18 +77,18 @@ export default function ClientCallServicePage() {
           { number: "500+", label: "Seats Supported" },
           { number: "24/7", label: "Support" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="our-call-center-solutions" label="Our Call Center Solutions"><Section>
         <SectionHeader
           eyebrow="Our Call Center Solutions"
           title={<>Call center <Accent>connectivity</Accent></>}
           lead="Comprehensive solutions designed specifically for call center operations."
         />
         <FeatureGrid items={solutions} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark">
+      <Managed id="benefits" label="Benefits"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="Benefits"
@@ -95,9 +96,9 @@ export default function ClientCallServicePage() {
           lead="Why call centers across Pakistan trust Sharptel for their connectivity needs."
         />
         <FeatureGrid dark columns={4} items={benefits} />
-      </Section>
+      </Section></Managed>
 
-      <Section>
+      <Managed id="performance" label="Performance"><Section>
         <Split
           reverse
           left={
@@ -125,14 +126,14 @@ export default function ClientCallServicePage() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Optimize your <Accent>call center</Accent></>}
         text="Contact our call center specialists for a free consultation and network assessment to improve your customer service operations."
         primary={{ label: "Request Assessment", href: "/Contact-us" }}
         secondary={{ label: "Call Now", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

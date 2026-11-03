@@ -13,6 +13,7 @@ import {
   SectionHeader,
   Split,
 } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientVirtualSolutionPage() {
   const plans = [
@@ -45,7 +46,7 @@ export default function ClientVirtualSolutionPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Hosting Solutions"
         title="Virtual"
         accent="Private Server"
@@ -61,9 +62,9 @@ export default function ClientVirtualSolutionPage() {
           { number: "SSD", label: "Storage" },
           { number: "Root", label: "Access" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="vps-plans" label="VPS Plans"><Section>
         <SectionHeader
           align="center"
           eyebrow="VPS Plans"
@@ -71,9 +72,9 @@ export default function ClientVirtualSolutionPage() {
           lead="Scalable VPS hosting plans for every business need."
         />
         <PricingCards plans={plans} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="included" label="Included"><Section tone="muted">
         <Split
           left={
             <>
@@ -94,14 +95,14 @@ export default function ClientVirtualSolutionPage() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Launch your <Accent>server</Accent></>}
         text="Get started with high-performance VPS hosting in minutes. Scale as your business grows."
         primary={{ label: "Get Started Now", href: "/Contact-us" }}
         secondary={{ label: "Call Hosting Expert", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

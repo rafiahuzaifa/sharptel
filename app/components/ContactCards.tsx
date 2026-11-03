@@ -5,6 +5,7 @@ import { Mail, Phone, MapPin, ArrowRight, Clock } from "lucide-react";
 import Link from "next/link";
 import Eyebrow from "./Eyebrow";
 import type { SiteContent } from "@/lib/content";
+import { Field } from "@/app/components/cms";
 
 interface ContactSectionProps {
   contact: SiteContent["contact"];
@@ -36,12 +37,12 @@ export default function ContactSection({ contact }: ContactSectionProps) {
           <div className="lg:col-span-8">
             <Eyebrow label="Get In Touch" dark />
             <h2 className="section-title-dark">
-              Let&apos;s build your <span className="accent">network</span> of tomorrow.
+              <Field name="title.1">Let&apos;s build your <span className="accent">network</span> of tomorrow.</Field>
             </h2>
           </div>
           <div className="flex flex-col gap-4 lg:col-span-4 lg:items-end">
             <p className="text-gray-400 lg:text-right">
-              We are always ready to help. Reach out through any of the channels below.
+              <Field name="text.1">We are always ready to help. Reach out through any of the channels below.</Field>
             </p>
             <Link href="/Contact-us" className="btn-primary group px-8 py-4">
               Contact Us
@@ -99,7 +100,7 @@ export default function ContactSection({ contact }: ContactSectionProps) {
           <div className="flex items-center gap-4">
             <Clock className="h-5 w-5 text-red-500" strokeWidth={1.75} />
             <div>
-              <span className="font-semibold text-white">Business Hours</span>
+              <span className="font-semibold text-white"><Field name="label.1">Business Hours</Field></span>
               <span className="mx-3 text-gray-600">·</span>
               <span className="text-sm text-gray-400">{contact.businessHours}</span>
             </div>

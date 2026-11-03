@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Calendar, Users, MapPin, ArrowRight, Clock, Presentation, GraduationCap, Briefcase, Mic } from "lucide-react";
 import { Accent, CTASection, PageHero } from "@/app/components/premium";
 import Link from "next/link";
+import { Field, Managed, useCmsList } from "@/app/components/cms";
 
 const events = [
   {
@@ -117,10 +118,15 @@ const engagements = [
   }
 ];
 
+// Only the first two are featured on the page; more can be added from the admin panel.
+const featuredEvents = events.slice(0, 2)
+
 export default function ClientEventsPage() {
+  const cmsEvents = useCmsList("events", "events", "Featured events", featuredEvents)
+  const cmsEngagements = useCmsList("events", "engagements", "Community engagements", engagements)
   return (
     <>
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Events & Engagements"
         title="Shaping Pakistan's"
         accent="Digital Future"
@@ -134,8 +140,8 @@ export default function ClientEventsPage() {
           { number: "100+", label: "Partners" },
           { number: "25+", label: "Cities Covered" },
         ]}
-      />
-    <section className="relative overflow-hidden bg-white">
+      /></Managed>
+    <Managed id="events" label="Events &amp; awards"><section className="relative overflow-hidden bg-white">
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 py-24">
 
         {/* Upcoming Events Highlight */}
@@ -148,7 +154,7 @@ export default function ClientEventsPage() {
         >
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-3xl font-bold text-gray-900">
-              <span className="text-red-600">Featured</span> Events
+              <Field name="title.1"><span className="text-red-600">Featured</span> Events</Field>
             </h3>
             <Link
               href="/events"
@@ -160,7 +166,7 @@ export default function ClientEventsPage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {events.slice(0, 2).map((event) => (
+            {cmsEvents.map((event) => (
               <motion.div
                 key={event.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -219,7 +225,7 @@ export default function ClientEventsPage() {
                           <Calendar className="h-5 w-5 text-red-600" />
                         </div>
                         <div>
-                          <div className="text-sm text-gray-500">Date</div>
+                          <div className="text-sm text-gray-500"><Field name="label.1">Date</Field></div>
                           <div className="font-semibold text-gray-900">{event.date}</div>
                         </div>
                       </div>
@@ -229,7 +235,7 @@ export default function ClientEventsPage() {
                           <MapPin className="h-5 w-5 text-red-600" />
                         </div>
                         <div>
-                          <div className="text-sm text-gray-500">Venue</div>
+                          <div className="text-sm text-gray-500"><Field name="label.2">Venue</Field></div>
                           <div className="font-semibold text-gray-900">{event.venue}</div>
                         </div>
                       </div>
@@ -285,15 +291,15 @@ export default function ClientEventsPage() {
         >
           <div className="text-center mb-12">
             <h3 className="section-title mb-5">
-              Community <span className="accent">engagements</span>
+              <Field name="title.2">Community <span className="accent">engagements</span></Field>
             </h3>
             <p className="section-lead mx-auto max-w-3xl">
-              Building strong connections with communities, universities, and industry partners across Pakistan.
+              <Field name="text.1">Building strong connections with communities, universities, and industry partners across Pakistan.</Field>
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {engagements.map((engagement) => (
+            {cmsEngagements.map((engagement) => (
               <motion.div
                 key={engagement.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -325,7 +331,7 @@ export default function ClientEventsPage() {
                 </div>
 
                 <div className="pt-6 border-t border-gray-200">
-                  <div className="text-sm text-gray-500 mb-1">Impact</div>
+                  <div className="text-sm text-gray-500 mb-1"><Field name="label.3">Impact</Field></div>
                   <div className="text-red-700 font-semibold">{engagement.impact}</div>
                 </div>
               </motion.div>
@@ -334,15 +340,15 @@ export default function ClientEventsPage() {
         </motion.div>
 
       </div>
-    </section>
+    </section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         eyebrow="Join Us"
         title={<>Join our next <Accent>event</Accent></>}
         text="Be part of Pakistan's largest technology community. Network, learn, and grow with industry leaders."
         primary={{ label: "Register Interest", href: "/Contact-us" }}
         secondary={{ label: "Host an Event", href: "/Contact-us" }}
-      />
+      /></Managed>
     </>
   );
 }

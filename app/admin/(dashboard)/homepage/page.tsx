@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { AdminData, SiteContent } from "@/lib/content";
+import type { AdminData, SiteContent } from "@/lib/cms-shared";
 import ImageField from "../ImageField";
 import { Loader2, Save, Check, Plus, Trash2 } from "lucide-react";
 

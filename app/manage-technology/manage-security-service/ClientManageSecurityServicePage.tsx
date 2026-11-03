@@ -2,6 +2,7 @@
 
 import { Shield, Lock, Eye, AlertTriangle, Database, Globe, Users, ShieldCheck, UserCheck, ClipboardCheck, Wallet } from "lucide-react"
 import { Accent, BenefitsPanel, CTASection, FeatureGrid, PageHero, Section, SectionHeader } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientManageSecurityServicePage() {
   const services = [
@@ -40,7 +41,7 @@ export default function ClientManageSecurityServicePage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Security Management"
         title="Managed"
         accent="Security Services"
@@ -56,18 +57,18 @@ export default function ClientManageSecurityServicePage() {
           { number: "15 Min", label: "Response Time" },
           { number: "Zero", label: "Major Breaches" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="security-services" label="Security Services"><Section>
         <SectionHeader
           eyebrow="Security Services"
           title={<>Proactive <Accent>security</Accent></>}
           lead="Complete security management services."
         />
         <FeatureGrid items={services} />
-      </Section>
+      </Section></Managed>
 
-      <BenefitsPanel
+      <Managed id="why-us" label="Why Us"><BenefitsPanel
         eyebrow="Why Us"
         title={<>Security <Accent>benefits</Accent></>}
         items={benefits}
@@ -79,14 +80,14 @@ export default function ClientManageSecurityServicePage() {
           { icon: <Globe />, label: "Global Intelligence", value: "Active" },
           { icon: <Users />, label: "Expert Response", value: "15 Minutes" },
         ]}
-      />
+      /></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Secure your <Accent>business</Accent></>}
         text="Don't wait for a security breach. Get 24/7 protection with our managed security services."
         primary={{ label: "Get Security Assessment", href: "/Contact-us" }}
         secondary={{ label: "Call Security Manager", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

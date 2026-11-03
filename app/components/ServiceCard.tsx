@@ -9,6 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Eyebrow from "./Eyebrow";
 import type { SiteContent } from "@/lib/content";
+import { Field } from "@/app/components/cms";
 
 interface ServiceCardsProps {
   services: SiteContent["services"];
@@ -96,12 +97,12 @@ export default function ServiceCards({ services }: ServiceCardsProps) {
           <div className="lg:col-span-7">
             <Eyebrow label="Our Services" />
             <h2 className="section-title">
-              What we <span className="accent">offer</span>
+              <Field name="title.1">What we <span className="accent">offer</span></Field>
             </h2>
           </div>
           <div className="lg:col-span-5">
             <p className="section-lead mb-6">
-              From high-speed connectivity to advanced security and automation — empowering businesses across Pakistan with reliable, future-ready ICT services.
+              <Field name="text.1">From high-speed connectivity to advanced security and automation — empowering businesses across Pakistan with reliable, future-ready ICT services.</Field>
             </p>
             <Link
               href="/pages/services"

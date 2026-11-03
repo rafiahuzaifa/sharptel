@@ -8,23 +8,23 @@ import TestimonialsSection from "@/app/components/Testimonials";
 import IndustryVerticals from "@/app/components/IndustryVerticals";
 import ContactSection from "@/app/components/ContactCards";
 import { getSiteContent } from "@/lib/content";
+import { Managed } from "@/app/components/cms";
 
-export const revalidate = 0;
 
 export default async function Home() {
   const content = await getSiteContent();
 
   return (
     <>
-      <HeroSection hero={content.hero} />
-      <WhatWeOffer services={content.services} />
-      <PartnersSection />
-      <CapabilitiesSection capabilities={content.capabilities} />
-      <AboutSection about={content.about} />
+      <Managed id="hero" label="Hero"><HeroSection hero={content.hero} /></Managed>
+      <Managed id="what-we-offer" label="What We Offer"><WhatWeOffer services={content.services} /></Managed>
+      <Managed id="partners" label="Partners"><PartnersSection /></Managed>
+      <Managed id="capabilities" label="Capabilities"><CapabilitiesSection capabilities={content.capabilities} /></Managed>
+      <Managed id="about" label="About"><AboutSection about={content.about} /></Managed>
 
-      <TestimonialsSection testimonials={content.testimonials} />
-      <IndustryVerticals industries={content.industries} />
-      <ContactSection contact={content.contact} />
+      <Managed id="testimonials" label="Testimonials"><TestimonialsSection testimonials={content.testimonials} /></Managed>
+      <Managed id="industry-verticals" label="Industry Verticals"><IndustryVerticals industries={content.industries} /></Managed>
+      <Managed id="contact" label="Contact"><ContactSection contact={content.contact} /></Managed>
     </>
   );
 }

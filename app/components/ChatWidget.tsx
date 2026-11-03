@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
+import { Field } from "@/app/components/cms";
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -99,8 +100,8 @@ export default function ChatWidget() {
                 <MessageCircle className="h-4 w-4" />
               </div>
               <div>
-                <div className="font-bold text-sm leading-tight">Sharptel Assistant</div>
-                <div className="text-xs text-red-100">Usually replies instantly</div>
+                <div className="font-bold text-sm leading-tight"><Field name="label.1">Sharptel Assistant</Field></div>
+                <div className="text-xs text-red-100"><Field name="label.2">Usually replies instantly</Field></div>
               </div>
             </div>
 

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Star } from "lucide-react";
 import Eyebrow from "./Eyebrow";
 import type { SiteContent } from "@/lib/content";
+import { Field } from "@/app/components/cms";
 
 interface TestimonialsProps {
   testimonials: SiteContent["testimonials"];
@@ -68,10 +69,10 @@ export default function TestimonialsSection({ testimonials }: TestimonialsProps)
           >
             <Eyebrow label="Testimonials" />
             <h2 className="section-title mb-5">
-              Trusted by <span className="accent">leaders</span>
+              <Field name="title.1">Trusted by <span className="accent">leaders</span></Field>
             </h2>
             <p className="section-lead mb-10">
-              Leading enterprises across Pakistan and beyond rely on SharpTel every day.
+              <Field name="text.1">Leading enterprises across Pakistan and beyond rely on SharpTel every day.</Field>
             </p>
 
             <div className="mt-auto flex items-center gap-6">
@@ -105,7 +106,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsProps)
                 aria-hidden
                 className="pointer-events-none absolute -top-6 right-8 select-none font-heading text-[12rem] leading-none text-red-50"
               >
-                &rdquo;
+                <Field name="label.1">&rdquo;</Field>
               </span>
 
               <AnimatePresence mode="wait" custom={direction}>

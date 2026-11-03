@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Eyebrow from "./Eyebrow";
+import { Field, useCmsList } from "@/app/components/cms";
 
 // File names must match public/background exactly — Vercel's filesystem is case-sensitive.
 const partners = [
@@ -28,6 +29,8 @@ const stats = [
 ];
 
 export default function PartnersSection() {
+  const cmsPartners = useCmsList("partners", "partners", "Partner logos", partners);
+  const cmsStats = useCmsList("partners", "stats", "Stats", stats);
   return (
     <section className="bg-white py-24 md:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,10 +43,10 @@ export default function PartnersSection() {
         >
           <Eyebrow label="Technology Partners" />
           <h2 className="section-title mb-5">
-            Built with the <span className="accent">best</span> in the industry
+            <Field name="title.1">Built with the <span className="accent">best</span> in the industry</Field>
           </h2>
           <p className="section-lead">
-            Collaborating with global technology leaders to deliver cutting-edge, certified solutions.
+            <Field name="text.1">Collaborating with global technology leaders to deliver cutting-edge, certified solutions.</Field>
           </p>
         </motion.div>
       </div>
@@ -51,7 +54,7 @@ export default function PartnersSection() {
       {/* Logo marquee */}
       <div className="marquee relative overflow-hidden border-y border-gray-100 py-10">
         <div className="marquee-track flex w-max items-center">
-          {[...partners, ...partners].map((partner, idx) => (
+          {[...cmsPartners, ...cmsPartners].map((partner, idx) => (
             <div
               key={`${partner.name}-${idx}`}
               aria-hidden={idx >= partners.length ? true : undefined}
@@ -81,7 +84,7 @@ export default function PartnersSection() {
           viewport={{ once: true }}
           className="mx-auto mt-16 grid max-w-5xl grid-cols-2 gap-y-10 md:grid-cols-4 md:divide-x md:divide-gray-200"
         >
-          {stats.map((stat, idx) => (
+          {cmsStats.map((stat, idx) => (
             <div key={idx} className="text-center">
               <div className="mb-2 text-4xl font-semibold text-gray-900 md:text-5xl" style={{ letterSpacing: "-0.04em" }}>
                 {stat.number.replace(/\+$/, "")}

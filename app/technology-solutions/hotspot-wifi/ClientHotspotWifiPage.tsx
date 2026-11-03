@@ -2,6 +2,7 @@
 
 import { Users, Shield, Radio, Building, Hotel, ShoppingBag, UtensilsCrossed, GraduationCap } from "lucide-react"
 import { Accent, CTASection, FeatureGrid, PageHero, Section, SectionHeader } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientHotspotWifiPage() {
   const solutions = [
@@ -40,7 +41,7 @@ export default function ClientHotspotWifiPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Wireless Solutions"
         title="Hotspot & Wi-Fi"
         accent="Solutions"
@@ -56,18 +57,18 @@ export default function ClientHotspotWifiPage() {
           { number: "10,000+", label: "Users Daily" },
           { number: "24/7", label: "Support" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="wi-fi-solutions" label="Wi-Fi Solutions"><Section>
         <SectionHeader
           eyebrow="Wi-Fi Solutions"
           title={<>Wireless <Accent>connectivity</Accent></>}
           lead="Comprehensive Wi-Fi solutions for all business needs."
         />
         <FeatureGrid items={solutions} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark">
+      <Managed id="deployments" label="Deployments"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="Deployments"
@@ -75,14 +76,14 @@ export default function ClientHotspotWifiPage() {
           lead="Wi-Fi solutions tailored for various industries."
         />
         <FeatureGrid dark columns={4} items={deployments} />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Connect your <Accent>business</Accent></>}
         text="Provide reliable Wi-Fi to your customers and guests with our professional hotspot solutions."
         primary={{ label: "Get Wi-Fi Quote", href: "/Contact-us" }}
         secondary={{ label: "Call Wi-Fi Expert", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

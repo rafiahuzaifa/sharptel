@@ -2,6 +2,7 @@
 
 import { Server, Settings, Monitor, Zap, Users, Shield, Headphones, Wallet, UserCog, Eye, TrendingUp } from "lucide-react"
 import { Accent, BenefitsPanel, CTASection, FeatureGrid, PageHero, Section, SectionHeader } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientManageItServicePage() {
   const services = [
@@ -40,7 +41,7 @@ export default function ClientManageItServicePage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="IT Management"
         title="Managed"
         accent="IT Services"
@@ -56,18 +57,18 @@ export default function ClientManageItServicePage() {
           { number: "50+", label: "Clients" },
           { number: "1 Hour", label: "Response Time" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="our-services" label="Our Services"><Section>
         <SectionHeader
           eyebrow="Our Services"
           title={<>Complete <Accent>IT management</Accent></>}
           lead="End-to-end managed IT services for businesses of all sizes."
         />
         <FeatureGrid items={services} />
-      </Section>
+      </Section></Managed>
 
-      <BenefitsPanel
+      <Managed id="why-managed-it" label="Why Managed IT"><BenefitsPanel
         eyebrow="Why Managed IT"
         title={<>Business <Accent>benefits</Accent></>}
         items={benefits}
@@ -79,14 +80,14 @@ export default function ClientManageItServicePage() {
           { icon: <Users />, label: "Support Hours", value: "24/7/365" },
           { icon: <Headphones />, label: "Resolution Time", value: "4 Hours" },
         ]}
-      />
+      /></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Focus on <Accent>business</Accent></>}
         text="Let us handle your IT while you focus on growing your business. Get reliable, predictable IT support today."
         primary={{ label: "Get IT Assessment", href: "/Contact-us" }}
         secondary={{ label: "Call IT Manager", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

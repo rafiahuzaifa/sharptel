@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { ArrowRight, Check, Wifi, Network, Video, Speaker, Camera, Phone, ShieldCheck, Fingerprint } from 'lucide-react'
 import { Accent, CTASection, PageHero, Reveal, Section, SectionHeader } from '@/app/components/premium'
+import { Managed, useCmsList } from "@/app/components/cms";
 
 const products = [
   { category: 'Wi-Fi Solutions', icon: Wifi, items: ['Enterprise Access Points', 'Mesh Wi-Fi Systems', 'Outdoor Wi-Fi', 'Guest Wi-Fi Portal'], slug: 'wi-fi-solutions' },
@@ -16,9 +17,11 @@ const products = [
 ]
 
 export default function ClientProductsPage() {
+  const cmsProducts = useCmsList("catalog", "products", "Products", products)
+
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         compact
         eyebrow="Hardware & Software"
         title="Our"
@@ -26,16 +29,16 @@ export default function ClientProductsPage() {
         subtitle="High-quality hardware and software solutions from leading global brands."
         image="/background/data-flow.webp"
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Products', href: '/pages/products' }]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="catalog" label="Catalog"><Section>
         <SectionHeader
           eyebrow="Catalog"
           title={<>Product <Accent>categories</Accent></>}
           lead="Sourced from global brands, configured and supported by our engineers."
         />
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((p, i) => {
+          {cmsProducts.map((p, i) => {
             const Icon = p.icon
             return (
               <Reveal key={p.slug} delay={(i % 4) * 0.06}>
@@ -64,14 +67,14 @@ export default function ClientProductsPage() {
             )
           })}
         </div>
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Need help choosing the right <Accent>hardware?</Accent></>}
         text="Our engineers will recommend, supply and install the right equipment for your environment."
         primary={{ label: 'Request a Quote', href: '/Contact-us' }}
         secondary={{ label: 'Call +92-311-128-4373', href: 'tel:+92-311-128-4373' }}
-      />
+      /></Managed>
     </div>
   )
 }

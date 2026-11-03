@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ALL_PAGES, type PageVisibility, type AdminData } from "@/lib/content";
-import { Loader2, Save, Check } from "lucide-react";
+import { ALL_PAGES, type PageVisibility, type AdminData } from "@/lib/cms-shared";
+import Link from "next/link";
+import { Loader2, Save, Check, PencilLine } from "lucide-react";
 
 export default function AdminPagesPage() {
   const [visibility, setVisibility] = useState<PageVisibility | null>(null);
@@ -69,9 +70,10 @@ export default function AdminPagesPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-1">Pages On/Off</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-1">All Pages</h1>
           <p className="text-gray-500">
-            Turn a page off to redirect visitors to the homepage. The homepage itself always stays on.
+            Every page of the website. Use Edit content to change its sections, or turn a page off to redirect
+            visitors to the homepage. The homepage itself always stays on.
           </p>
         </div>
         <button
@@ -104,6 +106,13 @@ export default function AdminPagesPage() {
                       <div className="font-medium text-gray-900 text-sm">{page.label}</div>
                       <div className="text-gray-400 text-xs">{page.path}</div>
                     </div>
+                    <div className="flex items-center gap-4">
+                    <Link
+                      href={`/admin/editor?page=${encodeURIComponent(page.path)}`}
+                      className="flex items-center gap-1.5 text-xs font-semibold text-red-600 hover:text-red-700"
+                    >
+                      <PencilLine className="h-3.5 w-3.5" /> Edit content
+                    </Link>
                     <button
                       disabled={isHome}
                       onClick={() => toggle(page.path)}
@@ -118,6 +127,7 @@ export default function AdminPagesPage() {
                         }`}
                       />
                     </button>
+                    </div>
                   </div>
                 );
               })}

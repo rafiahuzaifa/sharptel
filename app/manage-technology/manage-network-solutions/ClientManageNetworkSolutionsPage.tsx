@@ -2,6 +2,7 @@
 
 import { Network, Wifi, Server, Shield, Activity, Globe, Zap, Eye, ShieldCheck, Wallet } from "lucide-react"
 import { Accent, BenefitsPanel, CTASection, FeatureGrid, PageHero, Section, SectionHeader } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientManageNetworkSolutionsPage() {
   const services = [
@@ -40,7 +41,7 @@ export default function ClientManageNetworkSolutionsPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Network Management"
         title="Managed"
         accent="Network Services"
@@ -56,18 +57,18 @@ export default function ClientManageNetworkSolutionsPage() {
           { number: "100+", label: "Networks Managed" },
           { number: "30 Min", label: "Response Time" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="network-services" label="Network Services"><Section>
         <SectionHeader
           eyebrow="Network Services"
           title={<>Comprehensive <Accent>network management</Accent></>}
           lead="End-to-end network management services."
         />
         <FeatureGrid items={services} />
-      </Section>
+      </Section></Managed>
 
-      <BenefitsPanel
+      <Managed id="why-us" label="Why Us"><BenefitsPanel
         eyebrow="Why Us"
         title={<>Service <Accent>benefits</Accent></>}
         items={features}
@@ -79,14 +80,14 @@ export default function ClientManageNetworkSolutionsPage() {
           { icon: <Globe />, label: "Performance SLA", value: "95%+" },
           { icon: <Shield />, label: "Security Compliance", value: "100%" },
         ]}
-      />
+      /></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Optimize your <Accent>network</Accent></>}
         text="Let our experts manage your network infrastructure while you focus on core business operations."
         primary={{ label: "Get Network Assessment", href: "/Contact-us" }}
         secondary={{ label: "Call Network Manager", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

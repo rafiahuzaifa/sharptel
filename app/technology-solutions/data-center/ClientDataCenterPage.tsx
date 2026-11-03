@@ -13,6 +13,7 @@ import {
   SectionHeader,
   Split,
 } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientDataCenterPage() {
   const services = [
@@ -51,7 +52,7 @@ export default function ClientDataCenterPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Infrastructure"
         title="Data Center"
         accent="Services"
@@ -67,18 +68,18 @@ export default function ClientDataCenterPage() {
           { number: "24/7", label: "Support" },
           { number: "100+", label: "Clients" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="our-services" label="Our Services"><Section>
         <SectionHeader
           eyebrow="Our Services"
           title={<>Data center <Accent>solutions</Accent></>}
           lead="Comprehensive data center services for businesses of all sizes."
         />
         <FeatureGrid items={services} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="facility" label="Facility"><Section tone="muted">
         <Split
           left={
             <>
@@ -99,14 +100,14 @@ export default function ClientDataCenterPage() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Host your <Accent>infrastructure</Accent></>}
         text="Move your IT infrastructure to our secure, reliable data center and focus on growing your business."
         primary={{ label: "Schedule Tour", href: "/Contact-us" }}
         secondary={{ label: "Call Data Center Expert", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

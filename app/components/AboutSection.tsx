@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Target, Eye, Check, ArrowRight } from "lucide-react";
 import Eyebrow from "./Eyebrow";
 import type { SiteContent } from "@/lib/content";
+import { Field } from "@/app/components/cms";
 
 interface AboutSectionProps {
   about: SiteContent["about"];
@@ -56,13 +57,13 @@ export default function AboutSection({ about }: AboutSectionProps) {
                 <div className="text-3xl font-semibold text-gray-900" style={{ letterSpacing: "-0.04em" }}>
                   {about.yearsExperience}
                 </div>
-                <div className="mt-1 text-[11px] uppercase tracking-[0.15em] text-gray-500">Years Experience</div>
+                <div className="mt-1 text-[11px] uppercase tracking-[0.15em] text-gray-500"><Field name="label.1">Years Experience</Field></div>
               </div>
               <div className="pl-5">
                 <div className="text-3xl font-semibold text-red-600" style={{ letterSpacing: "-0.04em" }}>
                   {about.happyClients}
                 </div>
-                <div className="mt-1 text-[11px] uppercase tracking-[0.15em] text-gray-500">Happy Clients</div>
+                <div className="mt-1 text-[11px] uppercase tracking-[0.15em] text-gray-500"><Field name="label.2">Happy Clients</Field></div>
               </div>
             </motion.div>
           </motion.div>
@@ -77,7 +78,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
           >
             <Eyebrow label="About Us" />
             <h2 className="section-title mb-8">
-              Connecting Pakistan&apos;s enterprises to <span className="accent">what&apos;s next</span>
+              <Field name="title.1">Connecting Pakistan&apos;s enterprises to <span className="accent">what&apos;s next</span></Field>
             </h2>
 
             <p className="mb-10 text-lg leading-relaxed text-gray-600">{about.paragraph}</p>

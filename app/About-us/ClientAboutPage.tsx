@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { MapPin, Users, Target, Award, Shield, Clock, Globe, Building, Phone, Mail, Rocket, Handshake, Star, Zap, UsersRound } from "lucide-react"
 import { Accent, CTASection, FeatureGrid, PageHero, Section, SectionHeader } from "@/app/components/premium"
+import { Field, Managed, useCmsList } from "@/app/components/cms";
 
 export default function ClientAboutPage() {
   const leaders = [
@@ -96,10 +97,28 @@ export default function ClientAboutPage() {
     { year: "2024", title: "Market Leader", desc: "Leading ICT provider" },
   ]
 
+  const qualityDefaults = [
+      { label: "ISO 9001 Certified", value: "Quality Management" },
+      { label: "99.9% Uptime", value: "Network Reliability" },
+      { label: "24/7 Monitoring", value: "Proactive Support" },
+      { label: "SLAs", value: "Service Guarantee" },
+    ]
+
+  const officeDefaults = [
+      { city: "Lahore", phone: "+92-311-1123104 / +92-311-1123105", address: "Main Boulevard, Gulberg" },
+      { city: "Faisalabad", phone: "+92-311-1123104 / +92-311-1123105", address: "Jinnah Road, Civic Centre" },
+    ]
+
+  const cmsMilestones = useCmsList("pioneering-ict-solutions", "milestones", "Milestones", milestones)
+  const cmsLeaders = useCmsList("leadership", "leaders", "Leaders", leaders)
+  const qualityItems = useCmsList("quality", "quality", "Quality highlights", qualityDefaults)
+  const cmsPartners = useCmsList("quality", "partners", "Technology partners", partners)
+  const regionalOffices = useCmsList("offices", "regional", "Regional offices", officeDefaults)
+
   return (
     <div className="bg-white text-gray-800">
 
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Trusted Since 2005"
         title="Shaping The"
         accent="Digital Future"
@@ -116,10 +135,10 @@ export default function ClientAboutPage() {
           { number: "50+", label: "Cities Coverage" },
           { number: "99.9%", label: "Uptime SLA" },
         ]}
-      />
+      /></Managed>
 
       {/* OUR STORY SECTION */}
-      <section className="py-24 relative overflow-hidden">
+      <Managed id="pioneering-ict-solutions" label="Pioneering ICT Solutions"><section className="py-24 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-red-500/5 to-transparent rounded-full -translate-y-1/2 translate-x-1/2"></div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -132,35 +151,35 @@ export default function ClientAboutPage() {
             >
               <div className="inline-flex items-center gap-3 mb-5">
               <span className="h-px w-8 bg-red-600"></span>
-              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Our Journey</span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600"><Field name="label.1">Our Journey</Field></span>
               </div>
               
               <h2 className="section-title mb-8">
-                Pioneering ICT Solutions
-                <span className="block text-red-600">Since 2005</span>
+                <Field name="title.1">Pioneering ICT Solutions
+                <span className="block text-red-600">Since 2005</span></Field>
               </h2>
               
               <div className="space-y-6">
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Founded in 2005, Sharptel Communication Solutions began with a vision to transform enterprise 
+                  <Field name="text.1">Founded in 2005, Sharptel Communication Solutions began with a vision to transform enterprise 
                   connectivity in Pakistan. From our humble beginnings in Karachi, we have grown into a nationwide 
-                  leader serving government organizations, multinational corporations, financial institutions, and SMEs.
+                  leader serving government organizations, multinational corporations, financial institutions, and SMEs.</Field>
                 </p>
                 
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Our commitment to innovation, quality, and customer satisfaction has driven our evolution from a 
+                  <Field name="text.2">Our commitment to innovation, quality, and customer satisfaction has driven our evolution from a 
                   traditional telecom provider to a comprehensive ICT solutions partner. Today, we empower businesses 
-                  with cutting-edge technology solutions that drive growth and digital transformation.
+                  with cutting-edge technology solutions that drive growth and digital transformation.</Field>
                 </p>
               </div>
 
               {/* Milestones Timeline */}
               <div className="mt-12">
-                <h3 className="text-2xl font-bold mb-8">Our Milestones</h3>
+                <h3 className="text-2xl font-bold mb-8"><Field name="title.2">Our Milestones</Field></h3>
                 <div className="relative">
                   <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-red-500 via-red-400 to-red-300"></div>
                   <div className="space-y-8">
-                    {milestones.map((milestone, idx) => (
+                    {cmsMilestones.map((milestone, idx) => (
                       <div key={idx} className="relative pl-12">
                         <div className="absolute left-0 top-0 h-8 w-8 rounded-full bg-gradient-to-r from-red-600 to-red-500 flex items-center justify-center">
                           <div className="h-2 w-2 bg-white rounded-full"></div>
@@ -199,21 +218,21 @@ export default function ClientAboutPage() {
                     <Building className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-gray-900">HQ Office</div>
-                    <div className="text-sm text-gray-600">Karachi, Pakistan</div>
+                    <div className="text-2xl font-bold text-gray-900"><Field name="label.2">HQ Office</Field></div>
+                    <div className="text-sm text-gray-600"><Field name="label.3">Karachi, Pakistan</Field></div>
                   </div>
                 </div>
                 <p className="text-gray-700">
-                  Our state-of-the-art headquarters serves as the innovation hub for all our operations.
+                  <Field name="text.3">Our state-of-the-art headquarters serves as the innovation hub for all our operations.</Field>
                 </p>
               </div>
             </motion.div>
           </div>
         </div>
-      </section>
+      </section></Managed>
 
       {/* LEADERSHIP SECTION */}
-      <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
+      <Managed id="leadership" label="Leadership team"><section className="py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -224,19 +243,19 @@ export default function ClientAboutPage() {
           >
             <div className="inline-flex items-center gap-3 mb-5">
               <span className="h-px w-8 bg-red-600"></span>
-              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Leadership Team</span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600"><Field name="label.4">Leadership Team</Field></span>
             </div>
             
             <h2 className="section-title mb-6">
-              Meet Our <span className="text-red-600">Visionaries</span>
+              <Field name="title.3">Meet Our <span className="text-red-600">Visionaries</span></Field>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Experienced leaders driving innovation and excellence in every aspect of our operations.
+              <Field name="text.4">Experienced leaders driving innovation and excellence in every aspect of our operations.</Field>
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {leaders.map((leader, i) => (
+            {cmsLeaders.map((leader, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
@@ -270,10 +289,10 @@ export default function ClientAboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section></Managed>
 
       {/* CORE VALUES SECTION */}
-      <Section tone="dark">
+      <Managed id="our-principles" label="Our Principles"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="Our Principles"
@@ -281,10 +300,10 @@ export default function ClientAboutPage() {
           lead="The foundation of our success and the guiding principles for everything we do."
         />
         <FeatureGrid dark columns={3} items={values.map((v) => ({ icon: v.icon, title: v.title, desc: v.desc }))} />
-      </Section>
+      </Section></Managed>
 
       {/* QUALITY & PARTNERS SECTION */}
-      <section className="py-24 bg-white">
+      <Managed id="quality" label="Quality commitment"><section className="py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Quality Assurance */}
@@ -296,27 +315,22 @@ export default function ClientAboutPage() {
             >
               <div className="inline-flex items-center gap-3 mb-5">
               <span className="h-px w-8 bg-red-600"></span>
-              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Quality Commitment</span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600"><Field name="label.5">Quality Commitment</Field></span>
               </div>
               
               <h2 className="text-4xl font-bold mb-8">
-                Uncompromising <span className="text-red-600">Quality</span>
+                <Field name="title.4">Uncompromising <span className="text-red-600">Quality</span></Field>
               </h2>
               
               <div className="space-y-6">
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  At Sharptel, we adhere to international quality standards across all our solutions. 
+                  <Field name="text.5">At Sharptel, we adhere to international quality standards across all our solutions. 
                   From network design and implementation to ongoing support, quality assurance is 
-                  integrated into every project lifecycle to ensure excellence and reliability.
+                  integrated into every project lifecycle to ensure excellence and reliability.</Field>
                 </p>
                 
                 <div className="grid grid-cols-2 gap-6 mt-8">
-                  {[
-                    { label: "ISO 9001 Certified", value: "Quality Management" },
-                    { label: "99.9% Uptime", value: "Network Reliability" },
-                    { label: "24/7 Monitoring", value: "Proactive Support" },
-                    { label: "SLAs", value: "Service Guarantee" },
-                  ].map((item, idx) => (
+                  {qualityItems.map((item, idx) => (
                     <div key={idx} className="bg-gray-50 rounded-xl p-6">
                       <div className="text-2xl font-bold text-red-600 mb-2">{item.label}</div>
                       <div className="text-gray-600">{item.value}</div>
@@ -335,20 +349,20 @@ export default function ClientAboutPage() {
             >
               <div className="inline-flex items-center gap-3 mb-5">
               <span className="h-px w-8 bg-red-600"></span>
-              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Strategic Partnerships</span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600"><Field name="label.6">Strategic Partnerships</Field></span>
               </div>
               
               <h2 className="text-4xl font-bold mb-8">
-                Global <span className="text-red-600">Technology Partners</span>
+                <Field name="title.5">Global <span className="text-red-600">Technology Partners</span></Field>
               </h2>
               
               <p className="text-lg text-gray-700 mb-10">
-                We partner with world-leading technology providers to deliver cutting-edge solutions 
-                and ensure access to the latest innovations for our clients.
+                <Field name="text.6">We partner with world-leading technology providers to deliver cutting-edge solutions 
+                and ensure access to the latest innovations for our clients.</Field>
               </p>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {partners.map((p, i) => (
+                {cmsPartners.map((p, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, scale: 0.8 }}
@@ -375,10 +389,10 @@ export default function ClientAboutPage() {
             </motion.div>
           </div>
         </div>
-      </section>
+      </section></Managed>
 
       {/* MAP & LOCATION SECTION */}
-      <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+      <Managed id="offices" label="Our offices (map)"><section className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -389,14 +403,14 @@ export default function ClientAboutPage() {
           >
             <div className="inline-flex items-center gap-3 mb-5">
               <span className="h-px w-8 bg-red-600"></span>
-              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Find Us</span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600"><Field name="label.7">Find Us</Field></span>
             </div>
             
             <h2 className="section-title mb-6">
-              Our <span className="text-red-600">Presence</span> Across Pakistan
+              <Field name="title.6">Our <span className="text-red-600">Presence</span> Across Pakistan</Field>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Serving clients nationwide with multiple offices and extensive network coverage.
+              <Field name="text.7">Serving clients nationwide with multiple offices and extensive network coverage.</Field>
             </p>
           </motion.div>
 
@@ -459,13 +473,13 @@ export default function ClientAboutPage() {
                   {/* City Labels */}
                   <div className="absolute top-1/4 left-1/4">
                     <div className="bg-white rounded-lg px-3 py-2 shadow-lg">
-                      <div className="font-bold text-gray-900">Karachi</div>
-                      <div className="text-xs text-gray-600">Headquarters</div>
+                      <div className="font-bold text-gray-900"><Field name="label.8">Karachi</Field></div>
+                      <div className="text-xs text-gray-600"><Field name="label.9">Headquarters</Field></div>
                     </div>
                   </div>
                   <div className="absolute top-1/3 left-1/2">
                     <div className="bg-white rounded-lg px-3 py-2 shadow-lg">
-                      <div className="font-bold text-gray-900">Lahore</div>
+                      <div className="font-bold text-gray-900"><Field name="label.10">Lahore</Field></div>
                     </div>
                   </div>
                 </div>
@@ -476,15 +490,15 @@ export default function ClientAboutPage() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-3">
                     <div className="h-3 w-3 rounded-full bg-red-600"></div>
-                    <span className="text-sm font-medium">Headquarters</span>
+                    <span className="text-sm font-medium"><Field name="label.11">Headquarters</Field></span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="h-3 w-3 rounded-full bg-red-500"></div>
-                    <span className="text-sm font-medium">Regional Offices</span>
+                    <span className="text-sm font-medium"><Field name="label.12">Regional Offices</Field></span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="h-3 w-3 rounded-full bg-red-400"></div>
-                    <span className="text-sm font-medium">Service Centers</span>
+                    <span className="text-sm font-medium"><Field name="label.13">Service Centers</Field></span>
                   </div>
                 </div>
               </div>
@@ -499,15 +513,15 @@ export default function ClientAboutPage() {
               className="space-y-8"
             >
               <div className="bg-gradient-to-br from-red-600 to-red-700 rounded-3xl p-8 text-white">
-                <h3 className="text-3xl font-bold mb-6">Headquarters</h3>
+                <h3 className="text-3xl font-bold mb-6"><Field name="title.7">Headquarters</Field></h3>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
                     <div className="h-12 w-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
                       <MapPin className="h-6 w-6" />
                     </div>
                     <div>
-                      <div className="text-lg font-bold">Address</div>
-                      <div className="text-red-100">Office 104 &amp; 105, 1st Floor, Plot #54-C, Al-Murtaza Commercial Lane-2, DHA Phase VIII, Karachi, Pakistan</div>
+                      <div className="text-lg font-bold"><Field name="label.14">Address</Field></div>
+                      <div className="text-red-100"><Field name="label.15">Office 104 &amp; 105, 1st Floor, Plot #54-C, Al-Murtaza Commercial Lane-2, DHA Phase VIII, Karachi, Pakistan</Field></div>
                     </div>
                   </div>
                   
@@ -516,7 +530,7 @@ export default function ClientAboutPage() {
                       <Phone className="h-6 w-6" />
                     </div>
                     <div>
-                      <div className="text-lg font-bold">Contact</div>
+                      <div className="text-lg font-bold"><Field name="label.16">Contact</Field></div>
                       <div className="text-red-100">+92-311-1123104 / +92-311-1123105</div>
                     </div>
                   </div>
@@ -526,8 +540,8 @@ export default function ClientAboutPage() {
                       <Mail className="h-6 w-6" />
                     </div>
                     <div>
-                      <div className="text-lg font-bold">Email</div>
-                      <div className="text-red-100">info@sharptel.pk</div>
+                      <div className="text-lg font-bold"><Field name="label.17">Email</Field></div>
+                      <div className="text-red-100"><Field name="label.18">info@sharptel.pk</Field></div>
                     </div>
                   </div>
                 </div>
@@ -535,12 +549,9 @@ export default function ClientAboutPage() {
 
               {/* Regional Offices */}
               <div className="bg-white rounded-3xl shadow-xl p-8">
-                <h3 className="text-2xl font-bold mb-6 text-gray-900">Regional Offices</h3>
+                <h3 className="text-2xl font-bold mb-6 text-gray-900"><Field name="title.8">Regional Offices</Field></h3>
                 <div className="space-y-4">
-                  {[
-                    { city: "Lahore", phone: "+92-311-1123104 / +92-311-1123105", address: "Main Boulevard, Gulberg" },
-                    { city: "Faisalabad", phone: "+92-311-1123104 / +92-311-1123105", address: "Jinnah Road, Civic Centre" },
-                  ].map((office, idx) => (
+                  {regionalOffices.map((office, idx) => (
                     <div key={idx} className="flex items-center justify-between p-4 rounded-xl bg-gray-50 hover:bg-red-50 transition">
                       <div>
                         <div className="font-bold text-gray-900">{office.city}</div>
@@ -554,15 +565,15 @@ export default function ClientAboutPage() {
             </motion.div>
           </div>
         </div>
-      </section>
+      </section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         eyebrow="Partner With Us"
         title={<>Ready to partner with <Accent>Pakistan&apos;s ICT leader?</Accent></>}
         text="Join 5000+ satisfied clients who trust Sharptel for their technology needs. Let's build your digital future together. 19+ years experience · 24/7 technical support · Nationwide coverage."
         primary={{ label: "Get In Touch", href: "/Contact-us" }}
         secondary={{ label: "Explore Services", href: "/pages/services" }}
-      />
+      /></Managed>
     </div>
   )
 }

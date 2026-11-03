@@ -2,6 +2,7 @@
 
 import { Palette, Settings, Database, ShoppingCart, AppWindow, FileEdit } from "lucide-react"
 import { Accent, ChecklistCards, CTASection, FeatureGrid, PageHero, Section, SectionHeader, Steps } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientWebdevlopmentPage() {
   const technologies = [
@@ -40,7 +41,7 @@ export default function ClientWebdevlopmentPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Web Solutions"
         title="Custom Web"
         accent="Development"
@@ -56,41 +57,41 @@ export default function ClientWebdevlopmentPage() {
           { number: "24/7", label: "Support" },
           { number: "SEO", label: "Optimized" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="technologies-we-use" label="Technologies We Use"><Section>
         <SectionHeader
           eyebrow="Technologies We Use"
           title={<>Modern <Accent>tech stack</Accent></>}
           lead="We use cutting-edge technologies to build fast, scalable, and secure web applications."
         />
         <ChecklistCards items={technologies} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="what-we-build" label="What We Build"><Section tone="muted">
         <SectionHeader
           eyebrow="What We Build"
           title={<>Our <Accent>services</Accent></>}
           lead="Comprehensive web development services for businesses of all sizes."
         />
         <FeatureGrid columns={3} items={services} />
-      </Section>
+      </Section></Managed>
 
-      <Section>
+      <Managed id="how-we-work" label="How We Work"><Section>
         <SectionHeader
           eyebrow="How We Work"
           title={<>Development <Accent>process</Accent></>}
           lead="Our proven process ensures quality and timely delivery."
         />
         <Steps items={process} />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Build your <Accent>digital presence</Accent></>}
         text="Transform your business with a custom web solution that drives growth and engages customers."
         primary={{ label: "Get Free Consultation", href: "/Contact-us" }}
         secondary={{ label: "All Software Solutions", href: "/software-solutions" }}
-      />
+      /></Managed>
     </div>
   )
 }

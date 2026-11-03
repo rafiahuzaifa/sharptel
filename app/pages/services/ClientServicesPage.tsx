@@ -11,6 +11,7 @@ import {
   SectionHeader,
   Steps,
 } from '@/app/components/premium'
+import { Managed, useCmsList } from "@/app/components/cms";
 
 const services = [
   {
@@ -85,9 +86,11 @@ const additional = [
 ]
 
 export default function ClientServicesPage() {
+  const cmsAdditional = useCmsList("more", "additional", "Additional", additional)
+
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Professional Services"
         title="Our Professional"
         accent="Services"
@@ -104,9 +107,9 @@ export default function ClientServicesPage() {
           { number: '99.9%', label: 'Service Uptime' },
           { number: '6', label: 'Core Services' },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="core-services" label="Core Services"><Section>
         <SectionHeader
           eyebrow="Core Services"
           title={<>Comprehensive <Accent>ICT services</Accent></>}
@@ -127,18 +130,18 @@ export default function ClientServicesPage() {
             ),
           }))}
         />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="how-we-deliver" label="How We Deliver"><Section tone="muted">
         <SectionHeader
           eyebrow="How We Deliver"
           title={<>Our service delivery <Accent>process</Accent></>}
           lead="We follow a systematic approach to ensure successful implementation and optimal results."
         />
         <Steps items={process} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark">
+      <Managed id="why-sharptel" label="Why Sharptel"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="Why Sharptel"
@@ -146,16 +149,16 @@ export default function ClientServicesPage() {
           lead="Our experts can design a tailored solution specifically for your business requirements."
         />
         <FeatureGrid dark columns={4} items={whyUs} />
-      </Section>
+      </Section></Managed>
 
-      <Section>
+      <Managed id="more" label="More"><Section>
         <SectionHeader
           eyebrow="More"
           title={<>Additional professional <Accent>services</Accent></>}
           lead="Beyond our core offerings, we provide specialized services to meet diverse business needs."
         />
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {additional.map((a, i) => (
+          {cmsAdditional.map((a, i) => (
             <Reveal key={a.title} delay={i * 0.06}>
               <div className="premium-card group flex h-full items-start gap-4 p-6">
                 <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-600 transition-colors group-hover:bg-red-600 group-hover:text-white [&_svg]:h-5 [&_svg]:w-5">
@@ -169,14 +172,14 @@ export default function ClientServicesPage() {
             </Reveal>
           ))}
         </div>
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Ready to transform your <Accent>business?</Accent></>}
         text="Connect with our service experts to discuss how we can help you achieve your business objectives."
         primary={{ label: 'Get Started Today', href: '/Contact-us' }}
         secondary={{ label: 'Call +92-311-128-4373', href: 'tel:+92-311-128-4373' }}
-      />
+      /></Managed>
     </div>
   )
 }

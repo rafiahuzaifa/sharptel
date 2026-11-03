@@ -4,6 +4,7 @@ import {
   Settings, Database, Users, Shield, TrendingUp, Headphones, Package, Cloud, Layers, Boxes, Zap, BarChart3, Handshake, Wallet,
 } from "lucide-react"
 import { Accent, BenefitsPanel, CTASection, FeatureGrid, PageHero, Section, SectionHeader } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientCrmErpSolutionPage() {
   const solutions = [
@@ -43,7 +44,7 @@ export default function ClientCrmErpSolutionPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Business Automation"
         title="CRM/ERP"
         accent="Customization"
@@ -59,18 +60,18 @@ export default function ClientCrmErpSolutionPage() {
           { number: "24/7", label: "Support" },
           { number: "99%", label: "Client Retention" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="business-solutions" label="Business Solutions"><Section>
         <SectionHeader
           eyebrow="Business Solutions"
           title={<>Streamline your <Accent>operations</Accent></>}
           lead="Custom CRM and ERP solutions tailored to your business needs."
         />
         <FeatureGrid columns={3} items={solutions} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark">
+      <Managed id="platforms" label="Platforms"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="Platforms"
@@ -78,9 +79,9 @@ export default function ClientCrmErpSolutionPage() {
           lead="We work with leading CRM and ERP platforms."
         />
         <FeatureGrid dark columns={4} items={platforms} />
-      </Section>
+      </Section></Managed>
 
-      <BenefitsPanel
+      <Managed id="outcomes" label="Outcomes"><BenefitsPanel
         eyebrow="Outcomes"
         title={<>Business <Accent>benefits</Accent></>}
         items={benefits}
@@ -92,14 +93,14 @@ export default function ClientCrmErpSolutionPage() {
           { icon: <Users />, label: "Training", value: "1 Week" },
           { icon: <Shield />, label: "Support & Maintenance", value: "Ongoing" },
         ]}
-      />
+      /></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Automate your <Accent>business</Accent></>}
         text="Transform your business operations with a customized CRM/ERP solution that grows with your business."
         primary={{ label: "Schedule Demo", href: "/Contact-us" }}
         secondary={{ label: "All Software Solutions", href: "/software-solutions" }}
-      />
+      /></Managed>
     </div>
   )
 }

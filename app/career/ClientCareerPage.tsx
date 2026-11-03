@@ -5,6 +5,7 @@ import { Briefcase, Clock, DollarSign, MapPin, Send, X, Users, Award, TrendingUp
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { Accent, CTASection, PageHero } from "@/app/components/premium"
+import { Field, Managed, useCmsList } from "@/app/components/cms";
 
 const jobOpenings = [
   { 
@@ -85,6 +86,8 @@ const benefits = [
 ]
 
 export default function ClientCareerPage() {
+  const cmsJobs = useCmsList("openings", "jobs", "Job openings", jobOpenings)
+  const cmsBenefits = useCmsList("why-join", "benefits", "Benefits", benefits)
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedJob, setSelectedJob] = useState(jobOpenings[0])
   const [formData, setFormData] = useState({
@@ -184,7 +187,7 @@ export default function ClientCareerPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
 
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Join Our Team"
         title="Build Your"
         accent="Future With Us"
@@ -201,10 +204,10 @@ export default function ClientCareerPage() {
           { number: "15+", label: "Years Excellence" },
           { number: "50+", label: "Career Paths" },
         ]}
-      />
+      /></Managed>
 
       {/* WHY JOIN US SECTION */}
-      <section className="py-24 bg-white">
+      <Managed id="why-join" label="Why join us"><section className="py-24 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -215,19 +218,19 @@ export default function ClientCareerPage() {
           >
             <div className="inline-flex items-center gap-3 mb-5">
               <span className="h-px w-8 bg-red-600"></span>
-              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Why Sharptel?</span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600"><Field name="label.1">Why Sharptel?</Field></span>
             </div>
             
             <h2 className="section-title mb-6">
-              Why <span className="text-red-600">Join</span> Our Team?
+              <Field name="title.1">Why <span className="text-red-600">Join</span> Our Team?</Field>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We offer more than just a job - we offer a career with purpose, growth, and impact.
+              <Field name="text.1">We offer more than just a job - we offer a career with purpose, growth, and impact.</Field>
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {benefits.map((benefit, idx) => (
+            {cmsBenefits.map((benefit, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 30 }}
@@ -249,10 +252,10 @@ export default function ClientCareerPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section></Managed>
 
       {/* JOB OPENINGS SECTION */}
-      <section id="openings" className="py-24 bg-gradient-to-b from-gray-50 to-white">
+      <Managed id="openings" label="Job openings"><section id="openings" className="py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -263,19 +266,19 @@ export default function ClientCareerPage() {
           >
             <div className="inline-flex items-center gap-3 mb-5">
               <span className="h-px w-8 bg-red-600"></span>
-              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Current Openings</span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600"><Field name="label.2">Current Openings</Field></span>
             </div>
             
             <h2 className="section-title mb-6">
-              Explore <span className="text-red-600">Career</span> Opportunities
+              <Field name="title.2">Explore <span className="text-red-600">Career</span> Opportunities</Field>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Find your perfect role in Pakistan's leading ICT company. Grow with us.
+              <Field name="text.2">Find your perfect role in Pakistan's leading ICT company. Grow with us.</Field>
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {jobOpenings.map((job, idx) => (
+            {cmsJobs.map((job, idx) => (
               <motion.div
                 key={job.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -326,7 +329,7 @@ export default function ClientCareerPage() {
                   {/* Job Footer */}
                   <div className="px-8 py-6 bg-gradient-to-r from-gray-50 to-white border-t border-gray-100">
                     <button className="w-full py-3 bg-gradient-to-r from-red-600 to-red-500 text-white font-bold rounded-xl hover:from-red-700 hover:to-red-600 transition-all duration-300 flex items-center justify-center gap-2">
-                      <span>Apply Now</span>
+                      <span><Field name="label.3">Apply Now</Field></span>
                       <Send className="h-4 w-4" />
                     </button>
                   </div>
@@ -335,10 +338,10 @@ export default function ClientCareerPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section></Managed>
 
       {/* APPLICATION MODAL */}
-      <AnimatePresence>
+      <Managed id="job-modal" label="Job details popup"><AnimatePresence>
         {modalOpen && (
           <motion.div 
             className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
@@ -406,10 +409,10 @@ export default function ClientCareerPage() {
                 <div className="grid lg:grid-cols-2 gap-8">
                   {/* Job Details */}
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-6">Job Description</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-6"><Field name="title.3">Job Description</Field></h3>
                     <p className="text-gray-700 mb-8">{selectedJob.desc}</p>
                     
-                    <h4 className="text-xl font-bold text-gray-900 mb-4">Requirements</h4>
+                    <h4 className="text-xl font-bold text-gray-900 mb-4"><Field name="title.4">Requirements</Field></h4>
                     <ul className="space-y-3 mb-8">
                       {selectedJob.requirements.map((req, idx) => (
                         <li key={idx} className="flex items-center gap-3">
@@ -420,22 +423,22 @@ export default function ClientCareerPage() {
                     </ul>
 
                     <div className="bg-gradient-to-r from-gray-50 to-white rounded-2xl p-6">
-                      <h4 className="text-xl font-bold text-gray-900 mb-4">Quick Info</h4>
+                      <h4 className="text-xl font-bold text-gray-900 mb-4"><Field name="title.5">Quick Info</Field></h4>
                       <div className="space-y-4">
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Location:</span>
+                          <span className="text-gray-600"><Field name="label.4">Location:</Field></span>
                           <span className="font-semibold text-gray-900">{selectedJob.location}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Type:</span>
+                          <span className="text-gray-600"><Field name="label.5">Type:</Field></span>
                           <span className="font-semibold text-gray-900">{selectedJob.type}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Experience:</span>
+                          <span className="text-gray-600"><Field name="label.6">Experience:</Field></span>
                           <span className="font-semibold text-gray-900">{selectedJob.exp}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Salary:</span>
+                          <span className="text-gray-600"><Field name="label.7">Salary:</Field></span>
                           <span className="font-semibold text-gray-900">{selectedJob.salary}</span>
                         </div>
                       </div>
@@ -444,12 +447,12 @@ export default function ClientCareerPage() {
 
                   {/* Application Form */}
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-6">Apply for this Position</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-6"><Field name="title.6">Apply for this Position</Field></h3>
                     
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                          Full Name *
+                          <Field name="label.8">Full Name *</Field>
                         </label>
                         <input
                           type="text"
@@ -465,7 +468,7 @@ export default function ClientCareerPage() {
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
                           <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Email Address *
+                            <Field name="label.9">Email Address *</Field>
                           </label>
                           <input
                             type="email"
@@ -480,7 +483,7 @@ export default function ClientCareerPage() {
 
                         <div>
                           <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Phone Number *
+                            <Field name="label.10">Phone Number *</Field>
                           </label>
                           <input
                             type="tel"
@@ -496,7 +499,7 @@ export default function ClientCareerPage() {
 
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                          Cover Letter / Message
+                          <Field name="label.11">Cover Letter / Message</Field>
                         </label>
                         <textarea
                           name="message"
@@ -510,7 +513,7 @@ export default function ClientCareerPage() {
 
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
-                          Upload CV/Resume *
+                          <Field name="label.12">Upload CV/Resume *</Field>
                         </label>
                         <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-red-400 transition cursor-pointer">
                           <input
@@ -531,12 +534,12 @@ export default function ClientCareerPage() {
                               ) : (
                                 <>
                                   <div className="text-3xl mb-2">📄</div>
-                                  <div>Click to upload your CV</div>
+                                  <div><Field name="label.13">Click to upload your CV</Field></div>
                                 </>
                               )}
                             </div>
                             <div className="text-sm text-gray-400">
-                              PDF, DOC, DOCX (Max 5MB)
+                              <Field name="label.14">PDF, DOC, DOCX (Max 5MB)</Field>
                             </div>
                           </label>
                         </div>
@@ -562,7 +565,7 @@ export default function ClientCareerPage() {
                       </button>
                       
                       <p className="text-center text-gray-500 text-sm">
-                        We will review your application and contact you within 5-7 business days.
+                        <Field name="text.3">We will review your application and contact you within 5-7 business days.</Field>
                       </p>
                     </form>
                   </div>
@@ -571,15 +574,15 @@ export default function ClientCareerPage() {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         eyebrow="Open Application"
         title={<>Not finding the right <Accent>role?</Accent></>}
         text="Send us your CV anyway! We're always looking for talented individuals and may have upcoming opportunities that match your skills. Equal opportunity employer · Fast-track career growth · International certifications."
         primary={{ label: "Email Your CV", href: "mailto:careers@sharptel.pk" }}
         secondary={{ label: "Contact Us", href: "/Contact-us" }}
-      />
+      /></Managed>
     </div>
   )
 }

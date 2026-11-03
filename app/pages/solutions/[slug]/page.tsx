@@ -16,6 +16,7 @@ import {
   TagCloud,
 } from '@/app/components/premium'
 import { Shield, Server, Wifi, Cpu, Phone, ArrowLeft, CheckCircle, Users, Building, Zap, Clock, ShieldCheck, Target, BarChart3, Headphones, FileText, Globe, Lock, Database, Radio } from 'lucide-react'
+import { Field, Managed } from "@/app/components/cms";
 
 interface Solution {
   title: string
@@ -345,8 +346,8 @@ export default function SolutionDetailPage() {
   if (!solution) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-6 text-center">
-        <h1 className="section-title">Solution not <span className="accent">found</span></h1>
-        <p className="text-gray-600">The solution you&apos;re looking for doesn&apos;t exist.</p>
+        <h1 className="section-title"><Field name="title.1">Solution not <span className="accent">found</span></Field></h1>
+        <p className="text-gray-600"><Field name="text.1">The solution you&apos;re looking for doesn&apos;t exist.</Field></p>
         <Link href="/pages/solutions" className="btn-primary">
           <ArrowLeft className="h-4 w-4" />
           Back to Solutions
@@ -359,7 +360,7 @@ export default function SolutionDetailPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow={solution.keypoints.join(" · ")}
         title={solution.title}
         subtitle={solution.description}
@@ -377,9 +378,9 @@ export default function SolutionDetailPage() {
           ...solution.stats.map((s) => ({ number: s.value, label: s.label })),
           { number: "24/7", label: "Support" },
         ].slice(0, 4)}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="capabilities" label="Capabilities"><Section>
         <SectionHeader
           eyebrow="Capabilities"
           title={<>Key <Accent>features</Accent></>}
@@ -392,9 +393,9 @@ export default function SolutionDetailPage() {
             return { icon: FIcon ? <FIcon /> : undefined, title: f.title, desc: f.description }
           })}
         />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="outcomes" label="Outcomes"><Section tone="muted">
         <Split
           left={
             <>
@@ -417,7 +418,7 @@ export default function SolutionDetailPage() {
               subtitle="Platforms we design, deploy and support."
               footer={
                 <>
-                  <div className="mb-4 text-[11px] uppercase tracking-[0.18em] text-gray-400">Industries</div>
+                  <div className="mb-4 text-[11px] uppercase tracking-[0.18em] text-gray-400"><Field name="label.1">Industries</Field></div>
                   <TagCloud dark items={solution.industries} />
                 </>
               }
@@ -426,14 +427,14 @@ export default function SolutionDetailPage() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Ready to deploy <Accent>{solution.title}?</Accent></>}
         text="Connect with our solutions experts to design the right architecture for your business."
         primary={{ label: "Request Consultation", href: "/Contact-us" }}
         secondary={{ label: "All Solutions", href: "/pages/solutions" }}
-      />
+      /></Managed>
     </div>
   )
 }

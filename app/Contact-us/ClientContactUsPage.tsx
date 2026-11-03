@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { useState } from "react"
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle, AlertCircle } from "lucide-react"
 import { Accent, CTASection, PageHero } from "@/app/components/premium"
+import { Field, Managed, useCmsList } from "@/app/components/cms";
 
 export default function ClientContactUsPage() {
   const [formData, setFormData] = useState({
@@ -117,9 +118,49 @@ export default function ClientContactUsPage() {
     }
   }
 
+  const scheduleDefaults = [
+      { day: "Monday - Friday", hours: "9:00 AM - 6:00 PM", color: "text-green-600" },
+      { day: "Saturday", hours: "10:00 AM - 4:00 PM", color: "text-red-600" },
+      { day: "Sunday", hours: "Closed", color: "text-gray-400" },
+      { day: "Technical Support", hours: "24/7 Available", color: "text-red-600" },
+    ]
+
+  const faqDefaults = [
+      {
+        question: "What is your typical response time for inquiries?",
+        answer: "We respond to all inquiries within 24 hours. For urgent matters, our emergency support line is available 24/7."
+      },
+      {
+        question: "Do you offer customized solutions for specific business needs?",
+        answer: "Absolutely! We specialize in tailoring solutions to meet your specific requirements, budget, and timeline."
+      },
+      {
+        question: "What areas do you serve in Pakistan?",
+        answer: "We serve clients nationwide with headquarters in Karachi and a regional office in Lahore."
+      },
+      {
+        question: "How do I get a quote for your services?",
+        answer: "Fill out the contact form with your requirements, and our team will provide a detailed quote within 48 hours."
+      },
+      {
+        question: "What support services do you provide after implementation?",
+        answer: "We offer 24/7 technical support, regular maintenance, and ongoing optimization services."
+      },
+      {
+        question: "Are your solutions scalable for business growth?",
+        answer: "Yes, all our solutions are designed to scale with your business needs and growth."
+      },
+    ]
+
+  const cmsServices = useCmsList("contact-form", "services", "Form: service options", services)
+  const cmsContactInfo = useCmsList("contact-form", "channels", "Contact channels", contactInfo)
+  const cmsContactPoints = useCmsList("contact-form", "locations", "Locations", contactPoints)
+  const cmsSchedule = useCmsList("contact-form", "hours", "Business hours", scheduleDefaults)
+  const cmsFaqs = useCmsList("faq", "faqs", "FAQs", faqDefaults)
+
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         compact
         eyebrow="Get In Touch"
         title="Let's Build"
@@ -137,10 +178,10 @@ export default function ClientContactUsPage() {
           { number: "50+", label: "Cities" },
           { number: "19+", label: "Years Experience" },
         ]}
-      />
+      /></Managed>
 
       {/* CONTACT FORM & INFORMATION */}
-      <section className="py-24 relative">
+      <Managed id="contact-form" label="Contact form &amp; details"><section className="py-24 relative">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-red-500/5 to-transparent rounded-full -translate-y-1/2 translate-x-1/2"></div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -156,14 +197,14 @@ export default function ClientContactUsPage() {
               <div className="mb-10">
                 <div className="inline-flex items-center gap-3 mb-5">
               <span className="h-px w-8 bg-red-600"></span>
-              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">Send Message</span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600"><Field name="label.1">Send Message</Field></span>
                 </div>
                 
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  Get Your <span className="text-red-600">Free Consultation</span>
+                  <Field name="title.1">Get Your <span className="text-red-600">Free Consultation</span></Field>
                 </h2>
                 <p className="text-gray-600">
-                  Fill out the form below and our experts will contact you within 24 hours.
+                  <Field name="text.1">Fill out the form below and our experts will contact you within 24 hours.</Field>
                 </p>
               </div>
 
@@ -177,7 +218,7 @@ export default function ClientContactUsPage() {
                   <div className="flex items-center gap-3">
                     <CheckCircle className="h-5 w-5 text-green-600" />
                     <div>
-                      <div className="font-bold text-green-800">Message Sent Successfully!</div>
+                      <div className="font-bold text-green-800"><Field name="label.2">Message Sent Successfully!</Field></div>
                       <div className="text-green-700 text-sm mt-1">{submitMessage}</div>
                     </div>
                   </div>
@@ -193,7 +234,7 @@ export default function ClientContactUsPage() {
                   <div className="flex items-center gap-3">
                     <AlertCircle className="h-5 w-5 text-red-600" />
                     <div>
-                      <div className="font-bold text-red-800">Submission Failed</div>
+                      <div className="font-bold text-red-800"><Field name="label.3">Submission Failed</Field></div>
                       <div className="text-red-700 text-sm mt-1">{submitMessage}</div>
                     </div>
                   </div>
@@ -204,7 +245,7 @@ export default function ClientContactUsPage() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Full Name *
+                      <Field name="label.4">Full Name *</Field>
                     </label>
                     <input
                       type="text"
@@ -219,7 +260,7 @@ export default function ClientContactUsPage() {
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Email Address *
+                      <Field name="label.5">Email Address *</Field>
                     </label>
                     <input
                       type="email"
@@ -236,7 +277,7 @@ export default function ClientContactUsPage() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Phone Number *
+                      <Field name="label.6">Phone Number *</Field>
                     </label>
                     <input
                       type="tel"
@@ -251,7 +292,7 @@ export default function ClientContactUsPage() {
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Company Name
+                      <Field name="label.7">Company Name</Field>
                     </label>
                     <input
                       type="text"
@@ -267,7 +308,7 @@ export default function ClientContactUsPage() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Service Interested In *
+                      <Field name="label.8">Service Interested In *</Field>
                     </label>
                     <select
                       name="service"
@@ -277,7 +318,7 @@ export default function ClientContactUsPage() {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition bg-white"
                     >
                       <option value="">Select a service</option>
-                      {services.map((service, idx) => (
+                      {cmsServices.map((service, idx) => (
                         <option key={idx} value={service}>{service}</option>
                       ))}
                     </select>
@@ -285,7 +326,7 @@ export default function ClientContactUsPage() {
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Subject *
+                      <Field name="label.9">Subject *</Field>
                     </label>
                     <input
                       type="text"
@@ -301,7 +342,7 @@ export default function ClientContactUsPage() {
 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Your Message *
+                    <Field name="label.10">Your Message *</Field>
                   </label>
                   <textarea
                     name="message"
@@ -334,7 +375,7 @@ export default function ClientContactUsPage() {
                   </button>
                   
                   <p className="text-center text-gray-500 text-sm mt-4">
-                    We respect your privacy and will never share your information.
+                    <Field name="text.2">We respect your privacy and will never share your information.</Field>
                   </p>
                 </div>
               </form>
@@ -350,10 +391,10 @@ export default function ClientContactUsPage() {
             >
               {/* Contact Information Cards */}
               <div className="space-y-6">
-                <h3 className="text-3xl font-bold text-gray-900">Quick Contact Channels</h3>
+                <h3 className="text-3xl font-bold text-gray-900"><Field name="title.2">Quick Contact Channels</Field></h3>
                 
                 <div className="grid gap-6">
-                  {contactInfo.map((info, idx) => (
+                  {cmsContactInfo.map((info, idx) => (
                     <div key={idx} className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-200 shadow-lg hover:shadow-xl transition-shadow">
                       <div className="flex items-start gap-4">
                         <div className={`h-12 w-12 rounded-xl ${info.color} flex items-center justify-center flex-shrink-0`}>
@@ -387,7 +428,7 @@ export default function ClientContactUsPage() {
               {/* Interactive Map */}
               <div className="bg-gradient-to-br from-gray-900 to-black rounded-3xl overflow-hidden shadow-2xl">
                 <div className="p-6 text-white">
-                  <h3 className="text-2xl font-bold mb-4">Our Locations</h3>
+                  <h3 className="text-2xl font-bold mb-4"><Field name="title.3">Our Locations</Field></h3>
                   <div className="h-64 relative bg-gray-800 rounded-xl overflow-hidden mb-6">
                     {/* Interactive Map */}
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -421,13 +462,13 @@ export default function ClientContactUsPage() {
                         {/* Map Labels */}
                         <div className="absolute top-1/4 left-1/4 transform -translate-x-1/2">
                           <div className="bg-white text-gray-900 rounded-lg px-3 py-2 shadow-lg">
-                            <div className="font-bold">Karachi</div>
-                            <div className="text-xs">Headquarters</div>
+                            <div className="font-bold"><Field name="label.11">Karachi</Field></div>
+                            <div className="text-xs"><Field name="label.12">Headquarters</Field></div>
                           </div>
                         </div>
                         <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2">
                           <div className="bg-white text-gray-900 rounded-lg px-3 py-2 shadow-lg">
-                            <div className="font-bold">Lahore</div>
+                            <div className="font-bold"><Field name="label.13">Lahore</Field></div>
                           </div>
                         </div>
                       </div>
@@ -436,7 +477,7 @@ export default function ClientContactUsPage() {
                   
                   {/* Office Addresses */}
                   <div className="space-y-4">
-                    {contactPoints.map((point, idx) => (
+                    {cmsContactPoints.map((point, idx) => (
                       <div key={idx} className="flex items-start gap-4 p-4 rounded-xl bg-gray-800/50 hover:bg-gray-800 transition">
                         <div className={`h-10 w-10 rounded-lg bg-gradient-to-r ${point.color} flex items-center justify-center flex-shrink-0`}>
                           {point.icon}
@@ -454,14 +495,9 @@ export default function ClientContactUsPage() {
 
               {/* Business Hours */}
               <div className="bg-white rounded-3xl shadow-xl p-8">
-                <h3 className="text-2xl font-bold mb-6 text-gray-900">Business Hours</h3>
+                <h3 className="text-2xl font-bold mb-6 text-gray-900"><Field name="title.4">Business Hours</Field></h3>
                 <div className="space-y-4">
-                  {[
-                    { day: "Monday - Friday", hours: "9:00 AM - 6:00 PM", color: "text-green-600" },
-                    { day: "Saturday", hours: "10:00 AM - 4:00 PM", color: "text-red-600" },
-                    { day: "Sunday", hours: "Closed", color: "text-gray-400" },
-                    { day: "Technical Support", hours: "24/7 Available", color: "text-red-600" },
-                  ].map((schedule, idx) => (
+                  {cmsSchedule.map((schedule, idx) => (
                     <div key={idx} className="flex justify-between items-center p-4 rounded-xl bg-gray-50">
                       <div className="font-medium text-gray-900">{schedule.day}</div>
                       <div className={`font-semibold ${schedule.color}`}>{schedule.hours}</div>
@@ -475,7 +511,7 @@ export default function ClientContactUsPage() {
                       <Phone className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <div className="font-bold text-gray-900">Sales Support</div>
+                      <div className="font-bold text-gray-900"><Field name="label.14">Sales Support</Field></div>
                       <div className="text-red-600 font-semibold"> +92-311-1123104 / +92-311-1123105</div>
                     </div>
                   </div>
@@ -484,10 +520,10 @@ export default function ClientContactUsPage() {
             </motion.div>
           </div>
         </div>
-      </section>
+      </section></Managed>
 
       {/* FAQ SECTION */}
-      <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
+      <Managed id="faq" label="FAQ"><section className="py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -498,44 +534,19 @@ export default function ClientContactUsPage() {
           >
             <div className="inline-flex items-center gap-3 mb-5">
               <span className="h-px w-8 bg-red-600"></span>
-              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600">FAQs</span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-red-600"><Field name="label.15">FAQs</Field></span>
             </div>
             
             <h2 className="section-title mb-6">
-              Frequently Asked <span className="text-red-600">Questions</span>
+              <Field name="title.5">Frequently Asked <span className="text-red-600">Questions</span></Field>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Find quick answers to common questions about our services and support.
+              <Field name="text.3">Find quick answers to common questions about our services and support.</Field>
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {[
-              {
-                question: "What is your typical response time for inquiries?",
-                answer: "We respond to all inquiries within 24 hours. For urgent matters, our emergency support line is available 24/7."
-              },
-              {
-                question: "Do you offer customized solutions for specific business needs?",
-                answer: "Absolutely! We specialize in tailoring solutions to meet your specific requirements, budget, and timeline."
-              },
-              {
-                question: "What areas do you serve in Pakistan?",
-                answer: "We serve clients nationwide with headquarters in Karachi and a regional office in Lahore."
-              },
-              {
-                question: "How do I get a quote for your services?",
-                answer: "Fill out the contact form with your requirements, and our team will provide a detailed quote within 48 hours."
-              },
-              {
-                question: "What support services do you provide after implementation?",
-                answer: "We offer 24/7 technical support, regular maintenance, and ongoing optimization services."
-              },
-              {
-                question: "Are your solutions scalable for business growth?",
-                answer: "Yes, all our solutions are designed to scale with your business needs and growth."
-              },
-            ].map((faq, idx) => (
+            {cmsFaqs.map((faq, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
@@ -550,14 +561,14 @@ export default function ClientContactUsPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Ready to transform your <Accent>business?</Accent></>}
         text="Contact us today for a free consultation and discover how Sharptel can help your business achieve digital excellence. Free initial consultation · 24/7 technical support · Nationwide service coverage."
         primary={{ label: "Call +92-311-1123104", href: "tel:+92-311-1123104" }}
         secondary={{ label: "info@sharptel.pk", href: "mailto:info@sharptel.pk" }}
-      />
+      /></Managed>
     </div>
   )
 }

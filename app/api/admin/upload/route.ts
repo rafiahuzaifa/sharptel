@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { put, del } from "@vercel/blob";
 import { requireAdmin } from "@/lib/requireAdmin";
+import { canSaveContent } from "@/lib/content";
 
 export async function POST(req: NextRequest) {
   if (!(await requireAdmin(req))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+  if (!canSaveContent()) {
     return NextResponse.json({ error: "Blob storage is not connected yet." }, { status: 503 });
   }
 
@@ -24,6 +25,14 @@ export async function POST(req: NextRequest) {
     }
 
     const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, "-");
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      // Local development: keep uploads in a gitignored public folder.
+      const fs = await import("node:fs/promises");
+      const name = `${Date.now()}-${safeName}`;
+      await fs.mkdir("public/cms-uploads", { recursive: true });
+      await fs.writeFile(`public/cms-uploads/${name}`, Buffer.from(await file.arrayBuffer()));
+      return NextResponse.json({ url: `/cms-uploads/${name}` });
+    }
     const blob = await put(`admin-uploads/${Date.now()}-${safeName}`, file, {
       access: "public",
     });

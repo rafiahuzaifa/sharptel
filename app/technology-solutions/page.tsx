@@ -1,3 +1,5 @@
+"use client";
+
 import { ShieldCheck, Server, Activity, Wifi, Cpu, Zap, Camera, Cloud, Phone } from "lucide-react"
 import {
   Accent,
@@ -9,6 +11,7 @@ import {
   SectionHeader,
   TagCloud,
 } from "@/app/components/premium"
+import { Field, Managed, useCmsList } from "@/app/components/cms";
 
 const technologySolutions = [
   {
@@ -85,9 +88,11 @@ const caseStudies = [
 const partners = ["Cisco", "Fortinet", "Microsoft", "Dell EMC", "HP Enterprise", "VMware", "Palo Alto", "Hikvision"]
 
 export default function TechnologySolutions() {
+  const cmsCaseStudies = useCmsList("case-studies", "caseStudies", "Case studies", caseStudies)
+
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Future-Ready Technology Solutions"
         title="Advanced Technology"
         accent="Solutions for Tomorrow"
@@ -97,18 +102,18 @@ export default function TechnologySolutions() {
           primary: { label: "Get Technology Assessment", href: "/Contact-us" },
           secondary: { label: "Explore Solutions", href: "#solutions" },
         }}
-      />
+      /></Managed>
 
-      <Section id="solutions">
+      <Managed id="solutions" label="Solutions"><Section id="solutions">
         <SectionHeader
           eyebrow="Solutions"
           title={<>Comprehensive <Accent>technology</Accent> solutions</>}
           lead="End-to-end technology solutions tailored to meet the evolving needs of modern enterprises."
         />
         <FeatureGrid columns={3} items={technologySolutions} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark">
+      <Managed id="case-studies" label="Case Studies"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="Case Studies"
@@ -116,7 +121,7 @@ export default function TechnologySolutions() {
           lead="Real-world implementations delivering measurable results."
         />
         <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-          {caseStudies.map((s, i) => (
+          {cmsCaseStudies.map((s, i) => (
             <Reveal key={s.title} delay={i * 0.08}>
               <div className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-all duration-500 hover:border-red-500/40 hover:bg-white/[0.06]">
                 <div className="mb-8 font-mono text-xs tracking-[0.2em] text-red-500">{String(i + 1).padStart(2, "0")}</div>
@@ -124,16 +129,16 @@ export default function TechnologySolutions() {
                 <h3 className="mb-3 text-lg font-semibold text-white">{s.title}</h3>
                 <p className="mb-8 text-gray-400">{s.desc}</p>
                 <div className="border-t border-white/10 pt-5 text-sm">
-                  <span className="text-gray-500">Client · </span>
+                  <span className="text-gray-500"><Field name="label.1">Client ·</Field> </span>
                   <span className="text-gray-200">{s.client}</span>
                 </div>
               </div>
             </Reveal>
           ))}
         </div>
-      </Section>
+      </Section></Managed>
 
-      <Section>
+      <Managed id="partners" label="Partners"><Section>
         <SectionHeader
           align="center"
           eyebrow="Partners"
@@ -143,14 +148,14 @@ export default function TechnologySolutions() {
         <div className="mx-auto flex max-w-4xl justify-center">
           <TagCloud items={partners} />
         </div>
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Ready to transform your <Accent>technology infrastructure?</Accent></>}
         text="Contact our technology experts for a comprehensive assessment and customized solution proposal. Free initial assessment · Custom solution design · Implementation support."
         primary={{ label: "Schedule Technology Consultation", href: "/Contact-us" }}
         secondary={{ label: "Call +92-311-128-4373", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

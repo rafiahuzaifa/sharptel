@@ -13,6 +13,7 @@ import {
   SectionHeader,
   Split,
 } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientEnergyConversationPage() {
   const solutions = [
@@ -51,7 +52,7 @@ export default function ClientEnergyConversationPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Green Energy"
         title="Energy"
         accent="Conservation"
@@ -67,18 +68,18 @@ export default function ClientEnergyConversationPage() {
           { number: "5 Years", label: "Payback Period" },
           { number: "24/7", label: "Monitoring" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="energy-solutions" label="Energy Solutions"><Section>
         <SectionHeader
           eyebrow="Energy Solutions"
           title={<>Sustainable <Accent>energy</Accent></>}
           lead="Comprehensive energy conservation and renewable energy solutions."
         />
         <FeatureGrid items={solutions} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="why-it-pays" label="Why It Pays"><Section tone="muted">
         <Split
           left={
             <>
@@ -99,14 +100,14 @@ export default function ClientEnergyConversationPage() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Save energy, <Accent>save money</Accent></>}
         text="Reduce your energy costs and carbon footprint with our professional energy conservation solutions."
         primary={{ label: "Get Energy Audit", href: "/Contact-us" }}
         secondary={{ label: "Call Energy Expert", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

@@ -9,6 +9,7 @@ import {
   Steps,
   TagCloud,
 } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 const services = [
   {
@@ -75,7 +76,7 @@ const stack = ["React", "Next.js", "Node.js", "Python", "Flutter", "AWS", "Docke
 export default function SoftwareSolutions() {
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Innovative Software Solutions"
         title="Transform Your Vision Into"
         accent="Digital Reality"
@@ -85,27 +86,27 @@ export default function SoftwareSolutions() {
           primary: { label: "Start Your Project", href: "/Contact-us" },
           secondary: { label: "View Our Work", href: "#portfolio" },
         }}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="expertise" label="Expertise"><Section>
         <SectionHeader
           eyebrow="Expertise"
           title={<>Our <Accent>software</Accent> expertise</>}
           lead="Comprehensive software development services using latest technologies and agile methodologies."
         />
         <FeatureGrid columns={3} items={services} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="how-we-work" label="How We Work"><Section tone="muted">
         <SectionHeader
           eyebrow="How We Work"
           title={<>Our <Accent>development</Accent> process</>}
           lead="Transparent, agile, and collaborative approach to software development."
         />
         <Steps items={process} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark" id="portfolio">
+      <Managed id="portfolio" label="Portfolio"><Section tone="dark" id="portfolio">
         <SectionHeader
           dark
           eyebrow="Portfolio"
@@ -113,9 +114,9 @@ export default function SoftwareSolutions() {
           lead="Showcasing our expertise through successful software implementations."
         />
         <FeatureGrid dark columns={3} items={portfolio} />
-      </Section>
+      </Section></Managed>
 
-      <Section>
+      <Managed id="stack" label="Stack"><Section>
         <SectionHeader
           align="center"
           eyebrow="Stack"
@@ -125,14 +126,14 @@ export default function SoftwareSolutions() {
         <div className="mx-auto flex max-w-4xl justify-center">
           <TagCloud items={stack} />
         </div>
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Let&apos;s build something <Accent>amazing together</Accent></>}
         text="Share your project requirements and get a detailed proposal within 24 hours. Free initial consultation · Detailed project proposal · Transparent pricing."
         primary={{ label: "Start Project Discussion", href: "/Contact-us" }}
         secondary={{ label: "solutions@sharptel.pk", href: "mailto:solutions@sharptel.pk" }}
-      />
+      /></Managed>
     </div>
   )
 }

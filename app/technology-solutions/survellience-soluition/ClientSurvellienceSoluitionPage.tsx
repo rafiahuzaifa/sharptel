@@ -2,6 +2,7 @@
 
 import { Camera, Eye, AlertCircle, Lock, Building2, Home, Factory, ShoppingBag } from "lucide-react"
 import { Accent, CTASection, FeatureGrid, PageHero, Section, SectionHeader } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientSurvellienceSoluitionPage() {
   const solutions = [
@@ -40,7 +41,7 @@ export default function ClientSurvellienceSoluitionPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Security Solutions"
         title="Surveillance &"
         accent="Security"
@@ -56,18 +57,18 @@ export default function ClientSurvellienceSoluitionPage() {
           { number: "HD & 4K", label: "Camera Quality" },
           { number: "Mobile", label: "Access" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="security-systems" label="Security Systems"><Section>
         <SectionHeader
           eyebrow="Security Systems"
           title={<>Complete <Accent>security</Accent></>}
           lead="Integrated security solutions for comprehensive protection."
         />
         <FeatureGrid items={solutions} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark">
+      <Managed id="applications" label="Applications"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="Applications"
@@ -75,14 +76,14 @@ export default function ClientSurvellienceSoluitionPage() {
           lead="Security solutions tailored for various sectors."
         />
         <FeatureGrid dark columns={4} items={applications} />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Secure your <Accent>property</Accent></>}
         text="Protect what matters most with our professional surveillance and security solutions."
         primary={{ label: "Get Security Quote", href: "/Contact-us" }}
         secondary={{ label: "Call Security Expert", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

@@ -2,6 +2,7 @@
 
 import { Headphones, MessageSquare, Phone, Database, ShoppingCart, HeartPulse, Landmark, PhoneCall } from "lucide-react"
 import { Accent, CTASection, FeatureGrid, PageHero, Section, SectionHeader } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientItBpoSolutionsPage() {
   const services = [
@@ -40,7 +41,7 @@ export default function ClientItBpoSolutionsPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Business Process"
         title="IT & BPO"
         accent="Services"
@@ -56,18 +57,18 @@ export default function ClientItBpoSolutionsPage() {
           { number: "95%", label: "Satisfaction" },
           { number: "40%", label: "Cost Saving" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="bpo-services" label="BPO Services"><Section>
         <SectionHeader
           eyebrow="BPO Services"
           title={<>Complete <Accent>outsourcing</Accent></>}
           lead="Comprehensive BPO services for businesses."
         />
         <FeatureGrid items={services} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark">
+      <Managed id="industries" label="Industries"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="Industries"
@@ -75,14 +76,14 @@ export default function ClientItBpoSolutionsPage() {
           lead="BPO services tailored for various industries."
         />
         <FeatureGrid dark columns={4} items={industries} />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Outsource your <Accent>operations</Accent></>}
         text="Focus on your core business while we handle your support and back-office operations."
         primary={{ label: "Get BPO Quote", href: "/Contact-us" }}
         secondary={{ label: "Call BPO Manager", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

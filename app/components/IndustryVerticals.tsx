@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Building2, Landmark, Banknote, Store, Shield } from "lucide-react";
 import Eyebrow from "./Eyebrow";
 import type { SiteContent } from "@/lib/content";
+import { Field } from "@/app/components/cms";
 
 // Icons are fixed per card position; text/image content comes from admin-managed props.
 const icons = [Landmark, Building2, Banknote, Store, Shield];
@@ -27,11 +28,11 @@ export default function IndustryVerticals({ industries: verticals }: IndustryVer
           <div className="lg:col-span-7">
             <Eyebrow label="Industries" />
             <h2 className="section-title">
-              Industry <span className="accent">verticals</span> we serve
+              <Field name="title.1">Industry <span className="accent">verticals</span> we serve</Field>
             </h2>
           </div>
           <p className="section-lead lg:col-span-5">
-            Tailored solutions for diverse sectors across Pakistan and beyond.
+            <Field name="text.1">Tailored solutions for diverse sectors across Pakistan and beyond.</Field>
           </p>
         </motion.div>
 

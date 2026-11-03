@@ -2,6 +2,7 @@
 
 import { Search, Share2, Mail, PenLine, Target, BarChart3, TrendingUp } from "lucide-react"
 import { Accent, CTASection, FeatureGrid, PageHero, Section, SectionHeader, StatStrip } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientDigitalMarketingPage() {
   const services = [
@@ -41,7 +42,7 @@ export default function ClientDigitalMarketingPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Digital Growth"
         title="Digital Marketing"
         accent="Solutions"
@@ -57,18 +58,18 @@ export default function ClientDigitalMarketingPage() {
           { number: "24/7", label: "Monitoring" },
           { number: "Data-Driven", label: "Strategies" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="core-services" label="Core Services"><Section>
         <SectionHeader
           eyebrow="Core Services"
           title={<>Marketing <Accent>services</Accent></>}
           lead="Comprehensive digital marketing solutions for businesses of all sizes."
         />
         <FeatureGrid columns={3} items={services} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark">
+      <Managed id="strategies" label="Strategies"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="Strategies"
@@ -76,9 +77,9 @@ export default function ClientDigitalMarketingPage() {
           lead="Cutting-edge marketing strategies for maximum impact."
         />
         <FeatureGrid dark columns={4} items={strategies} />
-      </Section>
+      </Section></Managed>
 
-      <Section>
+      <Managed id="results" label="Results"><Section>
         <SectionHeader
           align="center"
           eyebrow="Results"
@@ -86,14 +87,14 @@ export default function ClientDigitalMarketingPage() {
           lead="Our data-driven approach delivers measurable results."
         />
         <StatStrip items={metrics} />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Grow your <Accent>business</Accent> online</>}
         text="Let us help you reach more customers and increase sales with data-driven digital marketing strategies tailored for Pakistan."
         primary={{ label: "Get Marketing Audit", href: "/Contact-us" }}
         secondary={{ label: "All Software Solutions", href: "/software-solutions" }}
-      />
+      /></Managed>
     </div>
   )
 }

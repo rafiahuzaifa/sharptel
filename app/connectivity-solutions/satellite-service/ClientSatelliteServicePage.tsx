@@ -2,6 +2,7 @@
 
 import { Ship, Plane, MapPin, Globe, Satellite, Wifi, Cloud, Zap, ShieldCheck, TrendingUp, Fuel, Anchor, Pickaxe } from "lucide-react"
 import { Accent, BenefitsPanel, ChecklistCards, CTASection, FeatureGrid, PageHero, Section, SectionHeader } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientSatelliteServicePage() {
   const solutions = [
@@ -46,7 +47,7 @@ export default function ClientSatelliteServicePage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Satellite Connectivity"
         title="Satellite"
         accent="Service"
@@ -62,18 +63,18 @@ export default function ClientSatelliteServicePage() {
           { number: "256kbps-50Mbps", label: "Speed Range" },
           { number: "24/7", label: "Support" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="satellite-solutions" label="Satellite Solutions"><Section>
         <SectionHeader
           eyebrow="Satellite Solutions"
           title={<>Satellite <Accent>connectivity</Accent></>}
           lead="Comprehensive VSAT solutions for diverse applications and industries."
         />
         <FeatureGrid items={solutions} />
-      </Section>
+      </Section></Managed>
 
-      <BenefitsPanel
+      <Managed id="why-satellite" label="Why Satellite"><BenefitsPanel
         eyebrow="Why Satellite"
         title={<>Why <Accent>satellite?</Accent></>}
         items={benefits}
@@ -85,23 +86,23 @@ export default function ClientSatelliteServicePage() {
           { icon: <Cloud />, label: "Antenna Size", value: "0.75m - 2.4m" },
           { icon: <Globe />, label: "Coverage", value: "Global" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="applications" label="Applications"><Section>
         <SectionHeader
           eyebrow="Applications"
           title={<>Ideal for <Accent>these</Accent> applications</>}
           lead="Satellite connectivity solutions for challenging environments."
         />
         <ChecklistCards items={useCases} />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Connect <Accent>anywhere</Accent></>}
         text="Get global satellite connectivity for your remote operations. Contact our satellite experts for a customized solution."
         primary={{ label: "Get Satellite Quote", href: "/Contact-us" }}
         secondary={{ label: "Call Satellite Expert", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

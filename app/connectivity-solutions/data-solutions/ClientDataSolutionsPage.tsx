@@ -13,6 +13,7 @@ import {
   SectionHeader,
   Split,
 } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientDataSolutionsPage() {
   const solutions = [
@@ -67,7 +68,7 @@ export default function ClientDataSolutionsPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Secure Data Connectivity"
         title="Data"
         accent="Connectivity Solutions"
@@ -83,18 +84,18 @@ export default function ClientDataSolutionsPage() {
           { number: "256-bit", label: "Encryption" },
           { number: "50+", label: "Cities Connected" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="our-solutions" label="Our Solutions"><Section>
         <SectionHeader
           eyebrow="Our Solutions"
           title={<>Comprehensive <Accent>data</Accent> solutions</>}
           lead="End-to-end data connectivity solutions for modern enterprises."
         />
         <FeatureGrid items={solutions} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark">
+      <Managed id="benefits" label="Benefits"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="Benefits"
@@ -102,9 +103,9 @@ export default function ClientDataSolutionsPage() {
           lead="Why choose Sharptel for your data connectivity needs."
         />
         <FeatureGrid dark columns={4} items={benefits} />
-      </Section>
+      </Section></Managed>
 
-      <Section>
+      <Managed id="use-cases" label="Use Cases"><Section>
         <Split
           left={
             <>
@@ -118,14 +119,14 @@ export default function ClientDataSolutionsPage() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Secure your business <Accent>data</Accent></>}
         text="Get in touch with our data connectivity experts for a free consultation and network assessment."
         primary={{ label: "Request Consultation", href: "/Contact-us" }}
         secondary={{ label: "Call +92-311-128-4373", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

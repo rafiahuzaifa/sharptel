@@ -19,7 +19,9 @@ export async function proxy(req: NextRequest) {
   if (pathname !== "/" && ALL_PAGES.some((p) => p.path === pathname)) {
     try {
       const visibility = await getPageVisibility();
-      if (visibility[pathname] === false) {
+      const token = req.cookies.get(SESSION_COOKIE)?.value;
+      // Admins can still open a switched-off page so the editor can preview and edit it.
+      if (visibility[pathname] === false && !(token && (await verifySessionToken(token)))) {
         return NextResponse.redirect(new URL("/", req.url));
       }
     } catch {
@@ -46,5 +48,7 @@ export const config = {
     "/manage-technology",
     "/manage-technology/:path*",
     "/pages/:path*",
+    "/privacy-policy",
+    "/terms-conditions",
   ],
 };

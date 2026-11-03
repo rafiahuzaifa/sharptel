@@ -6,6 +6,7 @@ import Link from "next/link";
 import { isValidElement, type ReactNode } from "react";
 import { ArrowRight, ArrowUpRight, Check, ChevronRight } from "lucide-react";
 import Eyebrow from "../Eyebrow";
+import { renderRich, useCms } from "../cms";
 
 /*
  * Shared building blocks for inner pages so every page speaks the same
@@ -17,9 +18,66 @@ export const ease = [0.22, 1, 0.36, 1] as const;
 
 export type LinkAction = { label: string; href: string };
 
+type Cms = ReturnType<typeof useCms>;
+
+/** A button can be edited (or added) from the admin panel through `<prefix>Label` / `<prefix>Href` fields. */
+function cmsAction(c: Cms, prefix: string, action?: LinkAction): LinkAction | undefined {
+  const label = c.str(`${prefix}Label`, action?.label);
+  if (!label) return undefined;
+  return { label, href: c.str(`${prefix}Href`, action?.href) ?? "/Contact-us" };
+}
+
+/** Names the admin editor shows for each kit list. */
+const LIST_LABELS: Record<string, string> = {
+  grid: "Cards",
+  points: "Points",
+  checklist: "Checklist cards",
+  steps: "Steps",
+  stats: "Stats",
+  rows: "Panel rows",
+  chips: "Panel chips",
+  metrics: "Panel metrics",
+  tags: "Tags",
+  plans: "Pricing plans",
+};
+
+/**
+ * A kit list the admin can add to, remove from and reorder (`list:<list>`),
+ * plus the older per-item text overrides `<list>.<index>.<prop>`.
+ */
+function cmsItems<T extends object>(c: Cms, list: string, items: T[], props: string[]): T[] {
+  items = c.list(list, LIST_LABELS[list] ?? list, items);
+  return items.map((item, i) => {
+    const next = { ...item } as Record<string, unknown>;
+    for (const p of props) {
+      const fallback = next[p];
+      const value =
+        typeof fallback === "string" || fallback === undefined
+          ? c.str(`${list}.${i}.${p}`, fallback as string | undefined)
+          : c.text(`${list}.${i}.${p}`, fallback as ReactNode);
+      // List entries saved from the editor keep accents as `*word*`.
+      next[p] = typeof value === "string" && /\*[^*]+\*/.test(value) ? renderRich(value) : value;
+    }
+    return next as T;
+  });
+}
+
+/**
+ * Per-entry overrides for plain string lists: `<list>.<index>`. Top-level lists can also be
+ * added to and reordered; nested ones (a card's features) are edited as lines of their card.
+ */
+function cmsList(c: Cms, list: string, items: string[], nested = false): string[] {
+  if (!nested) items = c.list(list, LIST_LABELS[list] ?? list, items);
+  return items.map((item, i) => c.str(`${list}.${i}`, item));
+}
+
+const f = (name: string) => ({ "data-cms-field": name });
+
 export function Accent({ children }: { children: ReactNode }) {
   return <span className="accent">{children}</span>;
 }
+/** Lets the CMS read coded `<Accent>` text back as `*word*`. */
+Accent.cmsAccent = true;
 
 export function Reveal({
   children,
@@ -70,8 +128,17 @@ export function PageHero({
   children?: ReactNode;
   compact?: boolean;
 }) {
+  const c = useCms();
+  image = c.str("hero.image", image);
+  const primary = cmsAction(c, "hero.primary", actions?.primary);
+  const secondary = cmsAction(c, "hero.secondary", actions?.secondary);
+  const heroAccent = c.text("hero.accent", accent);
+  const heroSubtitle = c.text("hero.subtitle", subtitle);
+  stats = stats && cmsItems(c, "stats", stats, ["number", "label"]);
   return (
     <section
+      data-cms-block="hero"
+      data-cms-image={image}
       className={`grain relative isolate flex flex-col overflow-hidden bg-gray-950 text-white ${
         compact ? "min-h-[56vh]" : "min-h-[72vh]"
       }`}
@@ -124,7 +191,9 @@ export function PageHero({
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
             </span>
-            <span className="text-sm text-gray-300">{eyebrow}</span>
+            <span className="text-sm text-gray-300" {...f("hero.eyebrow")}>
+              {c.text("hero.eyebrow", eyebrow)}
+            </span>
           </motion.div>
 
           <motion.h1
@@ -134,41 +203,45 @@ export function PageHero({
             className="mb-7 text-[2.6rem] font-semibold leading-[1.03] text-white sm:text-6xl md:text-7xl"
             style={{ letterSpacing: "-0.045em" }}
           >
-            {title}
-            {accent && (
-              <span className="block bg-gradient-to-r from-red-500 via-red-400 to-red-600 bg-clip-text pb-[0.08em] text-transparent">
-                {accent}
+            <span {...f("hero.title")}>{c.text("hero.title", title)}</span>
+            {heroAccent && (
+              <span
+                {...f("hero.accent")}
+                className="block bg-gradient-to-r from-red-500 via-red-400 to-red-600 bg-clip-text pb-[0.08em] text-transparent"
+              >
+                {heroAccent}
               </span>
             )}
           </motion.h1>
 
-          {subtitle && (
+          {heroSubtitle && (
             <motion.p
+              {...f("hero.subtitle")}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease, delay: 0.3 }}
               className="mb-10 max-w-2xl text-lg font-light leading-relaxed text-gray-300 md:text-xl"
             >
-              {subtitle}
+              {heroSubtitle}
             </motion.p>
           )}
 
-          {actions && (
+          {(primary || secondary) && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease, delay: 0.45 }}
               className="flex flex-col gap-3 sm:flex-row sm:items-center"
             >
-              {actions.primary && (
-                <Link href={actions.primary.href} className="btn-primary group px-8 py-4">
-                  {actions.primary.label}
+              {primary && (
+                <Link href={primary.href} data-cms-href="hero.primaryHref" className="btn-primary group px-8 py-4">
+                  <span {...f("hero.primaryLabel")}>{primary.label}</span>
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               )}
-              {actions.secondary && (
-                <Link href={actions.secondary.href} className="btn-ghost-dark group px-8 py-4">
-                  {actions.secondary.label}
+              {secondary && (
+                <Link href={secondary.href} data-cms-href="hero.secondaryHref" className="btn-ghost-dark group px-8 py-4">
+                  <span {...f("hero.secondaryLabel")}>{secondary.label}</span>
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </Link>
               )}
@@ -189,10 +262,12 @@ export function PageHero({
           <div className="container mx-auto grid grid-cols-2 gap-y-6 px-4 py-6 sm:px-6 md:grid-cols-4 md:divide-x md:divide-white/10 lg:px-8">
             {stats.map((s, i) => (
               <div key={i} className={i > 0 ? "md:pl-8" : ""}>
-                <div className="text-2xl font-semibold text-white md:text-3xl" style={{ letterSpacing: "-0.03em" }}>
+                <div className="text-2xl font-semibold text-white md:text-3xl" style={{ letterSpacing: "-0.03em" }} {...f(`stats.${i}.number`)}>
                   {s.number}
                 </div>
-                <div className="mt-1 text-[11px] uppercase tracking-[0.18em] text-gray-400">{s.label}</div>
+                <div className="mt-1 text-[11px] uppercase tracking-[0.18em] text-gray-400" {...f(`stats.${i}.label`)}>
+                  {s.label}
+                </div>
               </div>
             ))}
           </div>
@@ -252,26 +327,44 @@ export function SectionHeader({
   dark?: boolean;
   className?: string;
 }) {
+  const c = useCms();
+  eyebrow = c.str("header.eyebrow", eyebrow);
+  title = c.text("header.title", title);
+  lead = c.text("header.lead", lead);
   const titleClass = dark ? "section-title-dark" : "section-title";
   const leadClass = dark ? "text-base leading-relaxed text-gray-400 md:text-lg" : "section-lead";
 
   if (align === "split") {
     return (
       <Reveal className={`mb-14 grid items-end gap-6 lg:grid-cols-12 lg:gap-8 ${className}`}>
-        <div className="lg:col-span-7">
-          {eyebrow && <Eyebrow label={eyebrow} dark={dark} />}
-          <h2 className={titleClass}>{title}</h2>
+        <div className="lg:col-span-7" data-cms-block="header">
+          {eyebrow && <Eyebrow label={eyebrow} dark={dark} field="header.eyebrow" />}
+          <h2 className={titleClass} {...f("header.title")}>
+            {title}
+          </h2>
         </div>
-        {lead && <p className={`${leadClass} lg:col-span-5`}>{lead}</p>}
+        {lead && (
+          <p className={`${leadClass} lg:col-span-5`} {...f("header.lead")}>
+            {lead}
+          </p>
+        )}
       </Reveal>
     );
   }
 
   return (
     <Reveal className={`mb-14 ${align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"} ${className}`}>
-      {eyebrow && <Eyebrow label={eyebrow} dark={dark} />}
-      <h2 className={`${titleClass} ${lead ? "mb-5" : ""}`}>{title}</h2>
-      {lead && <p className={leadClass}>{lead}</p>}
+      <div data-cms-block="header">
+        {eyebrow && <Eyebrow label={eyebrow} dark={dark} field="header.eyebrow" />}
+        <h2 className={`${titleClass} ${lead ? "mb-5" : ""}`} {...f("header.title")}>
+          {title}
+        </h2>
+        {lead && (
+          <p className={leadClass} {...f("header.lead")}>
+            {lead}
+          </p>
+        )}
+      </div>
     </Reveal>
   );
 }
@@ -314,11 +407,15 @@ export function FeatureGrid({
   columns?: 2 | 3 | 4;
   dark?: boolean;
 }) {
+  const c = useCms();
+  items = cmsItems(c, "grid", items, ["title", "desc"]).map((item, i) =>
+    item.features ? { ...item, features: cmsList(c, `grid.${i}.features`, item.features, true) } : item
+  );
   const cols = { 2: "md:grid-cols-2", 3: "md:grid-cols-2 lg:grid-cols-3", 4: "sm:grid-cols-2 lg:grid-cols-4" }[columns];
 
   if (dark) {
     return (
-      <div className={`grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 ${cols}`}>
+      <div data-cms-block="grid" className={`grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 ${cols}`}>
         {items.map((item, i) => (
           <motion.div
             key={i}
@@ -334,7 +431,7 @@ export function FeatureGrid({
                 <IconTile icon={item.icon} index={i} dark />
                 <span className="font-mono text-xs tracking-[0.2em] text-gray-600">{String(i + 1).padStart(2, "0")}</span>
               </div>
-              <FeatureBody item={item} dark />
+              <FeatureBody item={item} index={i} dark />
             </div>
           </motion.div>
         ))}
@@ -343,7 +440,7 @@ export function FeatureGrid({
   }
 
   return (
-    <div className={`grid grid-cols-1 gap-5 ${cols}`}>
+    <div data-cms-block="grid" className={`grid grid-cols-1 gap-5 ${cols}`}>
       {items.map((item, i) => {
         const card = (
           <div className="premium-card group h-full p-8 md:p-9">
@@ -355,7 +452,7 @@ export function FeatureGrid({
                 <span className="font-mono text-xs tracking-[0.2em] text-gray-300">{String(i + 1).padStart(2, "0")}</span>
               )}
             </div>
-            <FeatureBody item={item} />
+            <FeatureBody item={item} index={i} />
           </div>
         );
         return (
@@ -374,22 +471,27 @@ export function FeatureGrid({
   );
 }
 
-function FeatureBody({ item, dark = false }: { item: FeatureItem; dark?: boolean }) {
+function FeatureBody({ item, index, dark = false }: { item: FeatureItem; index: number; dark?: boolean }) {
   return (
     <>
       <h3
         className={`mb-3 text-xl font-semibold md:text-[1.35rem] ${dark ? "text-white" : "text-gray-900"}`}
         style={{ letterSpacing: "-0.02em" }}
+        {...f(`grid.${index}.title`)}
       >
         {item.title}
       </h3>
-      {item.desc && <p className={`leading-relaxed ${dark ? "text-gray-400" : "text-gray-600"}`}>{item.desc}</p>}
+      {item.desc && (
+        <p className={`leading-relaxed ${dark ? "text-gray-400" : "text-gray-600"}`} {...f(`grid.${index}.desc`)}>
+          {item.desc}
+        </p>
+      )}
       {item.features && item.features.length > 0 && (
         <ul className={`mt-6 grid gap-x-6 gap-y-2.5 border-t pt-6 sm:grid-cols-2 ${dark ? "border-white/10" : "border-gray-100"}`}>
-          {item.features.map((f) => (
-            <li key={f} className={`flex items-center gap-2.5 text-sm ${dark ? "text-gray-300" : "text-gray-700"}`}>
+          {item.features.map((feature, j) => (
+            <li key={j} className={`flex items-center gap-2.5 text-sm ${dark ? "text-gray-300" : "text-gray-700"}`}>
               <Check className="h-4 w-4 flex-shrink-0 text-red-600" strokeWidth={2.5} />
-              {f}
+              <span {...f(`grid.${index}.features.${j}`)}>{feature}</span>
             </li>
           ))}
         </ul>
@@ -401,8 +503,10 @@ function FeatureBody({ item, dark = false }: { item: FeatureItem; dark?: boolean
 
 /** Vertical list of numbered/iconed points, used beside a panel in split layouts. */
 export function PointList({ items }: { items: { icon?: ReactNode; title: string; desc?: ReactNode }[] }) {
+  const c = useCms();
+  items = cmsItems(c, "points", items, ["title", "desc"]);
   return (
-    <ul className="divide-y divide-gray-200/80 border-y border-gray-200/80">
+    <ul data-cms-block="points" className="divide-y divide-gray-200/80 border-y border-gray-200/80">
       {items.map((item, i) => (
         <motion.li
           key={i}
@@ -414,10 +518,14 @@ export function PointList({ items }: { items: { icon?: ReactNode; title: string;
         >
           <IconTile icon={item.icon} index={i} />
           <div>
-            <h3 className="mb-1.5 text-lg font-semibold text-gray-900" style={{ letterSpacing: "-0.015em" }}>
+            <h3 className="mb-1.5 text-lg font-semibold text-gray-900" style={{ letterSpacing: "-0.015em" }} {...f(`points.${i}.title`)}>
               {item.title}
             </h3>
-            {item.desc && <p className="leading-relaxed text-gray-600">{item.desc}</p>}
+            {item.desc && (
+              <p className="leading-relaxed text-gray-600" {...f(`points.${i}.desc`)}>
+                {item.desc}
+              </p>
+            )}
           </div>
         </motion.li>
       ))}
@@ -449,14 +557,20 @@ export function DarkPanel({
   children: ReactNode;
   footer?: ReactNode;
 }) {
+  const c = useCms();
+  subtitle = c.text("panel.subtitle", subtitle);
   return (
     <div className="grain relative isolate overflow-hidden rounded-[2rem] bg-gray-950 p-8 text-white shadow-2xl shadow-gray-900/20 md:p-10">
       <div className="absolute -right-20 -top-20 -z-10 h-64 w-64 rounded-full bg-red-600/30 blur-[100px]" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-500 to-transparent" />
-      <h3 className="mb-2 text-2xl font-semibold text-white md:text-3xl" style={{ letterSpacing: "-0.03em" }}>
-        {title}
+      <h3 className="mb-2 text-2xl font-semibold text-white md:text-3xl" style={{ letterSpacing: "-0.03em" }} {...f("panel.title")}>
+        {c.text("panel.title", title)}
       </h3>
-      {subtitle && <p className="mb-8 text-gray-400">{subtitle}</p>}
+      {subtitle && (
+        <p className="mb-8 text-gray-400" {...f("panel.subtitle")}>
+          {subtitle}
+        </p>
+      )}
       <div className={subtitle ? "" : "mt-8"}>{children}</div>
       {footer && <div className="mt-8 border-t border-white/10 pt-8">{footer}</div>}
     </div>
@@ -464,15 +578,21 @@ export function DarkPanel({
 }
 
 export function PanelRows({ rows }: { rows: { icon?: ReactNode; label: ReactNode; value?: ReactNode }[] }) {
+  const c = useCms();
+  rows = cmsItems(c, "rows", rows, ["label", "value"]);
   return (
     <div className="divide-y divide-white/10">
       {rows.map((r, i) => (
         <div key={i} className="flex items-center justify-between gap-4 py-4 first:pt-0 last:pb-0">
           <div className="flex items-center gap-3 text-gray-300 [&_svg]:h-4 [&_svg]:w-4 [&_svg]:text-red-500">
             {r.icon}
-            <span>{r.label}</span>
+            <span {...f(`rows.${i}.label`)}>{r.label}</span>
           </div>
-          {r.value && <span className="text-right font-semibold text-white">{r.value}</span>}
+          {r.value && (
+            <span className="text-right font-semibold text-white" {...f(`rows.${i}.value`)}>
+              {r.value}
+            </span>
+          )}
         </div>
       ))}
     </div>
@@ -480,11 +600,14 @@ export function PanelRows({ rows }: { rows: { icon?: ReactNode; label: ReactNode
 }
 
 export function PanelChips({ items, columns = 2 }: { items: string[]; columns?: 2 | 3 }) {
+  const cms = useCms();
+  items = cmsList(cms, "chips", items);
   return (
     <div className={`grid gap-3 ${columns === 3 ? "grid-cols-2 sm:grid-cols-3" : "grid-cols-2"}`}>
-      {items.map((c) => (
+      {items.map((c, i) => (
         <div
-          key={c}
+          key={i}
+          {...f(`chips.${i}`)}
           className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-center text-sm font-medium text-white transition-colors hover:border-red-500/50"
         >
           {c}
@@ -495,14 +618,18 @@ export function PanelChips({ items, columns = 2 }: { items: string[]; columns?: 
 }
 
 export function PanelMetric({ items }: { items: { number: string; label: string }[] }) {
+  const c = useCms();
+  items = cmsItems(c, "metrics", items, ["number", "label"]);
   return (
     <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10">
       {items.map((m, i) => (
         <div key={i} className="bg-gray-950 p-5">
-          <div className="text-3xl font-semibold text-white" style={{ letterSpacing: "-0.04em" }}>
+          <div className="text-3xl font-semibold text-white" style={{ letterSpacing: "-0.04em" }} {...f(`metrics.${i}.number`)}>
             {m.number}
           </div>
-          <div className="mt-1 text-[11px] uppercase tracking-[0.15em] text-gray-400">{m.label}</div>
+          <div className="mt-1 text-[11px] uppercase tracking-[0.15em] text-gray-400" {...f(`metrics.${i}.label`)}>
+            {m.label}
+          </div>
         </div>
       ))}
     </div>
@@ -517,9 +644,14 @@ export function ChecklistCards({
   items: { title: string; desc?: ReactNode; items: string[]; icon?: ReactNode }[];
   columns?: 2 | 3 | 4;
 }) {
+  const cms = useCms();
+  items = cmsItems(cms, "checklist", items, ["title", "desc"]).map((card, i) => ({
+    ...card,
+    items: cmsList(cms, `checklist.${i}.items`, card.items, true),
+  }));
   const cols = { 2: "md:grid-cols-2", 3: "md:grid-cols-3", 4: "sm:grid-cols-2 lg:grid-cols-4" }[columns];
   return (
-    <div className={`grid grid-cols-1 gap-5 ${cols}`}>
+    <div data-cms-block="checklist" className={`grid grid-cols-1 gap-5 ${cols}`}>
       {items.map((c, i) => (
         <Reveal key={i} delay={i * 0.06}>
           <div className="premium-card group h-full p-8">
@@ -529,15 +661,19 @@ export function ChecklistCards({
               </div>
             )}
             <div className="mb-4 font-mono text-xs tracking-[0.2em] text-red-600">{String(i + 1).padStart(2, "0")}</div>
-            <h3 className="mb-3 text-xl font-semibold text-gray-900" style={{ letterSpacing: "-0.02em" }}>
+            <h3 className="mb-3 text-xl font-semibold text-gray-900" style={{ letterSpacing: "-0.02em" }} {...f(`checklist.${i}.title`)}>
               {c.title}
             </h3>
-            {c.desc && <p className="mb-6 leading-relaxed text-gray-600">{c.desc}</p>}
+            {c.desc && (
+              <p className="mb-6 leading-relaxed text-gray-600" {...f(`checklist.${i}.desc`)}>
+                {c.desc}
+              </p>
+            )}
             <ul className="space-y-2.5 border-t border-gray-100 pt-6">
-              {c.items.map((it) => (
-                <li key={it} className="flex items-center gap-2.5 text-sm text-gray-700">
+              {c.items.map((it, j) => (
+                <li key={j} className="flex items-center gap-2.5 text-sm text-gray-700">
                   <Check className="h-4 w-4 flex-shrink-0 text-red-600" strokeWidth={2.5} />
-                  {it}
+                  <span {...f(`checklist.${i}.items.${j}`)}>{it}</span>
                 </li>
               ))}
             </ul>
@@ -550,9 +686,11 @@ export function ChecklistCards({
 
 /** Numbered process steps on a connecting hairline. */
 export function Steps({ items, dark = false }: { items: { title: string; desc?: ReactNode; icon?: ReactNode }[]; dark?: boolean }) {
+  const c = useCms();
+  items = cmsItems(c, "steps", items, ["title", "desc"]);
   const cols = items.length >= 5 ? "lg:grid-cols-5" : items.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3";
   return (
-    <div className={`relative grid grid-cols-1 gap-10 sm:grid-cols-2 ${cols} lg:gap-6`}>
+    <div data-cms-block="steps" className={`relative grid grid-cols-1 gap-10 sm:grid-cols-2 ${cols} lg:gap-6`}>
       <div className={`absolute left-0 right-0 top-6 hidden h-px lg:block ${dark ? "bg-white/10" : "bg-gray-200"}`} />
       {items.map((s, i) => (
         <Reveal key={i} delay={i * 0.08} className="relative">
@@ -563,10 +701,14 @@ export function Steps({ items, dark = false }: { items: { title: string; desc?: 
           >
             {String(i + 1).padStart(2, "0")}
           </div>
-          <h3 className={`mb-2 text-lg font-semibold ${dark ? "text-white" : "text-gray-900"}`} style={{ letterSpacing: "-0.015em" }}>
+          <h3 className={`mb-2 text-lg font-semibold ${dark ? "text-white" : "text-gray-900"}`} style={{ letterSpacing: "-0.015em" }} {...f(`steps.${i}.title`)}>
             {s.title}
           </h3>
-          {s.desc && <p className={`text-sm leading-relaxed ${dark ? "text-gray-400" : "text-gray-600"}`}>{s.desc}</p>}
+          {s.desc && (
+            <p className={`text-sm leading-relaxed ${dark ? "text-gray-400" : "text-gray-600"}`} {...f(`steps.${i}.desc`)}>
+              {s.desc}
+            </p>
+          )}
         </Reveal>
       ))}
     </div>
@@ -575,11 +717,14 @@ export function Steps({ items, dark = false }: { items: { title: string; desc?: 
 
 /** Small pill cloud (technologies, industries, cities…). */
 export function TagCloud({ items, dark = false }: { items: string[]; dark?: boolean }) {
+  const c = useCms();
+  items = cmsList(c, "tags", items);
   return (
     <div className="flex flex-wrap gap-3">
-      {items.map((t) => (
+      {items.map((t, i) => (
         <span
-          key={t}
+          key={i}
+          {...f(`tags.${i}`)}
           className={`rounded-full border px-5 py-2.5 text-sm font-medium transition-colors ${
             dark
               ? "border-white/10 bg-white/[0.04] text-gray-200 hover:border-red-500/50 hover:text-white"
@@ -595,14 +740,18 @@ export function TagCloud({ items, dark = false }: { items: string[]; dark?: bool
 
 /** Stat strip for light sections. */
 export function StatStrip({ items }: { items: { number: string; label: string }[] }) {
+  const c = useCms();
+  items = cmsItems(c, "stats", items, ["number", "label"]);
   return (
-    <div className="grid grid-cols-2 gap-y-10 md:grid-cols-4 md:divide-x md:divide-gray-200">
+    <div data-cms-block="stats" className="grid grid-cols-2 gap-y-10 md:grid-cols-4 md:divide-x md:divide-gray-200">
       {items.map((s, i) => (
         <Reveal key={i} delay={i * 0.06} className="text-center">
-          <div className="mb-2 text-4xl font-semibold text-gray-900 md:text-5xl" style={{ letterSpacing: "-0.04em" }}>
+          <div className="mb-2 text-4xl font-semibold text-gray-900 md:text-5xl" style={{ letterSpacing: "-0.04em" }} {...f(`stats.${i}.number`)}>
             {s.number}
           </div>
-          <div className="text-xs uppercase tracking-[0.18em] text-gray-500">{s.label}</div>
+          <div className="text-xs uppercase tracking-[0.18em] text-gray-500" {...f(`stats.${i}.label`)}>
+            {s.label}
+          </div>
         </Reveal>
       ))}
     </div>
@@ -652,13 +801,19 @@ export function PricingCards({
   plans: { name: string; specs?: string; price: string; period?: string; features: string[] }[];
   cta?: LinkAction;
 }) {
+  const c = useCms();
+  plans = cmsItems(c, "plans", plans, ["name", "specs", "price", "period"]).map((p, i) => ({
+    ...p,
+    features: cmsList(c, `plans.${i}.features`, p.features, true),
+  }));
+  const action = cmsAction(c, "plansCta", cta) ?? cta;
   const featured = plans.length === 3 ? 1 : -1;
   return (
     <div className={`grid grid-cols-1 gap-5 ${plans.length >= 3 ? "lg:grid-cols-3" : "md:grid-cols-2"}`}>
       {plans.map((p, i) => {
         const hot = i === featured;
         return (
-          <Reveal key={p.name} delay={i * 0.08}>
+          <Reveal key={i} delay={i * 0.08}>
             <div
               className={`relative flex h-full flex-col overflow-hidden rounded-[2rem] p-8 md:p-10 ${
                 hot
@@ -669,29 +824,48 @@ export function PricingCards({
               {hot && (
                 <>
                   <div className="absolute -right-20 -top-20 -z-10 h-64 w-64 rounded-full bg-red-600/40 blur-[100px]" />
-                  <span className="absolute right-6 top-6 rounded-full bg-red-600 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-white">
-                    Popular
+                  <span
+                    className="absolute right-6 top-6 rounded-full bg-red-600 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-white"
+                    {...f("popularBadge")}
+                  >
+                    {c.text("popularBadge", "Popular")}
                   </span>
                 </>
               )}
-              <h3 className={`mb-2 text-xl font-semibold ${hot ? "text-white" : "text-gray-900"}`}>{p.name}</h3>
-              {p.specs && <p className={`mb-8 text-sm ${hot ? "text-gray-400" : "text-gray-500"}`}>{p.specs}</p>}
+              <h3 className={`mb-2 text-xl font-semibold ${hot ? "text-white" : "text-gray-900"}`} {...f(`plans.${i}.name`)}>
+                {p.name}
+              </h3>
+              {p.specs && (
+                <p className={`mb-8 text-sm ${hot ? "text-gray-400" : "text-gray-500"}`} {...f(`plans.${i}.specs`)}>
+                  {p.specs}
+                </p>
+              )}
               <div className="mb-8 flex items-baseline gap-1">
-                <span className={`text-4xl font-semibold ${hot ? "text-white" : "text-gray-900"}`} style={{ letterSpacing: "-0.04em" }}>
+                <span
+                  className={`text-4xl font-semibold ${hot ? "text-white" : "text-gray-900"}`}
+                  style={{ letterSpacing: "-0.04em" }}
+                  {...f(`plans.${i}.price`)}
+                >
                   {p.price}
                 </span>
-                <span className={hot ? "text-gray-400" : "text-gray-500"}>{p.period ?? "/month"}</span>
+                <span className={hot ? "text-gray-400" : "text-gray-500"} {...f(`plans.${i}.period`)}>
+                  {p.period ?? "/month"}
+                </span>
               </div>
               <ul className={`mb-10 space-y-3 border-t pt-8 ${hot ? "border-white/10" : "border-gray-100"}`}>
-                {p.features.map((f) => (
-                  <li key={f} className={`flex items-center gap-3 text-sm ${hot ? "text-gray-200" : "text-gray-700"}`}>
+                {p.features.map((feature, j) => (
+                  <li key={j} className={`flex items-center gap-3 text-sm ${hot ? "text-gray-200" : "text-gray-700"}`}>
                     <Check className="h-4 w-4 flex-shrink-0 text-red-500" strokeWidth={2.5} />
-                    {f}
+                    <span {...f(`plans.${i}.features.${j}`)}>{feature}</span>
                   </li>
                 ))}
               </ul>
-              <Link href={cta.href} className={`mt-auto ${hot ? "btn-primary" : "btn-secondary"} group w-full`}>
-                {cta.label}
+              <Link
+                href={action.href}
+                data-cms-href="plansCtaHref"
+                className={`mt-auto ${hot ? "btn-primary" : "btn-secondary"} group w-full`}
+              >
+                <span {...f("plansCtaLabel")}>{action.label}</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
@@ -719,8 +893,12 @@ export function CTASection({
   primary: LinkAction;
   secondary?: LinkAction;
 }) {
+  const c = useCms();
+  const p = cmsAction(c, "cta.primary", primary);
+  const sec = cmsAction(c, "cta.secondary", secondary);
+  const body = c.text("cta.text", text);
   return (
-    <section className="bg-white px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+    <section data-cms-block="cta" className="bg-white px-4 py-16 sm:px-6 md:py-24 lg:px-8">
       <Reveal className="container mx-auto">
         <div className="grain relative isolate overflow-hidden rounded-[2.5rem] bg-gray-950 px-8 py-16 text-white md:px-16 md:py-20">
           <div className="hairline-grid absolute inset-0 -z-10" />
@@ -729,18 +907,26 @@ export function CTASection({
 
           <div className="grid items-end gap-10 lg:grid-cols-12">
             <div className="lg:col-span-8">
-              <Eyebrow label={eyebrow} dark />
-              <h2 className="section-title-dark mb-5">{title}</h2>
-              {text && <p className="max-w-2xl text-lg leading-relaxed text-gray-400">{text}</p>}
+              <Eyebrow label={c.str("cta.eyebrow", eyebrow)} dark field="cta.eyebrow" />
+              <h2 className="section-title-dark mb-5" {...f("cta.title")}>
+                {c.text("cta.title", title)}
+              </h2>
+              {body && (
+                <p className="max-w-2xl text-lg leading-relaxed text-gray-400" {...f("cta.text")}>
+                  {body}
+                </p>
+              )}
             </div>
             <div className="flex flex-col gap-3 sm:flex-row lg:col-span-4 lg:flex-col lg:items-end">
-              <Link href={primary.href} className="btn-primary group px-8 py-4">
-                {primary.label}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-              {secondary && (
-                <Link href={secondary.href} className="btn-ghost-dark group px-8 py-4">
-                  {secondary.label}
+              {p && (
+                <Link href={p.href} data-cms-href="cta.primaryHref" className="btn-primary group px-8 py-4">
+                  <span {...f("cta.primaryLabel")}>{p.label}</span>
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              )}
+              {sec && (
+                <Link href={sec.href} data-cms-href="cta.secondaryHref" className="btn-ghost-dark group px-8 py-4">
+                  <span {...f("cta.secondaryLabel")}>{sec.label}</span>
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
               )}

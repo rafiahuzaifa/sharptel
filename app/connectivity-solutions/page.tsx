@@ -11,6 +11,7 @@ import {
   SectionHeader,
   Split,
 } from "@/app/components/premium"
+import { Field, Managed } from "@/app/components/cms";
 
 const services = [
   {
@@ -76,7 +77,7 @@ const stats = [
 export default function ConnectivityServices() {
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Enterprise Connectivity Solutions"
         title="Powering Digital"
         accent="Transformation"
@@ -87,18 +88,18 @@ export default function ConnectivityServices() {
           secondary: { label: "Explore Services", href: "#services" },
         }}
         stats={stats}
-      />
+      /></Managed>
 
-      <Section id="services">
+      <Managed id="connectivity" label="Connectivity"><Section id="services">
         <SectionHeader
           eyebrow="Connectivity"
           title={<>Our <Accent>connectivity</Accent> solutions</>}
           lead="Comprehensive connectivity services designed to meet the demands of modern enterprises."
         />
         <FeatureGrid columns={3} items={services} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="why-sharptel" label="Why Sharptel"><Section tone="muted">
         <Split
           left={
             <>
@@ -118,8 +119,8 @@ export default function ConnectivityServices() {
               subtitle="We serve leading enterprises across banking, telecom, manufacturing, and government sectors."
               footer={
                 <div className="flex items-baseline gap-3">
-                  <span className="text-4xl font-semibold text-white" style={{ letterSpacing: "-0.04em" }}>15+ Years</span>
-                  <span className="text-sm uppercase tracking-[0.15em] text-gray-400">Industry Experience</span>
+                  <span className="text-4xl font-semibold text-white" style={{ letterSpacing: "-0.04em" }}><Field name="label.1">15+ Years</Field></span>
+                  <span className="text-sm uppercase tracking-[0.15em] text-gray-400"><Field name="label.2">Industry Experience</Field></span>
                 </div>
               }
             >
@@ -127,14 +128,14 @@ export default function ConnectivityServices() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Ready to transform your business <Accent>connectivity?</Accent></>}
         text="Get in touch with our experts for a free network assessment and customized solution proposal."
         primary={{ label: "Request Free Consultation", href: "/Contact-us" }}
         secondary={{ label: "Call +92-311-128-4373", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

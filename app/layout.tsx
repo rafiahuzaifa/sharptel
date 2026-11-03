@@ -4,6 +4,9 @@ import type { Metadata } from "next";
 import Navbar from "../app/components/Navbar";
 import Footer from "../app/components/Footer";
 import ChatWidget from "../app/components/ChatWidget";
+import { CmsProvider, Managed } from "../app/components/cms";
+import { getPublicCmsData } from "@/lib/content";
+import { GLOBAL_SCOPE } from "@/lib/cms-shared";
 
 const spaceGrotesk = Space_Grotesk({
   weight: ["500", "600", "700"],
@@ -104,7 +107,8 @@ const organizationJsonLd = {
   ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cms = await getPublicCmsData();
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
       <body className={`${inter.className} antialiased bg-white text-text`}>
@@ -112,10 +116,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <Navbar />
-        <main className="min-h-screen overflow-x-clip">{children}</main>
-        <Footer />
-        <ChatWidget />
+        <CmsProvider data={cms}>
+          <Navbar />
+          <main className="min-h-screen overflow-x-clip">{children}</main>
+          <Managed id="footer" label="Footer" scope={GLOBAL_SCOPE}>
+            <Footer />
+          </Managed>
+          <Managed id="chat" label="AI chat widget" scope={GLOBAL_SCOPE}>
+            <ChatWidget />
+          </Managed>
+        </CmsProvider>
       </body>
     </html>
   );

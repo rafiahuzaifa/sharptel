@@ -2,6 +2,7 @@
 
 import { Ruler, MousePointerClick, Palette, Figma, PenTool, Sparkles, Gem } from "lucide-react"
 import { Accent, CTASection, FeatureGrid, PageHero, Section, SectionHeader, Steps } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientPrototypeDevlopmentPage() {
   const prototypes = [
@@ -43,7 +44,7 @@ export default function ClientPrototypeDevlopmentPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Rapid Prototyping"
         title="Prototype"
         accent="Development"
@@ -59,27 +60,27 @@ export default function ClientPrototypeDevlopmentPage() {
           { number: "90%", label: "Success Rate" },
           { number: "Iterative", label: "Approach" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="prototype-types" label="Prototype Types"><Section>
         <SectionHeader
           eyebrow="Prototype Types"
           title={<>From <Accent>concept</Accent> to reality</>}
           lead="Different levels of prototyping for various stages of your project."
         />
         <FeatureGrid columns={3} items={prototypes} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="how-we-work" label="How We Work"><Section tone="muted">
         <SectionHeader
           eyebrow="How We Work"
           title={<>Our <Accent>process</Accent></>}
           lead="Structured approach to prototype development."
         />
         <Steps items={process} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark">
+      <Managed id="toolkit" label="Toolkit"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="Toolkit"
@@ -87,14 +88,14 @@ export default function ClientPrototypeDevlopmentPage() {
           lead="We use industry-leading tools for prototype development."
         />
         <FeatureGrid dark columns={4} items={tools} />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Test your <Accent>idea</Accent> first</>}
         text="Validate your concept with a prototype before investing in full development. Save time and resources with our rapid prototyping services."
         primary={{ label: "Start Prototyping", href: "/Contact-us" }}
         secondary={{ label: "All Software Solutions", href: "/software-solutions" }}
-      />
+      /></Managed>
     </div>
   )
 }

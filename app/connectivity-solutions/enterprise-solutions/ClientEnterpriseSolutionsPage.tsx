@@ -13,6 +13,7 @@ import {
   SectionHeader,
   Split,
 } from "@/app/components/premium"
+import { Field, Managed, useCmsList } from "@/app/components/cms";
 
 export default function ClientEnterpriseSolutionsPage() {
   const features = [
@@ -40,9 +41,11 @@ export default function ClientEnterpriseSolutionsPage() {
     "Comprehensive SLA coverage"
   ]
 
+  const cmsHighlights = useCmsList("overview", "highlights", "Highlights", highlights)
+
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Enterprise Connectivity"
         title="Enterprise"
         accent="Internet Services"
@@ -58,27 +61,27 @@ export default function ClientEnterpriseSolutionsPage() {
           { number: "24/7", label: "Support" },
           { number: "1000+", label: "Enterprise Clients" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="overview" label="Overview"><Section>
         <Split
           left={
             <>
               <SectionHeader align="left" eyebrow="Overview" title={<>Reliable internet for <Accent>modern enterprises</Accent></>} className="!mb-8" />
               <div className="mb-8 space-y-5 text-lg leading-relaxed text-gray-600">
                 <p>
-                  Sharptel&apos;s Enterprise Internet Services provide dedicated, high-speed connectivity solutions designed
+                  <Field name="text.1">Sharptel&apos;s Enterprise Internet Services provide dedicated, high-speed connectivity solutions designed
                   specifically for businesses that demand reliability, security, and optimal performance. Our fiber optic
-                  network infrastructure ensures minimal latency and maximum uptime for your critical business operations.
+                  network infrastructure ensures minimal latency and maximum uptime for your critical business operations.</Field>
                 </p>
                 <p>
-                  With multiple Tier-1 upstream providers and redundant network paths, we guarantee uninterrupted
+                  <Field name="text.2">With multiple Tier-1 upstream providers and redundant network paths, we guarantee uninterrupted
                   connectivity even during peak hours. Our solutions are scalable, allowing your bandwidth to grow with
-                  your business needs.
+                  your business needs.</Field>
                 </p>
               </div>
               <ul className="grid gap-x-8 sm:grid-cols-2">
-                {highlights.map((item) => (
+                {cmsHighlights.map((item) => (
                   <li key={item} className="flex items-center gap-3 border-b border-gray-100 py-3 text-gray-800">
                     <Check className="h-4 w-4 flex-shrink-0 text-red-600" strokeWidth={2.5} />
                     {item}
@@ -94,7 +97,7 @@ export default function ClientEnterpriseSolutionsPage() {
               footer={
                 <div className="flex items-baseline gap-3">
                   <span className="text-4xl font-semibold text-white" style={{ letterSpacing: "-0.04em" }}>15+</span>
-                  <span className="text-sm uppercase tracking-[0.15em] text-gray-400">Years Experience</span>
+                  <span className="text-sm uppercase tracking-[0.15em] text-gray-400"><Field name="label.1">Years Experience</Field></span>
                 </div>
               }
             >
@@ -109,9 +112,9 @@ export default function ClientEnterpriseSolutionsPage() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark">
+      <Managed id="features" label="Features"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="Features"
@@ -119,9 +122,9 @@ export default function ClientEnterpriseSolutionsPage() {
           lead="Everything you need for reliable enterprise-grade internet connectivity."
         />
         <FeatureGrid dark columns={3} items={features} />
-      </Section>
+      </Section></Managed>
 
-      <Section>
+      <Managed id="use-cases" label="Use Cases"><Section>
         <SectionHeader
           eyebrow="Use Cases"
           title={<>Ideal for <Accent>these</Accent> businesses</>}
@@ -130,14 +133,14 @@ export default function ClientEnterpriseSolutionsPage() {
         <div className="max-w-4xl">
           <PointList items={useCases} />
         </div>
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Ready for enterprise-grade <Accent>internet?</Accent></>}
         text="Contact our experts for a free network assessment and customized solution proposal. Free initial assessment · No setup fees · 30-day money back guarantee."
         primary={{ label: "Request Free Assessment", href: "/Contact-us" }}
         secondary={{ label: "Call +92-311-128-4373", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

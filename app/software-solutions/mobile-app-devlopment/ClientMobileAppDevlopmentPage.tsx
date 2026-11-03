@@ -2,6 +2,7 @@
 
 import { Apple, Smartphone, Globe, Palette, Plug, FlaskConical, TrendingUp, ShoppingCart, HeartPulse, GraduationCap } from "lucide-react"
 import { Accent, ChecklistCards, CTASection, FeatureGrid, PageHero, Section, SectionHeader } from "@/app/components/premium"
+import { Managed } from "@/app/components/cms";
 
 export default function ClientMobileAppDevlopmentPage() {
   const platforms = [
@@ -40,7 +41,7 @@ export default function ClientMobileAppDevlopmentPage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Mobile Solutions"
         title="Mobile Apps"
         accent="Development"
@@ -56,18 +57,18 @@ export default function ClientMobileAppDevlopmentPage() {
           { number: "4.8/5", label: "App Store Rating" },
           { number: "24/7", label: "Support" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="development-platforms" label="Development Platforms"><Section>
         <SectionHeader
           eyebrow="Development Platforms"
           title={<>Cross-platform <Accent>expertise</Accent></>}
           lead="We develop for all major mobile platforms using latest technologies."
         />
         <FeatureGrid columns={3} items={platforms} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="dark">
+      <Managed id="what-we-do" label="What We Do"><Section tone="dark">
         <SectionHeader
           dark
           eyebrow="What We Do"
@@ -75,23 +76,23 @@ export default function ClientMobileAppDevlopmentPage() {
           lead="End-to-end mobile app development services."
         />
         <FeatureGrid dark columns={4} items={services} />
-      </Section>
+      </Section></Managed>
 
-      <Section>
+      <Managed id="industries" label="Industries"><Section>
         <SectionHeader
           eyebrow="Industries"
           title={<>Industry <Accent>solutions</Accent></>}
           lead="Custom mobile solutions for diverse industries."
         />
         <ChecklistCards items={industries} />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Launch your <Accent>app</Accent> today</>}
         text="Transform your business with a custom mobile application. Let's build something amazing together."
         primary={{ label: "Start Your Project", href: "/Contact-us" }}
         secondary={{ label: "All Software Solutions", href: "/software-solutions" }}
-      />
+      /></Managed>
     </div>
   )
 }

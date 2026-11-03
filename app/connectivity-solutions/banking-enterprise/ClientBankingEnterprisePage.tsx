@@ -14,6 +14,7 @@ import {
   SectionHeader,
   Split,
 } from "@/app/components/premium"
+import { Field, Managed } from "@/app/components/cms";
 
 export default function ClientBankingEnterprisePage() {
   const solutions = [
@@ -75,7 +76,7 @@ export default function ClientBankingEnterprisePage() {
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         eyebrow="Banking Solutions"
         title="Banking"
         accent="Enterprise Services"
@@ -91,18 +92,18 @@ export default function ClientBankingEnterprisePage() {
           { number: "24/7", label: "Monitoring" },
           { number: "50+", label: "Bank Clients" },
         ]}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="our-banking-solutions" label="Our Banking Solutions"><Section>
         <SectionHeader
           eyebrow="Our Banking Solutions"
           title={<>Tailored for <Accent>financial institutions</Accent></>}
           lead="Comprehensive connectivity solutions meeting the stringent requirements of banking and financial services."
         />
         <FeatureGrid items={solutions} />
-      </Section>
+      </Section></Managed>
 
-      <Section tone="muted">
+      <Managed id="why-us" label="Why Us"><Section tone="muted">
         <Split
           left={
             <>
@@ -118,8 +119,8 @@ export default function ClientBankingEnterprisePage() {
                 <div className="flex items-center gap-4">
                   <Building className="h-7 w-7 text-red-500" />
                   <div>
-                    <div className="font-semibold text-white">SBP Compliant</div>
-                    <div className="text-sm text-gray-400">All solutions meet State Bank requirements</div>
+                    <div className="font-semibold text-white"><Field name="label.1">SBP Compliant</Field></div>
+                    <div className="text-sm text-gray-400"><Field name="label.2">All solutions meet State Bank requirements</Field></div>
                   </div>
                 </div>
               }
@@ -128,23 +129,23 @@ export default function ClientBankingEnterprisePage() {
             </DarkPanel>
           }
         />
-      </Section>
+      </Section></Managed>
 
-      <Section>
+      <Managed id="compliance" label="Compliance"><Section>
         <SectionHeader
           eyebrow="Compliance"
           title={<>Regulatory <Accent>compliance</Accent></>}
           lead="Our solutions are designed to meet all banking regulatory requirements."
         />
         <ChecklistCards items={compliance} />
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Secure your <Accent>banking operations</Accent></>}
         text="Schedule a consultation with our banking solutions specialists to discuss your specific requirements and compliance needs."
         primary={{ label: "Schedule Consultation", href: "/Contact-us" }}
         secondary={{ label: "Call Banking Expert", href: "tel:+92-311-128-4373" }}
-      />
+      /></Managed>
     </div>
   )
 }

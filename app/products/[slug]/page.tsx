@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { ArrowLeft, Check } from 'lucide-react'
 import { Accent, CTASection, DarkPanel, PageHero, Reveal, Section } from '@/app/components/premium'
+import { Field, Managed } from "@/app/components/cms";
 
 const productDetails: Record<string, { title: string, description: string, features: string[], image: string }> = {
   'wi-fi-solutions': {
@@ -63,15 +64,15 @@ export default function ProductDetailPage() {
   if (!product) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-6 text-center">
-        <h1 className="section-title">Product not <span className="accent">found</span></h1>
-        <Link href="/pages/products" className="btn-primary">Back to Products</Link>
+        <h1 className="section-title"><Field name="title.1">Product not <span className="accent">found</span></Field></h1>
+        <Link href="/pages/products" className="btn-primary"><Field name="label.1">Back to Products</Field></Link>
       </div>
     )
   }
 
   return (
     <div className="bg-white text-gray-800">
-      <PageHero
+      <Managed id="hero" label="Hero"><PageHero
         compact
         eyebrow="Products"
         title={product.title}
@@ -83,13 +84,13 @@ export default function ProductDetailPage() {
           { label: product.title, href: '#' },
         ]}
         actions={{ primary: { label: 'Request a Quote', href: '/Contact-us' } }}
-      />
+      /></Managed>
 
-      <Section>
+      <Managed id="features" label="Product features"><Section>
         <div className="grid items-start gap-12 lg:grid-cols-12">
           <Reveal className="lg:col-span-7">
             <h2 className="section-title mb-6">
-              What&apos;s in the <Accent>range</Accent>
+              <Field name="title.2">What&apos;s in the <Accent>range</Accent></Field>
             </h2>
             <p className="mb-10 text-lg leading-relaxed text-gray-600">{product.description}</p>
             <ul className="grid gap-x-8 sm:grid-cols-2">
@@ -118,14 +119,14 @@ export default function ProductDetailPage() {
             </DarkPanel>
           </Reveal>
         </div>
-      </Section>
+      </Section></Managed>
 
-      <CTASection
+      <Managed id="cta" label="Call to action"><CTASection
         title={<>Get a quote for <Accent>{product.title}</Accent></>}
         text="Tell us about your site and requirements, and our team will get back to you with options."
         primary={{ label: 'Request a Quote', href: '/Contact-us' }}
         secondary={{ label: 'Call +92-311-128-4373', href: 'tel:+92-311-128-4373' }}
-      />
+      /></Managed>
     </div>
   )
 }

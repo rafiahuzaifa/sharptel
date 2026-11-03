@@ -3,9 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, Phone, Mail, Clock, MapPin, XCircle } from "lucide-react";
+import { Field, Managed, useCmsList } from "./cms";
+import { GLOBAL_SCOPE } from "@/lib/cms-shared";
 
 const menuItems = [
   {
@@ -63,8 +65,30 @@ const menuItems = [
   { label: "Contact Us", href: "/Contact-us", sub: [] },
 ];
 
+/** Admin-editable form of the menu: each dropdown link is one "Label | /link" line. */
+const menuDefaults = menuItems.map((m) => ({
+  label: m.label,
+  href: m.href,
+  links: m.sub.map((s) => `${s.label} | ${s.href}`),
+}));
+
 export default function PremiumNavbar() {
   const pathname = usePathname();
+  const cmsMenu = useCmsList("menu", "menu", "Menu items (dropdown links: Label | /link)", menuDefaults, GLOBAL_SCOPE);
+  const menu = useMemo(
+    () =>
+      cmsMenu.map((m) => ({
+        label: m.label,
+        href: m.href || "#",
+        sub: (m.links || [])
+          .filter((l) => l.trim())
+          .map((l) => {
+            const [label, href] = l.split("|").map((x) => x.trim());
+            return { label, href: href || "#" };
+          }),
+      })),
+    [cmsMenu]
+  );
   const [hoverMenu, setHoverMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMobileMenu, setActiveMobileMenu] = useState<string | null>(null);
@@ -181,6 +205,7 @@ export default function PremiumNavbar() {
     <>
       <div ref={headerWrapperRef}>
       {/* Top Bar - Red Theme */}
+      <Managed id="top-bar" label="Top bar (email & hours)" scope={GLOBAL_SCOPE}>
       <div className="bg-gradient-to-r from-red-700 via-red-600 to-red-800 text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between py-1.5 gap-2">
@@ -190,8 +215,8 @@ export default function PremiumNavbar() {
                   <Mail className="h-4 w-4 text-white" />
                 </div>
                 <div>
-                  <div className="text-xs text-red-100">Email Support</div>
-                  <div className="text-sm font-semibold tracking-wide">info@sharptel.pk</div>
+                  <div className="text-xs text-red-100"><Field name="label.1">Email Support</Field></div>
+                  <div className="text-sm font-semibold tracking-wide"><Field name="label.2">info@sharptel.pk</Field></div>
                 </div>
               </div>
               
@@ -200,8 +225,8 @@ export default function PremiumNavbar() {
                   <Clock className="h-4 w-4 text-white" />
                 </div>
                 <div>
-                  <div className="text-xs text-red-100">Business Hours</div>
-                  <div className="text-sm font-semibold tracking-wide">Mon - Sat: 9AM - 6PM</div>
+                  <div className="text-xs text-red-100"><Field name="label.3">Business Hours</Field></div>
+                  <div className="text-sm font-semibold tracking-wide"><Field name="label.4">Mon - Sat: 9AM - 6PM</Field></div>
                 </div>
               </div>
             </div>
@@ -211,14 +236,16 @@ export default function PremiumNavbar() {
                 href="/career" 
                 className="text-sm font-semibold hover:text-red-200 transition px-3 py-1 rounded-lg hover:bg-white/10"
               >
-                🚀 We're Hiring
+                <Field name="label.5">🚀 We're Hiring</Field>
               </Link>
             </div>
           </div>
         </div>
       </div>
+      </Managed>
 
       {/* Main Navbar - Black & White Theme */}
+      <Managed id="menu" label="Main menu & quote form" scope={GLOBAL_SCOPE}>
       <header className={`sticky top-0 z-50 w-full transition-all duration-500 ${
         scrolled
           ? "bg-white/90 backdrop-blur-xl shadow-lg border-b border-gray-100"
@@ -251,7 +278,7 @@ export default function PremiumNavbar() {
 
             {/* Desktop Navigation - Larger Fonts */}
             <nav className="hidden lg:flex items-center gap-1 relative z-10">
-              {menuItems.map(({ label, href, sub }) => {
+              {menu.map(({ label, href, sub }) => {
                 const isHovered = hoverMenu === label;
                 const hasSubmenu = sub.length > 0;
 
@@ -352,7 +379,7 @@ export default function PremiumNavbar() {
                   <div className="absolute inset-0 bg-gradient-to-r from-red-800 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                   <div className="relative flex items-center gap-2.5 text-[15px] tracking-wide">
-                    <span>Get Free Quote</span>
+                    <span><Field name="label.6">Get Free Quote</Field></span>
                     <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -398,8 +425,8 @@ export default function PremiumNavbar() {
                 <div className="sticky top-0 bg-gradient-to-r from-red-700 to-red-600 text-white p-6 rounded-t-2xl">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="text-2xl font-bold">Request Free Quote</h2>
-                      <p className="text-red-100 mt-1">Get customized pricing for your requirements</p>
+                      <h2 className="text-2xl font-bold"><Field name="title.1">Request Free Quote</Field></h2>
+                      <p className="text-red-100 mt-1"><Field name="text.1">Get customized pricing for your requirements</Field></p>
                     </div>
                     <button
                       onClick={() => setShowQuoteForm(false)}
@@ -414,7 +441,7 @@ export default function PremiumNavbar() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Full Name *
+                        <Field name="label.7">Full Name *</Field>
                       </label>
                       <input
                         type="text"
@@ -429,7 +456,7 @@ export default function PremiumNavbar() {
 
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Email Address *
+                        <Field name="label.8">Email Address *</Field>
                       </label>
                       <input
                         type="email"
@@ -444,7 +471,7 @@ export default function PremiumNavbar() {
 
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Phone Number *
+                        <Field name="label.9">Phone Number *</Field>
                       </label>
                       <input
                         type="tel"
@@ -459,7 +486,7 @@ export default function PremiumNavbar() {
 
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Company Name
+                        <Field name="label.10">Company Name</Field>
                       </label>
                       <input
                         type="text"
@@ -473,7 +500,7 @@ export default function PremiumNavbar() {
 
                     <div className="md:col-span-2">
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Service Interested In *
+                        <Field name="label.11">Service Interested In *</Field>
                       </label>
                       <select
                         name="service"
@@ -493,7 +520,7 @@ export default function PremiumNavbar() {
 
                     <div className="md:col-span-2">
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Project Requirements *
+                        <Field name="label.12">Project Requirements *</Field>
                       </label>
                       <textarea
                         name="message"
@@ -522,7 +549,7 @@ export default function PremiumNavbar() {
 
                   <div className="flex items-center justify-between pt-6 border-t border-gray-200">
                     <div className="text-sm text-gray-600">
-                      We'll respond within 24 hours
+                      <Field name="label.13">We'll respond within 24 hours</Field>
                     </div>
                     <button
                       type="submit"
@@ -559,7 +586,7 @@ export default function PremiumNavbar() {
               <div className="container mx-auto px-4 sm:px-6 py-8">
                 {/* Mobile Menu Items */}
                 <div className="space-y-2">
-                  {menuItems.map(({ label, href, sub }) => {
+                  {menu.map(({ label, href, sub }) => {
                     const isActive = activeMobileMenu === label;
                     const hasSubmenu = sub.length > 0;
 
@@ -662,7 +689,7 @@ export default function PremiumNavbar() {
                           <Phone className="h-6 w-6 text-white" />
                         </div>
                         <div>
-                          <div className="text-sm text-gray-500">24/7 Support</div>
+                          <div className="text-sm text-gray-500"><Field name="label.14">24/7 Support</Field></div>
                           <div className="text-lg font-bold text-gray-800">+92-311-128-4373</div>
                         </div>
                       </div>
@@ -672,8 +699,8 @@ export default function PremiumNavbar() {
                           <Mail className="h-6 w-6 text-white" />
                         </div>
                         <div>
-                          <div className="text-sm text-gray-500">Email Us</div>
-                          <div className="text-lg font-bold text-gray-800">info@sharptel.pk</div>
+                          <div className="text-sm text-gray-500"><Field name="label.15">Email Us</Field></div>
+                          <div className="text-lg font-bold text-gray-800"><Field name="label.16">info@sharptel.pk</Field></div>
                         </div>
                       </div>
                       
@@ -682,8 +709,8 @@ export default function PremiumNavbar() {
                           <MapPin className="h-6 w-6 text-white" />
                         </div>
                         <div>
-                          <div className="text-sm text-gray-500">Location</div>
-                          <div className="text-lg font-bold text-gray-800">Karachi, Pakistan</div>
+                          <div className="text-sm text-gray-500"><Field name="label.17">Location</Field></div>
+                          <div className="text-lg font-bold text-gray-800"><Field name="label.18">Karachi, Pakistan</Field></div>
                         </div>
                       </div>
                     </div>
@@ -694,6 +721,7 @@ export default function PremiumNavbar() {
           )}
         </AnimatePresence>
       </header>
+      </Managed>
       </div>
     </>
   );
